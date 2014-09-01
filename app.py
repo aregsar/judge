@@ -37,6 +37,7 @@ def app_before_first_request():
 
 @app.before_request
 def app_before_request():
+    g.db = 10
     g.current_user = 1
     print g.current_user
 
@@ -49,9 +50,12 @@ def app_after_req(response):
 
 @app.teardown_request
 def app_teardown_request(exception):
+    if g.db:
+        g.db#.close()
     if g.current_user:
         g.current_user = 3
         print g.current_user
+
 
 
 #optionally add url routing rules instead of route attributes (before registering blueprints)

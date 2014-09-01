@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template,g
 mod = Blueprint('home',__name__)
 
 #uncomment for blueprint specific error handler
@@ -12,5 +12,6 @@ def index():
     #1/0
     #return 'home.index'
     #abort(404)
+    print g.current_user
     return render_template("home/index.html")
 
