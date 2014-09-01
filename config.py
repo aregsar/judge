@@ -6,7 +6,7 @@ defines all keys that will exist in all environments
 (some keys may not be being used in some environments but that is OK)
 The values for all keys are loaded from environment variables defined
 in each environment. If the env var is not defined the key value will default
-to Nothing. A separate bash script that is not checked in to public
+to None. A separate bash script that is not checked in to public
 source control repo, should be created for each environment
 which will set the environmet vars for that specific environment
 """

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, g
 from flask.ext.script import Manager
 from config import Config
 from routes import add_url_rules
@@ -32,19 +32,27 @@ def internal_server_error(e):
 
 @app.before_first_request
 def app_before_first_request():
+    #initialize database
     pass
 
 @app.before_request
 def app_before_request():
-    pass
+    g.current_user = 1
+    print g.current_user
 
 @app.after_request
 def app_after_req(response):
+    if g.current_user:
+        g.current_user = 2
+        print g.current_user
     return response
 
 @app.teardown_request
-def app_teardown_request(response):
-    return response
+def app_teardown_request(exception):
+    if g.current_user:
+        g.current_user = 3
+        print g.current_user
+
 
 #optionally add url routing rules instead of route attributes (before registering blueprints)
 add_url_rules()
@@ -56,6 +64,8 @@ app.register_blueprint(home.mod)
 #list all mapped routes
 #app.url_map
 #home.mod.url_map
+
+
 
 #manage from commanc line
 if __name__ == '__main__':
