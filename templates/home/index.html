@@ -10,7 +10,7 @@
     </head>
     <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse" role="navigation">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,38 +21,44 @@
               </button>
               <a class="navbar-brand" href="#">JudgeJungle</a>
             </div>
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse navbar-right">
               <ul class="nav navbar-nav">
-                <li><a href="#">Reviews</a></li>
-                <li><a href="#about">Add Review</a></li>
-                <li><a href="#contact">Create Account</a></li>
-                <li><a href="#about">Sign in</a></li>
+                <li><a href="#">Judge reviews</a></li>
+                <li><a href="#about">Add a review</a></li>
+                <li><a href="#contact">Sign up</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
     </div>
 
-  <div class="container">
-      <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-      </div>
-
-    </div>
-
         <!-- Body -->
         <div class="container">
-          <div class="blog-header">
+<div class="blog-header ">
             <p class="lead blog-description">Know your judge</p>
-          </div>
-
-          <div class="row"></div>
+</div>
 
         </div>
 
+        <div class="container">
+          <form class="form-signin" role="form">
+            <input type="email" class="form-control" placeholder="Email address" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            New user?  <a href="#about">Sign up</a>
+          </form>
+        </div> <!-- /container -->
+
+      <div class="container">
+<div class="blog-header ">
+
+             <p class="lead blog-description">JudgeJungle helps attorneys pick the right judge for their case. It's like Voir dire but for judges.</p>
+</div>
+        </div>
         <!-- footer -->
         <div class="blog-footer">
           <p>
-            Copyright 2014 JudgeJungle&copy;&nbsp;all rights reserved<a href="#">Back to top</a>
+          <a href="#">Back to top</a><br />
+            Copyright&copy;&nbsp; 2014 JudgeJungle.
           </p>
            <a href="#about">About</a>
           <a href="#contact">Contact</a>

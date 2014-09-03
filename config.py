@@ -11,6 +11,8 @@ source control repo, should be created for each environment
 which will set the environmet vars for that specific environment
 """
 class Config:
+    #ENV can be set to "DEV" or "TEST" or "STAGE" or "PROD"
+    ENV = os.environ.get('FLASK_ENVIRONMET')
     DEBUG = bool(os.environ.get('FLASK_DEBUG'))
 
     #python script for generating secret key from command line
