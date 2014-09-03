@@ -12,6 +12,11 @@ def index():
     #1/0
     #return 'home.index'
     #abort(404)
-    print g.current_user
+    #print g.current_user
     return render_template("home/index.html")
+
+
+@mod.route('/dashboard')
+def dashboard():
+    return render_template("home/dashboard.html")
 

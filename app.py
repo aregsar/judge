@@ -2,7 +2,7 @@ from flask import Flask, g
 from config import Config
 from routes import add_url_rules
 from views import home
-#from views import review
+from views import account
 
 #
 #create the root application context
@@ -63,7 +63,7 @@ add_url_rules()
 #register blueprints
 #register_blueprints(app)
 app.register_blueprint(home.mod)
-#app.register_blueprint(review.mod)
+app.register_blueprint(account.mod)
 
 #
 #list all mapped routes

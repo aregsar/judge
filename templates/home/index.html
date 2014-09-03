@@ -1,42 +1,10 @@
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Judge.com</title>
-        <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/css/app.css">
-    </head>
-    <body>
-
-    <div class="navbar navbar-inverse" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">JudgeJungle</a>
-            </div>
-            <div class="collapse navbar-collapse navbar-right">
-              <ul class="nav navbar-nav">
-                <li><a href="#">Judge reviews</a></li>
-                <li><a href="#about">Add a review</a></li>
-                <li><a href="#contact">Sign up</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-    </div>
-
-        <!-- Body -->
+{% extends "signedout.html" %}
+{% block body %}
         <div class="container">
-<div class="blog-header ">
+          <div class="blog-header ">
             <p class="lead blog-description">Know your judge</p>
-</div>
-
+          </div>
         </div>
 
         <div class="container">
@@ -45,27 +13,13 @@
             <input type="password" class="form-control" placeholder="Password" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             New user?  <a href="#about">Sign up</a>
+            Forgot password?  <a href="#about">Reset password</a>
           </form>
-        </div> <!-- /container -->
-
-      <div class="container">
-<div class="blog-header ">
-
-             <p class="lead blog-description">JudgeJungle helps attorneys pick the right judge for their case. It's like Voir dire but for judges.</p>
-</div>
         </div>
-        <!-- footer -->
-        <div class="blog-footer">
-          <p>
-          <a href="#">Back to top</a><br />
-            Copyright&copy;&nbsp; 2014 JudgeJungle.
-          </p>
-           <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+
+        <div class="container">
+          <div class="blog-header ">
+             <p class="lead blog-description">JudgeJungle helps attorneys pick the right judge for their case. <br/>It's like Voir dire but for judges.</p>
+          </div>
         </div>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/static/js/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/static/js/app.js"></script>
-    </body>
-</html>
+ {% endblock %}
