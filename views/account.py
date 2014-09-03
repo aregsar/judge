@@ -20,13 +20,11 @@ def signup():
 def signedup():
     return render_template("account/signedup.html")
 
-@mod.route('/account/confirm')
+@mod.route('/account/confirm',methods=['GET','POST'])
 def confirm():
     return render_template("account/account_confirmed.html")
 
-@mod.route('/account/confirm',methods=['POST'])
-def confirm():
-    if False;
-        return redirect(url_for("home.dashboard"))
-    return render_template("account/account_confirmation_error.html")
+    #if False:
+    #    return redirect(url_for("home.dashboard"))
+    #return render_template("account/account_confirmation_error.html")
 
