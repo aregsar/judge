@@ -3,6 +3,8 @@ from config import Config
 from routes import add_url_rules
 from views import home
 from views import account
+from flask.ext.sqlalchemy import SQLAlchemy
+#from functools import wraps
 
 #
 #create the root application context
@@ -11,6 +13,10 @@ app = Flask(__name__)
 #
 #configure application
 app.config.from_object(Config)
+
+#
+#setup flask extensions
+db = SQLAlchemy(app)
 
 #
 #install application wide error hanlders

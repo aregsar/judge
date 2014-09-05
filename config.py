@@ -14,7 +14,9 @@ class Config:
     #ENV can be set to "DEV" or "TEST" or "STAGE" or "PROD"
     ENV = os.environ.get('FLASK_ENVIRONMET')
     DEBUG = bool(os.environ.get('FLASK_DEBUG'))
-
+    #export DATABASE_URI=sqlite:///judgedoc
+    #export DATABASE_URI=postgres://un:pwd@localhost/judgedb
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
 
     #python script for generating secret key from command line
     #python xxxxxx
