@@ -15,11 +15,31 @@ class Config:
     ENV = os.environ.get('FLASK_ENVIRONMET')
     DEBUG = bool(os.environ.get('FLASK_DEBUG'))
 
+
     #python script for generating secret key from command line
     #python xxxxxx
     #SECRET_KEY = os.environ.get('FLASK_DEBUG')
 
 
+    #In bash set rails to production
+    #export RAILS_ENV=production
+    #In rails migrator app add a production environment configuration
+    #to the database.yml file
+    #when rails starts up it loads all environment vars into an ENV hash
+    #including the RAILS_ENV env var which can be accessed using ENV['RAILS_ENV']
+    #via Rails.application.initialize! in the environment.rb file
+    #we can set a default value if the env var is not created in the shell
+    #in environment.rb file
+    #ENV['RAILS_ENV'] ||= 'production'
+
+    #heroku database management
+    #$ heroku config | grep DATABASE_URL  --app herokuappname
+    #$ heroku config | grep DATABASE_URL  --app judgejungle
+    #DATABASE_URL => postgres://judgedb:ec2.amazonaws.com/judgedb
+    #on the migrator heroku database management application (judgedb)
+    #$ heroku config:add DATABASE_URL=postgres://judgedb:ec2.amazonaws.com/judgedb --app judgedatabase
+    #$ heroku pg:promote DATABASE_URL --app judgejungle
+    #$ heroku pg:promote DATABASE_URL --app judgejungledb
 
 """
 Alteratively load a configuration file path for each environment
