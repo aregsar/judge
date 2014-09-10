@@ -1,8 +1,9 @@
-from flask import Blueprint,redirect, render_template, url_for,g
+from flask import Blueprint,redirect, render_template, url_for,g,current_app
 import uuid
 from services import db,flaskuuid
 
 mod = Blueprint('account',__name__)
+
 
 
 

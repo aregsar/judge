@@ -3,7 +3,6 @@ from flask import Blueprint,render_template,g
 mod = Blueprint('home',__name__)
 
 
-
 #uncomment for blueprint specific error handler
 #@mod.app_errorhandler(404)
 #def not_found(e):

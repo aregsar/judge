@@ -2,14 +2,8 @@ from flask import Flask, g
 from config import Config
 from routes import add_url_rules
 from blueprints import register_blueprints
-#from functools import wraps
-#from views import home
-#from views import account
-#from flask.ext.sqlalchemy import SQLAlchemy
-#from flask.ext.uuid import FlaskUUID
-
+from functools import wraps
 from services import initialize_services
-
 
 #
 #create the root application context
@@ -21,11 +15,21 @@ app.config.from_object(Config)
 
 #
 #setup flask extensions
-#db = SQLAlchemy(app)
-#flaskuuid = FlaskUUID(app)
-#db.init_app(app)
-#flaskuuid.init_app(app)
 initialize_services(app)
+
+#
+#add any aditional url routing rules (before registering blueprints)
+add_url_rules()
+
+#
+#register blueprints
+register_blueprints(app)
+
+
+#
+#list all mapped routes
+#app.url_map
+#home.mod.url_map
 
 
 #
@@ -71,20 +75,7 @@ def app_teardown_request(exception):
         g.current_user = 3
         print g.current_user
 
-#
-#add any aditional url routing rules (before registering blueprints)
-add_url_rules()
 
-#
-#register blueprints
-register_blueprints(app)
-#app.register_blueprint(home.mod)
-#app.register_blueprint(account.mod)
-
-#
-#list all mapped routes
-#app.url_map
-#home.mod.url_map
 
 
 #
