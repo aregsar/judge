@@ -4,7 +4,7 @@ from flask.ext.uuid import FlaskUUID
 db = SQLAlchemy()
 flaskuuid = FlaskUUID()
 
-def initialize_services(app):
+def init_plugins(app):
     db.init_app(app)
     flaskuuid.init_app(app)
 

@@ -3,7 +3,7 @@ from config import Config
 from routes import add_url_rules
 from blueprints import register_blueprints
 from functools import wraps
-from services import initialize_services
+from plugins import init_plugins
 
 #
 #create the root application context
@@ -15,7 +15,7 @@ app.config.from_object(Config)
 
 #
 #setup flask extensions
-initialize_services(app)
+init_plugins(app)
 
 #
 #add any aditional url routing rules (before registering blueprints)
