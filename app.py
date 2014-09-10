@@ -1,10 +1,15 @@
 from flask import Flask, g
 from config import Config
 from routes import add_url_rules
-from views import home
-from views import account
-from flask.ext.sqlalchemy import SQLAlchemy
+from blueprints import register_blueprints
 #from functools import wraps
+#from views import home
+#from views import account
+#from flask.ext.sqlalchemy import SQLAlchemy
+#from flask.ext.uuid import FlaskUUID
+
+from services import initialize_services
+
 
 #
 #create the root application context
@@ -16,7 +21,12 @@ app.config.from_object(Config)
 
 #
 #setup flask extensions
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
+#flaskuuid = FlaskUUID(app)
+#db.init_app(app)
+#flaskuuid.init_app(app)
+initialize_services(app)
+
 
 #
 #install application wide error hanlders
@@ -67,9 +77,9 @@ add_url_rules()
 
 #
 #register blueprints
-#register_blueprints(app)
-app.register_blueprint(home.mod)
-app.register_blueprint(account.mod)
+register_blueprints(app)
+#app.register_blueprint(home.mod)
+#app.register_blueprint(account.mod)
 
 #
 #list all mapped routes

@@ -1,7 +1,20 @@
-from flask import Blueprint,render_template,g
+from flask import Blueprint,redirect, render_template, url_for,g
+import uuid
+from services import db,flaskuuid
+
 mod = Blueprint('account',__name__)
 
 
+
+#using flask-uuid
+#@app.route('/<uuid(strict=False):id>'>
+#@app.route('/<uuid:id>')
+#def mypage(id):
+#    return id  # 'id' is a uuid.UUID instance
+#import uuid
+#url_for('mypage', id=uuid.uuid4())
+
+#@mod.route('/account/signin')
 @mod.route('/account/signin')
 def signin():
     if True:

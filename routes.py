@@ -1,4 +1,5 @@
 from views import home
+from views import account
 
 
 def add_url_rules():
