@@ -1,12 +1,10 @@
 
 {% extends "signedout.html" %}
 {% block body %}
+
+
         <div class="container">
-        <!-- Know your judge -->
-          <div class="blog-header ">
-            <p class="lead blog-description">JudgeJungle helps attorneys pick the right judge for their case</p>
-          </div>
-          <form method="POST" action="{{ url_for('account.signin') }}" class="form-signin" role="form">
+           <form method="POST" action="{{ url_for('account.signin') }}" class="form-signin" role="form">
             <input type="text" class="form-control" placeholder="Email address" autofocus>
             <input type="password" class="form-control" placeholder="Password">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
@@ -15,5 +13,6 @@
             {{ form.csrf_token }}
           </form>
         </div>
+
 
  {% endblock %}

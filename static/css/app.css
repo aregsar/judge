@@ -207,3 +207,21 @@ h6, .h6 {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.navbar  {
+    background-color: #428bca;
+    border: 1px solid #428bca;
+    border-radius: 0px;
+}
+
+.navbar .navbar-collapse .navbar-nav a {
+    color: #ffffff;
+}
+
+.navbar .navbar-collapse .navbar-nav a:hover {
+    color: #cccccc;
+}
+
+.navbar-header .navbar-brand {
+    color: #ffffff;
+}

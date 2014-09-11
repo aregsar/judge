@@ -44,12 +44,15 @@ def signin():
     if form.validate_on_submit():
         #signin the user
         print "signin valid post"
-        return redirect(url_for("home.index"))
+        #return redirect(url_for("home.index"))
+        return render_template("home/dashboard.html",form=form)
     #flash "invalid email or password"
+    #return render_template("account/signin.html",form=form)
+    return render_template("home/dashboard.html",form=form)
     #save email so home.index can put it back in the form it renders
     #session["email"]=form.email.data
     #return redirect(url_for("home.index"))
-    return render_template("account/signin.html",form=form)
+
 
 
 @mod.route('/account/signedup')
