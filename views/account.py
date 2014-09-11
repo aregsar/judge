@@ -1,10 +1,14 @@
-from flask import Blueprint,redirect, render_template, url_for,g,current_app
+from flask import Blueprint,redirect, render_template, url_for, g, current_app
 import uuid
-from plugins import db,flaskuuid
+from plugins import db, flaskuuid
+
+#NameError: global name 'SigninForm' is not defined
+#from forms import signin_form, signup_form, forgotpassword_form
+from forms.signin_form import SigninForm
+from forms.signup_form import SignupForm
+from forms.forgotpassword_form import ForgotPasswordForm
 
 mod = Blueprint('account',__name__)
-
-
 
 
 #using flask-uuid
@@ -15,20 +19,38 @@ mod = Blueprint('account',__name__)
 #import uuid
 #url_for('mypage', id=uuid.uuid4())
 
-#@mod.route('/account/signin')
-@mod.route('/account/signin')
-def signin():
-    if True:
-        return redirect(url_for("home.dashboard"))
-    return redirect(url_for("home.dashboard"))
-    #flash message signup error
-    #return render_template("account/signup_error.html")
 
-@mod.route('/account/signup')
+
+@mod.route('/account/signup',methods=['GET','POST'])
 def signup():
-    if True:
+    form = SignupForm()
+    if form.validate_on_submit():
         return redirect(url_for("account.signedup"))
-    return render_template("account/signup.html")
+    return render_template("account/signup.html",form=form)
+
+
+@mod.route('/account/password/reset',methods=['GET','POST'])
+def forgot_password():
+    form = ForgotPasswordForm()
+    #if True:
+    #    return redirect(url_for("account.signedup"))
+    return render_template("account/forgot_password.html",form=form)
+
+
+@mod.route('/account/signin',methods=['GET','POST'])
+def signin():
+    print "signin"
+    form = SigninForm()
+    if form.validate_on_submit():
+        #signin the user
+        print "signin valid post"
+        return redirect(url_for("home.index"))
+    #flash "invalid email or password"
+    #save email so home.index can put it back in the form it renders
+    #session["email"]=form.email.data
+    #return redirect(url_for("home.index"))
+    return render_template("account/signin.html",form=form)
+
 
 @mod.route('/account/signedup')
 def signedup():

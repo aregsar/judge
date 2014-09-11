@@ -4,10 +4,16 @@ class User(db.Model)
     __tablename__ = "users"
 
     id = db.Column(db.Integer,primary_key=True)
+    username = db.Column(db.String(255),nullable=False)
+    barnumber = db.Column(db.String,nullable=False)
     email = db.Column(db.String,nullable=False)
     password = db.Column(db.String,nullable=False)
-
+    signin_token = db.Column(db.String,nullable=False)
+    user_role = db.Column(db.String,nullable=False)#options: "user" or "mod" or "admin" or "sa"
     activated = db.Column(db.Boolean,nullable=False)
+    banned = db.Column(db.Boolean,nullable=False)
+    activated_at = db.Column(db.DateTime,nullable=False)
+    signedin_at = db.Column(db.DateTime,nullable=False)
 
     def __init__(self,email,password)
         self.email = email

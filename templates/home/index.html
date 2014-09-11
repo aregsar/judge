@@ -6,12 +6,13 @@
           <div class="blog-header ">
             <p class="lead blog-description">JudgeJungle helps attorneys pick the right judge for their case</p>
           </div>
-          <form class="form-signin" role="form">
+          <form method="POST" action="{{ url_for('account.signin') }}" class="form-signin" role="form">
             <input type="email" class="form-control" placeholder="Email address" required autofocus>
             <input type="password" class="form-control" placeholder="Password" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            New user?  <a href="#about">Sign up</a><br/>
-            Forgot password?  <a href="#about">Reset password</a>
+            New user?  <a href="{{ url_for('account.signup') }}">Sign up</a><br/>
+            Forgot password?  <a href="{{ url_for('account.forgot_password') }}">Reset password</a>
+            {{ form.csrf_token }}
           </form>
         </div>
 
