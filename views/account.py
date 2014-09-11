@@ -40,18 +40,26 @@ def forgot_password():
 @mod.route('/account/signin',methods=['GET','POST'])
 def signin():
     form = SigninForm()
-    print "start"
-    print form.email.data
-    print "end"
     if form.validate_on_submit():
-        #signin the user
-        return redirect(url_for("home.index"))
+        user = User.query.get(form.email.data)
+        if (user
+            and user.is_not_banned()
+            and user.password_is_authenticated(form.password.data) ):
+            user.authenticated = True
+            db.session.add(user)
+            db.session.commit()
+            #store the authentcation state for login_user
+            user.authenticated=True
+            login_user(user, remember=True)
+            return redirect(url_for("home.index"))
     #flash "invalid email or password"
     return render_template("account/signin.html",form=form)
-    #save email so home.index can put it back in the form it renders
-    #session["email"]=form.email.data
-    #return redirect(url_for("home.index"))
 
+
+#@login_required
+def logout():
+    logout_user()
+    return render_template("home/index.html")
 
 
 @mod.route('/account/signedup')
