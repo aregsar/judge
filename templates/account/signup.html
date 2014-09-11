@@ -4,11 +4,11 @@
 
 
         <div class="container">
-          <form class="form-signin" role="form">
-            <input type="text" class="form-control" placeholder="User name" required autofocus>
-            <input type="text" class="form-control" placeholder="Bar number" required autofocus>
-            <input type="email" class="form-control" placeholder="Email address" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" required>
+          <form method="POST" action="{{ url_for('account.signup') }}" class="form-signin" role="form">
+             {{form.username(class='form-control',placeholder='User name',required=False,autofocus=True,onfocus='this.value = this.value;')}}
+             {{form.barnumber(class='form-control',placeholder='Bar number',required=False)}}
+            {{form.email(class='form-control',placeholder='Email address',required=False)}}
+            <input type="password" name="password" class="form-control" placeholder="Password">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
             Already have an account?  <a href="{{ url_for('home.index') }}">Sign in</a>
           </form>
