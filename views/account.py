@@ -7,10 +7,10 @@ from forms.signin_form import SigninForm
 from forms.signup_form import SignupForm
 from forms.forgotpassword_form import ForgotPasswordForm
 from itsdangerous import URLSafeTimedSerializer
-from flask.ext.login import LoginManager
+from flask.ext.login import LoginManager,login_required
 
-secret = current_app.config["SECRET_KEY"]
-ts = URLSafeTimedSerializer(secret)
+#secret = current_app.config["SECRET_KEY"]
+#ts = URLSafeTimedSerializer(secret)
 
 mod = Blueprint('account',__name__)
 
@@ -29,12 +29,11 @@ mod = Blueprint('account',__name__)
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
-         user = User(
+        user = User(
             email = form.email.data,
             password = form.password.data,
             barnumber=form.barnumber.data,
-            username=form.username.data
-        )
+            username=form.username.data)
         db.session.add(user)
         db.session.commit()
         token = ts.dumps(self.email, salt=secret)
@@ -44,8 +43,10 @@ def signup():
         return render_template("account/confirm.html",confirm_url=confirm_url)
     return render_template("account/signup.html",form=form)
 
-@app.route('/account/confirm/<token>')
+@mod.route('/account/confirm/<token>')
 def confirm_account(token):
+    secret = current_app.config["SECRET_KEY"]
+    ts = URLSafeTimedSerializer(secret)
     try:
         email = ts.loads(token, salt=secret, max_age=86400)
     except:
@@ -65,25 +66,25 @@ def confirm_account(token):
 
 @mod.route('/account/password/activate',methods=['GET','POST'])
 def forgot_password():
+    secret = current_app.config["SECRET_KEY"]
+    ts = URLSafeTimedSerializer(secret)
     form = ForgotPasswordForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=email).first_or_404()
         if user.is_not_banned():
             token = ts.dumps(self.email, salt=secret)
-            if user.activated:
-                password_url = url_for('account.reset_password',token=token,_external=True)
-                #html = render_template('account/reset_password.html',password_url=password_url)
-                return render_template("account/reset_password.html",password_url=password_url)
-            else
-                confirm_url = url_for('account.confirm',token=token,_external=True)
-                #html = render_template('account/confirm.html',confirm_url=confirm_url)
-                return render_template("account/confirm.html",confirm_url=confirm_url)
-            #send_email(user.email, subject, html)
+        if user.activated:
+            password_url = url_for('account.reset_password',token=token,_external=True)
+            #html = render_template('account/reset_password.html',password_url=password_url)
+            return render_template("account/reset_password.html",password_url=password_url)
+        else:
+            confirm_url = url_for('account.confirm',token=token,_external=True)
+            #html = render_template('account/confirm.html',confirm_url=confirm_url)
+            return render_template("account/confirm.html",confirm_url=confirm_url)
     return render_template("account/forgot_password.html",form=form)
 
 
-
-@app.route('/account/password/reset/<token>')
+@mod.route('/account/password/reset/<token>')
 def reset_password(token):
     try:
         email = ts.loads(token, salt=secret, max_age=86400)
@@ -97,6 +98,8 @@ def reset_password(token):
 
 @mod.route('/account/password/set/<token>',methods=['GET','POST'])
 def set_password():
+    secret = current_app.config["SECRET_KEY"]
+    ts = URLSafeTimedSerializer(secret)
     try:
         email = ts.loads(token, salt=secret, max_age=86400)
     except:
@@ -110,7 +113,7 @@ def set_password():
         except:
             abort(404)
         user = User.query.filter_by(email=form.email.data).first()
-        if (user and user.is_not_banned() and email == user.email)
+        if (user and user.is_not_banned() and email == user.email):
             user.set_password(form.password.data)
             db.session.add(user)
             db.session.commit()
@@ -135,7 +138,7 @@ def signin():
     return render_template("account/signin.html",form=form)
 
 
-#@login_required
+@login_required
 def logout():
     logout_user()
     return render_template("home/index.html")
