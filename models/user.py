@@ -1,11 +1,7 @@
 from app import db
+from flask.ext.bcrypt import Bcrypt
+from flask.ext.login import LoginManager
 
-@login_manager.user_loader
-def user_loader(user_id):
-    #user_id is the value returned from User.get_id() method
-    #it is first called by flask-login in the login_user(user) method
-    #then this methode is called passing in the value returned rom User.get_id()
-    return User.query.get(user_id)
 
 class User(db.Model)
     __tablename__ = "users"
@@ -27,7 +23,7 @@ class User(db.Model)
 
     def __init__(self,email,password,barnumber,username):
         self.email = email
-        self.password = password
+        self.password= set_password(password)
         self.barnumber = barnumber
         self.username = username
         self.user_role = "member"
@@ -36,14 +32,15 @@ class User(db.Model)
         self.banned = False;
 
 
-    def is_not_banned():
+    def set_password(self):
+        self.password= bcrypt.generate_password_hash(password))
+
+    def is_not_banned(self):
         #return self.banned
         return True
 
-    def password_is_authenticated(pasword):
-        hashedpassword = "areg"
-        #hashedpassword = compute_hash(password)
-        return self.password == hashedpassword
+    def password_is_correct(self, password)
+        return bcrypt.check_password_hash(self.password, password)
 
     def refresh_signin_token_and_date():
         self.signin_token = "areg"
@@ -56,7 +53,7 @@ class User(db.Model)
         unicode(self.id)
 
     def is_active(self):
-        return self.activated
+        return self.activated #and not self.banned
 
     def is_authenticated(self):
         return self.authenticated
@@ -66,5 +63,15 @@ class User(db.Model)
         return False
     #end Flask-Login interface
 
-    def __repr__(self)
+    def __repr__(self):
         return '<email {}'.format(self.email)
+
+#define after defining User
+@login_manager.user_loader
+def user_loader(user_id):
+    #user_id is the value returned from User.get_id() method
+    #it is first called by flask-login in the login_user(user) method
+    #then this methode is called passing in the value returned rom User.get_id()
+    return User.query.get(user_id)
+    #return User.query.filter(User.email==email).first()
+    #return User.query.filter(User.email==email).firstordefault()

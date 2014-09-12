@@ -13,7 +13,7 @@ def create_app():
     app = Flask(__name__)
 
     #
-    #configure application
+    #configure application(before initializing plugins)
     app.config.from_object(Config)
 
     #
@@ -28,15 +28,8 @@ def create_app():
     #register blueprints
     register_blueprints(app)
 
-
     #
-    #list all mapped routes
-    #app.url_map
-    #home.mod.url_map
-
-
-    #
-    #install application wide error hanlders
+    #install application wide error handlers
     @app.errorhandler(404)
     def not_found(e):
         return "Judge not found"
@@ -54,7 +47,6 @@ def create_app():
     #install application wide request filters
     @app.before_first_request
     def app_before_first_request():
-        #initialize database
         pass
 
     @app.before_request
@@ -78,6 +70,14 @@ def create_app():
             g.current_user = 3
             print g.current_user
 
+
+    #
+    #list all application mapped routes
+    #app.url_map
+
+    #
+    #list all bluprint mapped routes
+    #home.mod.url_map
 
     return app
 
