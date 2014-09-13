@@ -1,9 +1,9 @@
-from app import db
+from plugins import db
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import LoginManager
 from datetime import datetime
 
-class User(db.Model)
+class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer,primary_key=True)
@@ -36,12 +36,12 @@ class User(db.Model)
         self.activated = True
         self.activated_at = datetime.utcnow()
 
-     def refresh_signin_token_and_date():
+    def refresh_signin_token_and_date():
         self.signin_token = "areg"
         self.signedin_at = datetime.utcnow()
 
-    def set_password(self):
-        self.password= bcrypt.generate_password_hash(password))
+    def set_password(self,password):
+        self.password = bcrypt.generate_password_hash(password)
 
     def is_banned(self):
         return self.banned
@@ -70,7 +70,7 @@ class User(db.Model)
         return '<email {}'.format(self.email)
 
 #define after defining User
-@login_manager.user_loader
+#@login_manager.user_loader
 def user_loader(user_id):
     #user_id is the value returned from User.get_id() method
     #it is first called by flask-login in the login_user(user) method
