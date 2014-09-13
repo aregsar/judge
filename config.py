@@ -11,14 +11,27 @@ source control repo, should be created for each environment
 which will set the environmet vars for that specific environment
 """
 class Config:
+    #use $ env or $ printenv to show current env var settings
+
     #ENV can be set to "DEV" or "TEST" or "STAGE" or "PROD"
-    ENV = os.environ.get('FLASK_ENVIRONMET')
+    ENV = os.environ.get('FLASK_ENVIRONMENT')
     DEBUG = bool(os.environ.get('FLASK_DEBUG'))
-    SECRET_KEY = "test"
+
+    #SqlAlchemy looks for this specific app.config['SQLALCHEMY_DATABASE_URL']
+    #export DATABASE_URL='postgres://localhost/judgedb'
+    SQLALCHEMY_DATABASE_URL = os.environ['DATABASE_URL']
+    #export SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
+    SECRET_KEY = os.environ['SECRET_KEY']
+
+    #app has these special config keys as properties???
+    #app.secret_key
+    #app.config['SECRET_KEY']
+    #app.debug
+    #app.config['DEBUG']
+
+    #SECRET_KEY = "test"
     #export DATABASE_URI=sqlite:///judgedoc
     #export DATABASE_URI=postgres://un:pwd@localhost/judgedb
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
-
     #python script for generating secret key from command line
     #python xxxxxx
     #SECRET_KEY = os.environ.get('FLASK_DEBUG')
