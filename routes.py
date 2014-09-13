@@ -9,3 +9,6 @@ def add_url_rules():
     #post.mod.add_url_rule('/posts/<id>', defaults={'id': None},view_func=post.index, methods=['GET','POST'])
 
 
+    #
+    #list all bluprint mapped routes
+    #home.mod.url_map

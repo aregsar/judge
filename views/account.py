@@ -27,15 +27,36 @@ mod = Blueprint('account',__name__)
 
 @mod.route('/account/signup',methods=['GET','POST'])
 def signup():
+    #db = SQLAlchemy(current_app)
+    print "signup"
+    print current_app.name
+    print "signup"
     form = SignupForm()
     if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            flash("account with email exists.")
+            return render_template("account/signup.html",form=form)
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            flash("username taken, please try another.")
+            return render_template("account/signup.html",form=form)
+        user = User.query.filter_by(barnumber=form.barnumber.data).first()
+        if user:
+            flash("account with bar number exists.")
+            return render_template("account/signup.html",form=form)
         user = User(
             email = form.email.data,
             password = form.password.data,
             barnumber=form.barnumber.data,
             username=form.username.data)
-        db.session.add(user)
-        db.session.commit()
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except:
+            flash("There was an error while creating your account.")
+            flash("Please check for errors and resubmit the form.")
+            return render_template("account/signup.html",form=form)
         token = ts.dumps(self.email, salt=secret)
         confirm_url = url_for('account.confirm',token=token,_external=True)
         #html = render_template('account/confirm.html',confirm_url=confirm_url)
@@ -54,7 +75,7 @@ def confirm_account(token):
         #redirect(url_for(account.invalid_token))
 
     user = User.query.filter_by(email=email).first_or_404()
-    user.verified = True
+    user.activate()
     db.session.add(user)
     db.session.commit()
     form = SigninForm()
@@ -126,10 +147,13 @@ def set_password():
 def signin():
     form = SigninForm()
     if form.validate_on_submit():
-        user = User.query.get(form.email.data)
+        user = User.query.filter_by(email=form.email.data).first()
         if (user
-            and user.is_not_banned()
-            and user.password_is_correct(form.password.data) ):
+                and not user.is_banned()
+                and user.password_is_correct(form.password.data) ):
+            user.refresh_signin_token_and_date()
+            db.session.add(user)
+            db.session.commit()
             #store the authentcation state for login_user to access
             user.authenticated=True
             login_user(user, remember=True)
