@@ -19,7 +19,7 @@ class Config:
 
     #SqlAlchemy looks for this specific app.config['SQLALCHEMY_DATABASE_URL']
     #export DATABASE_URL='postgres://localhost/judgedb'
-    SQLALCHEMY_DATABASE_URL = os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     #export SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
     SECRET_KEY = os.environ['SECRET_KEY']
 
