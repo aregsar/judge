@@ -20,7 +20,7 @@ with app.app_context():
     #recreate the database(does not drop the database)
 
 
-    db.drop_all()
+    #db.drop_all()
     db.create_all()
     db.session.commit()
     user = User.query.filter_by(email="test").first()
