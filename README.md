@@ -5,9 +5,79 @@ judge
     {"keys": ["f5"], "command": "refresh_folder_list" }
 ]
 
-
+cmd-opt / #to comment or uncomment blocks and lines
 (venv)$ pip install -r requirements.txt
 (venv)$ pip freeze > requirements.txt
+
+realpython discover flask part 9 sqlalchemy
+around 16 minute mark there is discussion around avoiding circular imports
+
+==========
+#using flask-uuid
+#@app.route('/<uuid(strict=False):id>'>
+#@app.route('/<uuid:id>')
+#def mypage(id):
+#    return id  # 'id' is a uuid.UUID instance
+#import uuid
+#url_for('mypage', id=uuid.uuid4())
+
+===========
+import os
+os.urandom(24)
+
+SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
+
+app.secret_key = '\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
+
+===========
+export secretkey='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
+
+DEBUG=os.environ['JUDGE_DEBUG']
+SECRET_KEY=os.environ['JUDGE_SECRET_KEY']
+SQLALCHEMY_DATABASE_URL=os.environ['DATABASE_URL']
+========
+app.database #sqlite database file
+app.config['SQLALCHEMY_DATABASE_URL']='postgres://xxxxx/yyyyy'
+
+#need to manually create database before running sqlalchemy create_db.py ???
+$ pgstart
+$ psql
+aregsarkissian=# CREATE DATABASE judgedb;
+
+in create_db.py file
+#from app import db
+from plugins import db
+from models import User
+db.create_all()
+
+#from the shell
+#create (database specified with SQLALCHEMY_DATABASE_URL???)
+#and create users table
+$python db_create.py
+--------------
+
+if request.method == 'POST':
+request.form['username']
+errormessage=None
+return render_template("aa.html",errormessage=errormessage)
+session['name']= "abcd"
+session.pop('username',None)
+if 'name' in session:
+flash('username or password invalid')
+{% for message in get_flashed_messages() %}
+{{message}}
+{% endfor %}
+
+{% if errormessage %}
+{{errormessage}}
+{% endif %}
+
+<input type="text" name="email" value="{{ request.form.email }}">
+
+def Signin():
+g.db = connect_db()
+g.db.close()
+-------------------------------------
 
 
 Setting up a new Flask project

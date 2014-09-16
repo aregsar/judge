@@ -1,4 +1,5 @@
-from flask import Blueprint,redirect, render_template, url_for, g, current_app
+import sys
+from flask import Blueprint,redirect, render_template, url_for, g, current_app,flash
 import uuid
 from plugins import db, flaskuuid
 #NameError: global name 'SigninForm' is not defined
@@ -8,31 +9,17 @@ from forms.signup_form import SignupForm
 from forms.forgotpassword_form import ForgotPasswordForm
 from itsdangerous import URLSafeTimedSerializer
 from flask.ext.login import LoginManager,login_required
-
-#secret = current_app.config["SECRET_KEY"]
-#ts = URLSafeTimedSerializer(secret)
+#from models import user
+from models.user import User,Testtable
 
 mod = Blueprint('account',__name__)
 
-
-#using flask-uuid
-#@app.route('/<uuid(strict=False):id>'>
-#@app.route('/<uuid:id>')
-#def mypage(id):
-#    return id  # 'id' is a uuid.UUID instance
-#import uuid
-#url_for('mypage', id=uuid.uuid4())
-
-
-
 @mod.route('/account/signup',methods=['GET','POST'])
 def signup():
-    #db = SQLAlchemy(current_app)
-    print "signup"
-    print current_app.name
-    print "signup"
+    #print current_app.name
     form = SignupForm()
     if form.validate_on_submit():
+        print "signup valid"
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             flash("account with email exists.")
@@ -45,7 +32,7 @@ def signup():
         if user:
             flash("account with bar number exists.")
             return render_template("account/signup.html",form=form)
-        user = User(
+        user = Testtable(
             email = form.email.data,
             password = form.password.data,
             barnumber=form.barnumber.data,
@@ -54,15 +41,22 @@ def signup():
             db.session.add(user)
             db.session.commit()
         except:
+            #sqlalchemy.exc.IntegrityError
+            e = sys.exc_info()[0]
+            flash("Error: %s" % e)
             flash("There was an error while creating your account.")
             flash("Please check for errors and resubmit the form.")
             return render_template("account/signup.html",form=form)
-        token = ts.dumps(self.email, salt=secret)
-        confirm_url = url_for('account.confirm',token=token,_external=True)
-        #html = render_template('account/confirm.html',confirm_url=confirm_url)
-        #send_email(user.email, subject, html)
+        # secret = current_app.config["SECRET_KEY"]
+        # ts = URLSafeTimedSerializer(secret)
+        # token = ts.dumps(self.email, salt=secret)
+        # confirm_url = url_for('account.confirm',token=token,_external=True)
+        # #html = render_template('account/confirm.html',confirm_url=confirm_url)
+        # #send_email(user.email, subject, html)
+        confirm_url = "http://account/confirm?token=123456"
         return render_template("account/confirm.html",confirm_url=confirm_url)
     return render_template("account/signup.html",form=form)
+
 
 @mod.route('/account/confirm/<token>')
 def confirm_account(token):

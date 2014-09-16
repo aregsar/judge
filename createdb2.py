@@ -2,13 +2,17 @@ from app import create_app
 app = create_app()
 #app.run(debug=true)
 with app.app_context():
+    from models.user import Testtable
     from models.user import User
     from plugins import db
     print db
     db.drop_all()
     db.create_all()
     user = User.query.filter_by(email="test").first()
+
+    test = Testtable.query.filter_by(username="test").first()
     print user
+    print test
 
 #work with the database
 #$psql judgedb

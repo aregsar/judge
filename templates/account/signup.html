@@ -5,7 +5,7 @@
 
         <div class="container">
           {% for message in get_flashed_messages() %}
-          {{ message }}
+          {{ message }}<br />
           {% endfor %}
           <form method="POST" action="{{ url_for('account.signup') }}" class="form-signin" role="form">
              {{form.username(class='form-control',placeholder='User name',required=False,autofocus=True,onfocus='this.value = this.value;')}}
