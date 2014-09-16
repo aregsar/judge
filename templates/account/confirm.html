@@ -1,13 +1,16 @@
 {% extends "signedout.html" %}
 {% block body %}
-        <div class="container">
-          <div class="blog-header ">
-             <p class="lead blog-description">Congratulations, you have successfully signed up.</p>
-             <p> An account confirmation email has been sent to the email address you provided. Please follow the instructions in the email to activate and sign in to your new account. </p>
 
-             <p>Please allow a few minutes for the confirmation email to be delivered and be sure to also check your spam folder<br/>
-             If you do not recieve the confirmation email within the next five minutes, please use <a href="#">this</a> link or the reset password link on the home page to send a new account confirmation email.<br/>Sincerely, founders of Judge Jungle</p>
-            <a href="{{confirm_url}}">activate account</a>
-          </div>
+
+        <div class="container">
+           <form method="POST" action="{{ url_for('account.signin') }}" class="form-signin" role="form">
+          {{form.email(class='form-control',placeholder='Email address')}}
+            <input type="password" name="password" class="form-control" placeholder="Password" autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            Forgot password?  <a href="{{ url_for('account.forgot_password') }}">Reset password</a>
+            {{ form.csrf_token }}
+          </form>
         </div>
+
+
  {% endblock %}
