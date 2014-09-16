@@ -32,7 +32,7 @@ def signup():
         if user:
             flash("account with bar number exists.")
             return render_template("account/signup.html",form=form)
-        user = Testtable(
+        user = User(
             email = form.email.data,
             password = form.password.data,
             barnumber=form.barnumber.data,
