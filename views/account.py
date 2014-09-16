@@ -10,7 +10,7 @@ from forms.forgotpassword_form import ForgotPasswordForm
 from itsdangerous import URLSafeTimedSerializer
 from flask.ext.login import LoginManager,login_required
 #from models import user
-from models.user import User,Testtable
+from models.user import User
 
 mod = Blueprint('account',__name__)
 
@@ -32,34 +32,41 @@ def signup():
         if user:
             flash("account with bar number exists.")
             return render_template("account/signup.html",form=form)
+        email = form.email.data
+        secret = current_app.config["SECRET_KEY"]
+        ts = URLSafeTimedSerializer(secret)
+        token = ts.dumps(email, salt=secret)
+        confirm_url = url_for('account.confirm',token=token,_external=True)
+        html = render_template('account/confirm.html',confirm_url=confirm_url)
+        #confirm_url = "http://account/confirm?token=123456"
+        #return render_template("account/confirm.html",confirm_url=confirm_url)
         user = User(
-            email = form.email.data,
+            email = email,
             password = form.password.data,
             barnumber=form.barnumber.data,
             username=form.username.data)
         try:
             db.session.add(user)
             db.session.commit()
-        except:
-            #sqlalchemy.exc.IntegrityError
+        except: #sqlalchemy.exc.IntegrityError
             e = sys.exc_info()[0]
             flash("Error: %s" % e)
             flash("There was an error while creating your account.")
             flash("Please check for errors and resubmit the form.")
             return render_template("account/signup.html",form=form)
-        # secret = current_app.config["SECRET_KEY"]
-        # ts = URLSafeTimedSerializer(secret)
-        # token = ts.dumps(self.email, salt=secret)
-        # confirm_url = url_for('account.confirm',token=token,_external=True)
-        # #html = render_template('account/confirm.html',confirm_url=confirm_url)
-        # #send_email(user.email, subject, html)
-        confirm_url = "http://account/confirm?token=123456"
-        return render_template("account/confirm.html",confirm_url=confirm_url)
+        try:
+            #send_email(user.email, subject, html)
+            return html
+        except:
+            e = sys.exc_info()[0]
+            flash("Error: %s" % e)
+            flash("Signup was success but there was an error sending the confirmation email.")
+            #redirect(url_for("account.error_signup_email_delivery"))
     return render_template("account/signup.html",form=form)
 
 
 @mod.route('/account/confirm/<token>')
-def confirm_account(token):
+def confirm(token):
     secret = current_app.config["SECRET_KEY"]
     ts = URLSafeTimedSerializer(secret)
     try:
