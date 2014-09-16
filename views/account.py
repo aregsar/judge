@@ -37,9 +37,7 @@ def signup():
         ts = URLSafeTimedSerializer(secret)
         token = ts.dumps(email, salt=secret)
         confirm_url = url_for('account.confirm',token=token,_external=True)
-        html = render_template('account/confirm.html',confirm_url=confirm_url)
-        #confirm_url = "http://account/confirm?token=123456"
-        #return render_template("account/confirm.html",confirm_url=confirm_url)
+
         user = User(
             email = email,
             password = form.password.data,
@@ -55,7 +53,12 @@ def signup():
             flash("Please check for errors and resubmit the form.")
             return render_template("account/signup.html",form=form)
         try:
-            #send_email(user.email, subject, html)
+
+            html_email = render_template('account/confirmation_email.html',confirm_url=confirm_url)
+            html = render_template('account/created.html',confirm_url=confirm_url)
+            #html = render_template('account/created.html')
+            #subject = "JudgeJungle account activation email"
+            #send_email(email, subject, html_email)
             return html
         except:
             e = sys.exc_info()[0]
