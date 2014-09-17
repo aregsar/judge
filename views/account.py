@@ -84,28 +84,29 @@ def confirmation_email(token):
 
 @mod.route('/account/confirm/<token>')
 def confirm(token):
-
     secret = current_app.config["SECRET_KEY"]
     ts = URLSafeTimedSerializer(secret)
     try:
         email = ts.loads(token, salt=secret, max_age=86400)
-        user = User.query.filter_by(email=email).first_or_404()
-
+        user = User.query.filter_by(email=email).first()
     except:
-        abort(404)
-        #redirect(url_for(account.invalid_token))
+        return render_template("account/confirmation_failed.html")
 
-    # try:
-    #     user.activate()
-    #     db.session.add(user)
-    #     db.session.commit()
-    # except:
-    #     #flash("There was an error while confirming your account.")
-    #     #flash("Please try the confirmation link again.")
-    #     #flash("If the error persits please try the confirmation link again. in a few minutes")
-    #     #flash("You can always check for updates to the status of our website on twitter.com\judgejungle")
-    #     return render_template("account/confirmation_error.html")
+    #print user.activated
 
+    try:
+        user.activate()
+        db.session.commit()
+    except:
+        #flash("There was an error while confirming your account.")
+        #flash("Please try the confirmation link again.")
+        #flash("If the error persits please try the confirmation link again. in a few minutes")
+        #flash("You can always check for updates to the status of our website on twitter.com\judgejungle")
+        return render_template("account/confirmation_error.html")
+
+
+    user = User.query.filter_by(email=email).first()
+    #print user.activated
     form = SigninForm(email=email)
 
     # #return redirect(url_for('account.signin'))

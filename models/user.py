@@ -48,8 +48,10 @@ class User(db.Model):
         self.password = bcrypt.generate_password_hash(password)
 
     def activate(self):
+        dt = datetime.utcnow()
         self.activated = True
-        self.activated_at = datetime.utcnow()
+        self.activated_at = dt
+        self.updated_at = dt
 
     def refresh_signin_token_and_date(self):
         self.signin_token = "areg"
