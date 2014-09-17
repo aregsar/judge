@@ -58,8 +58,13 @@ def signup():
         try:
 
             html_email = render_template('account/confirmation_email.html',confirm_url=confirm_url)
-            html = render_template('account/created.html',confirm_url=confirm_url)
             #html = render_template('account/created.html')
+
+            #set up a test only view to display the email. link to it from account/created.html
+            confirmation_email_url = url_for('account.confirmation_email',token=token,_external=True)
+            html = render_template('account/created.html',confirmation_email_url=confirmation_email_url)
+            #
+
             #subject = "JudgeJungle account activation email"
             #send_email(email, subject, html_email)
             return html
@@ -70,10 +75,15 @@ def signup():
             #redirect(url_for("account.error_signup_email_delivery"))
     return render_template("account/signup.html",form=form)
 
+#this route if for testing only. It is a confirmation email short circuit loopback
+@mod.route('/account/confirmation_email/<token>')
+def confirmation_email(token):
+    confirm_url = url_for('account.confirm',token=token,_external=True)
+    return render_template('account/confirmation_email.html',confirm_url=confirm_url)
+
 
 @mod.route('/account/confirm/<token>')
 def confirm(token):
-    form = SigninForm()
 
     secret = current_app.config["SECRET_KEY"]
     ts = URLSafeTimedSerializer(secret)
@@ -85,18 +95,18 @@ def confirm(token):
         abort(404)
         #redirect(url_for(account.invalid_token))
 
-    try:
-        user.activate()
-        db.session.add(user)
-        db.session.commit()
-    except:
-        #flash("There was an error while confirming your account.")
-        #flash("Please try the confirmation link again.")
-        #flash("If the error persits please try the confirmation link again. in a few minutes")
-        #flash("You can always check for updates to the status of our website on twitter.com\judgejungle")
-        return render_template("account/confirmation_error.html")
+    # try:
+    #     user.activate()
+    #     db.session.add(user)
+    #     db.session.commit()
+    # except:
+    #     #flash("There was an error while confirming your account.")
+    #     #flash("Please try the confirmation link again.")
+    #     #flash("If the error persits please try the confirmation link again. in a few minutes")
+    #     #flash("You can always check for updates to the status of our website on twitter.com\judgejungle")
+    #     return render_template("account/confirmation_error.html")
 
-    form.data.email = email
+    form = SigninForm(email=email)
 
     # #return redirect(url_for('account.signin'))
     # flash("Account verified. Please sign in")
