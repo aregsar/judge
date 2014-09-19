@@ -134,9 +134,10 @@ def signin():
 
 
 @login_required
-def logout():
+@mod.route('/account/signout')
+def signout():
     logout_user()
-    return render_template("home/index.html")
+    return redirect(url_for("home.index"))
 
 
 

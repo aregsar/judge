@@ -62,13 +62,11 @@ class User(db.Model):
     def is_banned(self):
         return self.banned
 
-    def password_is_correct(self, password):
-        return bcrypt.check_password_hash(self.password, password)
-
-
 
     #Flask-Login interface
     def get_id(self):
+        #TODO: return token
+        #return unicode(self.signin_token)
         return unicode(self.email)
         #return unicode(self.id)
 
@@ -95,5 +93,10 @@ def user_loader(user_id):
     #it is first called by flask-login in the login_user(user) method
     #then this methode is called passing in the value returned rom User.get_id()
     #return User.query.get(user_id)
-    return User.query.filter(User.email==user_id).first()
+    #TODO: query by token
+    #user = User.query.filter(User.signin_token==user_id).first()
+    user = User.query.filter(User.email==user_id).first()
+    if user:
+        user.authenticated = True
+    return user
 

@@ -21,12 +21,12 @@ def index():
     #abort(404)
     #print g.current_user
 
-    #if current_user.is_authenticated
-    #    return render_template("home/dashboard.html")
-    #else
+    if current_user.is_authenticated():
+        return render_template("home/dashboard.html")
+    else:
         #must pass an empty form for antiXSS
-    form = SigninForm()
-    return render_template("home/index.html",form=form)
+        form = SigninForm()
+        return render_template("home/index.html",form=form)
 
 
 @mod.route('/dashboard')
