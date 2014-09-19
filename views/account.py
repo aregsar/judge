@@ -41,8 +41,8 @@ def signup():
         user = User(
             email = email,
             password = form.password.data,
-            barnumber=form.barnumber.data,
-            username=form.username.data)
+            barnumber = form.barnumber.data,
+            username = form.username.data)
         try:
             db.session.add(user)
             db.session.commit()

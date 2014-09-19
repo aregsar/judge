@@ -12,15 +12,15 @@ class User(db.Model):
     password = db.Column(db.String(2048),nullable=False)
     #user_role options: "member" or "mod" or "admin" or "sa"
     user_role = db.Column(db.String(50),nullable=False)
-    signin_token = db.Column(db.String(255),nullable=True, unique=True, index=True)
+    signin_token = db.Column(db.String(2048),nullable=True, unique=True, index=True)
     signedin_at = db.Column(db.DateTime,nullable=True)
     activated = db.Column(db.Boolean,nullable=False)
-    activation_token = db.Column(db.String(255),nullable=True, unique=True, index=True)
+    activation_token = db.Column(db.String(2048),nullable=True, unique=True, index=True)
     activated_at = db.Column(db.DateTime,nullable=True)
     banned = db.Column(db.Boolean,nullable=False)
+    password_reset_token = db.Column(db.String(2048),nullable=True, unique=True, index=True)
     created_at = db.Column(db.DateTime,nullable=False, index=True)
     updated_at = db.Column(db.DateTime,nullable=True)
-    password_reset_token = db.Column(db.String(255),nullable=True, unique=True, index=True)
 
     #SecureRandom.urlsafe_base64
 
