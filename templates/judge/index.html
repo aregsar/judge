@@ -1,0 +1,21 @@
+
+{% extends "signedin.html" %}
+{% block body %}
+ <div class="container">
+
+       <form method="POST" action="{{ url_for('judge.search') }}" class="form-signin" role="form">
+           {{form.judgename(class='form-control',required=False,autofocus=True,onfocus='this.value = this.value;')}}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+
+            {{ form.csrf_token }}
+          </form>
+
+
+
+</div>
+<div class="container">
+{% for judge in judges %}
+{{judge.name}}
+{% endfor %}
+</div>
+ {% endblock %}

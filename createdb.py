@@ -10,8 +10,8 @@ with app.app_context():
     db.create_all()
     user = User.query.filter_by(username="areg").first()
     print user
-    judge = CreateRetiredJudge(name="areg")
-    judgereview = JudgeReview(judge_id=1,title="test review",body="bad judge",rating="1",username="areg",user_id=1)
+    #judge = CreateRetiredJudge(name="areg")
+    #judgereview = JudgeReview(judge_id=1,title="test review",body="bad judge",rating="1",username="areg",user_id=1)
 
 #work with the database
 #$psql judgedb

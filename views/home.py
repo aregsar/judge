@@ -3,6 +3,7 @@ from flask import Blueprint,render_template,g
 #NameError: global name 'SigninForm' is not defined
 #from forms import signin_form
 from forms.signin_form import SigninForm
+from forms.judge_search_form import JudgeSearchForm
 from flask.ext.login import current_user
 mod = Blueprint('home',__name__)
 
@@ -22,7 +23,8 @@ def index():
     #print g.current_user
 
     if current_user.is_authenticated():
-        return render_template("home/dashboard.html")
+        form = JudgeSearchForm()
+        return render_template("home/dashboard.html",form=form)
     else:
         #must pass an empty form for antiXSS
         form = SigninForm()
