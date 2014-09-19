@@ -3,7 +3,7 @@ from flask import Blueprint,render_template,g
 #NameError: global name 'SigninForm' is not defined
 #from forms import signin_form
 from forms.signin_form import SigninForm
-
+from flask.ext.login import current_user
 mod = Blueprint('home',__name__)
 
 
@@ -15,6 +15,7 @@ mod = Blueprint('home',__name__)
 
 @mod.route('/')
 def index():
+    print current_user
     #1/0
     #return 'home.index'
     #abort(404)

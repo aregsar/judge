@@ -1,14 +1,14 @@
 import sys
 from flask import Blueprint,redirect, render_template, url_for, g, current_app,flash
 import uuid
-from plugins import db, flaskuuid
+from plugins import db, flaskuuid,bcrypt
 #NameError: global name 'SigninForm' is not defined
 #from forms import signin_form, signup_form, forgotpassword_form
 from forms.signin_form import SigninForm
 from forms.signup_form import SignupForm
 from forms.forgotpassword_form import ForgotPasswordForm
 from itsdangerous import URLSafeTimedSerializer
-from flask.ext.login import LoginManager,login_required
+from flask.ext.login import LoginManager,login_required,login_user,logout_user
 #from models import user
 from models.user import User
 
@@ -114,6 +114,32 @@ def confirm(token):
     return render_template("account/confirm.html",form=form)
 
 
+@mod.route('/account/signin',methods=['GET','POST'])
+def signin():
+    form = SigninForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        #if (user and not user.is_banned() ):
+        if user:
+            # #if user.password_is_correct(form.password.data):
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                user.refresh_signin_token_and_date()
+                db.session.commit()
+                #store the authentcation state for login_user to access
+                user.authenticated=True
+                login_user(user, remember=True)
+                return redirect(url_for("home.index"))
+    flash("invalid email or password")
+    return render_template("account/signin.html",form=form)
+
+
+@login_required
+def logout():
+    logout_user()
+    return render_template("home/index.html")
+
+
+
 
 @mod.route('/account/password/activate',methods=['GET','POST'])
 def forgot_password():
@@ -173,29 +199,7 @@ def set_password():
             return redirect(url_for("home.index"))
     return render_template("account/set_password.html",form=form)
 
-@mod.route('/account/signin',methods=['GET','POST'])
-def signin():
-    form = SigninForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if (user
-                and not user.is_banned()
-                and user.password_is_correct(form.password.data) ):
-            user.refresh_signin_token_and_date()
-            db.session.add(user)
-            db.session.commit()
-            #store the authentcation state for login_user to access
-            user.authenticated=True
-            login_user(user, remember=True)
-            return redirect(url_for("home.index"))
-    flash("invalid email or password")
-    return render_template("account/signin.html",form=form)
 
-
-@login_required
-def logout():
-    logout_user()
-    return render_template("home/index.html")
 
 
 

@@ -4,6 +4,9 @@
 
 
         <div class="container">
+          {% for message in get_flashed_messages() %}
+          {{ message }}<br />
+          {% endfor %}
            <form method="POST" action="{{ url_for('account.signin') }}" class="form-signin" role="form">
           {{form.email(class='form-control',placeholder='Email address')}}
             <input type="password" name="password" class="form-control" placeholder="Password" autofocus>

@@ -54,9 +54,10 @@ class User(db.Model):
         self.updated_at = dt
 
     def refresh_signin_token_and_date(self):
+        dt = datetime.utcnow()
         self.signin_token = "areg"
-        self.signedin_at = datetime.utcnow()
-
+        self.signedin_at = dt
+        self.updated_at = dt
 
     def is_banned(self):
         return self.banned
@@ -88,7 +89,7 @@ class User(db.Model):
 
 
 #define after defining User
-#@login_manager.user_loader
+@login_manager.user_loader
 def user_loader(user_id):
     #user_id is the value returned from User.get_id() method
     #it is first called by flask-login in the login_user(user) method
