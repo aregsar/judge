@@ -133,7 +133,7 @@ def signin():
     return render_template("account/signin.html",form=form)
 
 
-@login_required
+#@login_required
 @mod.route('/account/signout')
 def signout():
     logout_user()

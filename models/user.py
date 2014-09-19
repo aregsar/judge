@@ -1,6 +1,7 @@
-from plugins import db, bcrypt,login_manager
-#from flask.ext.login import LoginManager
+from plugins import db, bcrypt,login_manager,flaskuuid
+from flask.ext.login import make_secure_token
 from datetime import datetime
+import uuid
 
 class User(db.Model):
     __tablename__ = "users"
@@ -55,7 +56,9 @@ class User(db.Model):
 
     def refresh_signin_token_and_date(self):
         dt = datetime.utcnow()
-        self.signin_token = "areg"
+        guid = uuid.uuid4().hex
+        print guid
+        self.signin_token = make_secure_token(guid)
         self.signedin_at = dt
         self.updated_at = dt
 
@@ -66,8 +69,8 @@ class User(db.Model):
     #Flask-Login interface
     def get_id(self):
         #TODO: return token
-        #return unicode(self.signin_token)
-        return unicode(self.email)
+        return unicode(self.signin_token)
+        #return unicode(self.email)
         #return unicode(self.id)
 
     def is_active(self):
@@ -78,6 +81,10 @@ class User(db.Model):
 
     def is_anonymous(self):
         return False
+
+    #def get_auth_token(self)
+    #   return unicode(self.signin_token)
+
     #end Flask-Login interface
 
     def __repr__(self):
@@ -94,9 +101,16 @@ def user_loader(user_id):
     #then this methode is called passing in the value returned rom User.get_id()
     #return User.query.get(user_id)
     #TODO: query by token
-    #user = User.query.filter(User.signin_token==user_id).first()
-    user = User.query.filter(User.email==user_id).first()
+    user = User.query.filter(User.signin_token==user_id).first()
+    #user = User.query.filter(User.email==user_id).first()
     if user:
         user.authenticated = True
     return user
+
+#@login_manager.token_loader
+#def token_loader(user_token):
+    # user = User.query.filter(User.signin_token==user_token).first()
+    # if user:
+    #     user.authenticated = True
+    # return user
 
