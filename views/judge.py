@@ -10,8 +10,9 @@ from models.judge import Judge, CreateRetiredJudge
 mod = Blueprint('judge',__name__)
 
 
-#@login_required
+
 @mod.route('/judge')
+@login_required
 def index():
 
     #print current_user
