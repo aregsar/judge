@@ -34,5 +34,5 @@ class Judge(db.Model):
 def CreateActiveJudge(name,state,court,district,scope="State"):
     return Judge(name="areg",scope=scope,state=state,court=court,district=district)
 
-def CreateRetiredJudge(name,scope="Arbitrator"):
-    return Judge(name=name,scope=scope,retired=True)
+def CreateRetiredJudge(name,state,scope="Arbitrator"):
+    return Judge(name=name,state=state,scope=scope,retired=True)

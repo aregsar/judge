@@ -2,12 +2,12 @@
 {% extends "signedin.html" %}
 {% block body %}
  <div class="container">
-    <h2>lookup a judge</h2>
-       <form method="GET" action="{{ url_for('judge.index',judgename='areg') }}" class="form-signin" role="form">
-           {{form.name(class='form-control',required=False,autofocus=True,onfocus='this.value = this.value;')}}
+    <div class="blog-header ">
+            <p class="lead blog-description">Lookup a judge</p>
+          </div>
+       <form method="GET" action="{{ url_for('judge.index') }}" class="form-signin" role="form">
+           {{form.name(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
             <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
-
-            {{ form.csrf_token }}
           </form>
 </div>
  {% endblock %}

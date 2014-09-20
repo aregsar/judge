@@ -1,21 +1,27 @@
 
 {% extends "signedin.html" %}
 {% block body %}
- <div class="container">
-
-       <form method="POST" action="{{ url_for('judge.search') }}" class="form-signin" role="form">
-           {{form.judgename(class='form-control',required=False,autofocus=True,onfocus='this.value = this.value;')}}
+     <div class="container">
+      <div class="blog-header ">
+                <p class="lead blog-description">Lookup a judge</p>
+      </div>
+       <form method="GET" action="{{ url_for('judge.index') }}" class="form-signin" role="form">
+           {{form.name(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
             <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
-
-            {{ form.csrf_token }}
           </form>
 
 
 
-</div>
-<div class="container">
-{% for judge in judges %}
-{{judge.name}}
-{% endfor %}
-</div>
+        <div class="blog-header ">
+                {% if message %}
+                {{message}}
+                <a href="#">review {{name}}</a>
+                {% endif %}
+                    {% for judge in judges %}
+                        {{judge.name}}<br /><a href="#">reviews</a>&nbsp;|&nbsp;<a href="#">add a review</a>
+                    {% endfor %}
+        </div>
+
+    </div>
+
  {% endblock %}
