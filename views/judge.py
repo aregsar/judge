@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,g,request,abort
+from flask import Blueprint,render_template,g,request,abort,redirect,url_for
 from forms.signin_form import SigninForm
 from flask.ext.login import current_user
 from forms.judge_search_form import JudgeSearchForm
@@ -60,8 +60,9 @@ def add():
         judge = CreateActiveJudge(form.name.data,"CA","court","district",scope="State")
         db.session.add(judge)
         db.session.commit()
-        form.name.data = ""
-        return render_template("judge/edit.html",form=form,id=judge.id)
+        return redirect(url_for('judge.edit',id=judge.id))
+        #form.name.data = judge.name
+        #return render_template("judge/edit.html",form=form,id=judge.id)
     return render_template("judge/add.html",form=form)
 
 @mod.route('/judge/add/retired',methods=['GET','POST'])
@@ -73,8 +74,9 @@ def addretired():
         judge = CreateRetiredJudge(form.name.data,"CA",scope="Arbitrator")
         db.session.add(judge)
         db.session.commit()
-        form.name.data = ""
-        return render_template("judge/editretired.html",form=form,id=judge.id)
+        return redirect(url_for('judge.edit',id=judge.id))
+        #form.name.data = judge.name
+        #return render_template("judge/editretired.html",form=form,id=judge.id)
     return render_template("judge/addretired.html",form=form)
 
 @mod.route('/judge/edit/<id>',methods=['GET','POST'])
@@ -85,21 +87,23 @@ def edit(id):
         abort(404)
     if judge.retired:
         form = RetiredJudgeEditForm()
-        form.name.data = judge.name
         if form.validate_on_submit():
             judge.name = form.name.data
             #judge.scope = form.scope.data
             db.session.commit()
+            return redirect(url_for('judge.edit',id=id))
+        form.name.data = judge.name
         return render_template("judge/editretired.html",form=form,id=id)
     else:
         form = JudgeEditForm()
-        form.name.data = judge.name
         if form.validate_on_submit():
             judge.name = form.name.data
             #judge.scope = form.scope.data
             #judge.district = form.district.data
             #judge.court = form.court.data
             db.session.commit()
+            return redirect(url_for('judge.edit',id=id))
+        form.name.data = judge.name
         return render_template("judge/edit.html",form=form,id=id)
 
 
