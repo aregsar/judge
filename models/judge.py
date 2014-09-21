@@ -32,7 +32,7 @@ class Judge(db.Model):
 
 #factory methods
 def CreateActiveJudge(name,state,court,district,scope="State"):
-    return Judge(name="areg",scope=scope,state=state,court=court,district=district)
+    return Judge(name=name,scope=scope,state=state,court=court,district=district)
 
 def CreateRetiredJudge(name,state,scope="Arbitrator"):
     return Judge(name=name,state=state,scope=scope,retired=True)

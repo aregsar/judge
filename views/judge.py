@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,g,request
+from flask import Blueprint,render_template,g,request,abort
 from forms.signin_form import SigninForm
 from flask.ext.login import current_user
 from forms.judge_search_form import JudgeSearchForm
@@ -34,4 +34,57 @@ def submit(name):
         db.session.commit()
         return render_template("judge/submitted.html")
     return render_template("judge/submit.html",form=form,name=name)
+
+@mod.route('/judge/candidates')
+@login_required
+def candidates():
+    if current_user.user_role == "admin":
+        judges = Candidate.query.all()
+        return render_template("judge/candidates.html",judges=judges)
+    abort(404)
+
+@mod.route('/judge/add',methods=['GET','POST'])
+@login_required
+def add():
+    form = JudgeEditForm()
+    if form.validate_on_submit():
+        judge = Judge(name=form.name.data)
+        db.session.add(judge)
+        db.session.commit()
+        form.name.data = ""
+        return render_template("judge/edit.html",form=form,id=judge.id)
+    return render_template("judge/add.html",form=form)
+
+@mod.route('/judge/add/retired',methods=['GET','POST'])
+@login_required
+def addretired():
+    form = RetiredJudgeEditForm()
+    if form.validate_on_submit():
+        judge = Judge(name=form.name.data,retired=True)
+        db.session.add(judge)
+        db.session.commit()
+        form.name.data = ""
+        return render_template("judge/editretired.html",form=form,id=judge.id)
+    return render_template("judge/addretired.html",form=form)
+
+@mod.route('/judge/edit/id',methods=['GET','POST'])
+@login_required
+def edit(id):
+    judge = Judge.query.get(user_id)
+    if judge == None:
+        abort(404)
+    if judge.retired:
+        form = RetiredJudgeEditForm()
+        if form.validate_on_submit():
+            judge.name = form.name.data
+            db.session.commit()
+        return render_template("judge/editretired.html",form=form,id=judge.id)
+    else:
+        form = JudgeEditForm()
+        if form.validate_on_submit():
+            judge.name = form.name.data
+            db.session.commit()
+        return render_template("judge/edit.html",form=form,id=judge.id)
+
+
 
