@@ -4,7 +4,7 @@ from app import create_app
 app = create_app()
 with app.app_context():
     from models.user import User, create_admin_users
-    from models.judge import Judge,create_judges
+    from models.judge import Judge,create_test_judges
     from models.judgereview import JudgeReview
     from plugins import db
     print db
@@ -15,7 +15,7 @@ with app.app_context():
     if user == None:
         create_admin_users()
     user = User.query.filter_by(username="areg").first()
-    #create_judges()
+    #create_test_judges()
     print user
 
 #work with the database

@@ -17,9 +17,18 @@
                 {{message}}
                 <a href="{{ url_for('judge.submit',name=name) }}">review {{name}}</a>
                 {% endif %}
+
+                {% if current_user.user_role != "admin" %}
                     {% for judge in judges %}
                         {{judge.name}}<br /><a href="#">reviews</a>&nbsp;|&nbsp;<a href="#">add a review</a>
                     {% endfor %}
+                {% endif%}
+
+                {% if current_user.user_role == "admin" %}
+                     {% for judge in judges %}
+                        {{judge.name}}<br /><a href="{{ url_for('judge.edit',id=judge.id) }}">edit</a>
+                    {% endfor %}
+                  {% endif%}
         </div>
 
     </div>
