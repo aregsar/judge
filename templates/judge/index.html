@@ -15,7 +15,7 @@
         <div class="blog-header ">
                 {% if message %}
                 {{message}}
-                <a href="#">review {{name}}</a>
+                <a href="{{ url_for('judge.submit',name=name) }}">review {{name}}</a>
                 {% endif %}
                     {% for judge in judges %}
                         {{judge.name}}<br /><a href="#">reviews</a>&nbsp;|&nbsp;<a href="#">add a review</a>

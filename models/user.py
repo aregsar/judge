@@ -68,7 +68,6 @@ class User(db.Model):
 
     #Flask-Login interface
     def get_id(self):
-        #TODO: return token
         return unicode(self.signin_token)
         #return unicode(self.email)
         #return unicode(self.id)
@@ -81,7 +80,8 @@ class User(db.Model):
 
     def is_anonymous(self):
         return False
-
+    #flask login api for alternative token authentication
+    #not used since we are just returning the token via get_id
     #def get_auth_token(self)
     #   return unicode(self.signin_token)
 
@@ -105,6 +105,8 @@ def create_admin_users():
     db.session.commit()
 
 
+#flask login api for user if based authentication. works in conjunction with get_id
+#hacked it so it uses tokens instead of user id
 #define after defining User
 @login_manager.user_loader
 def user_loader(user_id):
@@ -112,13 +114,15 @@ def user_loader(user_id):
     #it is first called by flask-login in the login_user(user) method
     #then this methode is called passing in the value returned rom User.get_id()
     #return User.query.get(user_id)
-    #TODO: query by token
     user = User.query.filter(User.signin_token==user_id).first()
     #user = User.query.filter(User.email==user_id).first()
     if user:
         user.authenticated = True
     return user
 
+
+#flask login api for alternative token authentication. works in conjunction with get_auth_token
+#not used since we are using user_loader passing in a token via user_id
 #@login_manager.token_loader
 #def token_loader(user_token):
     # user = User.query.filter(User.signin_token==user_token).first()

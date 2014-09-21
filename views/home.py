@@ -5,6 +5,9 @@ from flask import Blueprint,render_template,g
 from forms.signin_form import SigninForm
 from forms.judge_search_form import JudgeSearchForm
 from flask.ext.login import current_user
+
+
+#this bluprint is registered in blueprints.py
 mod = Blueprint('home',__name__)
 
 

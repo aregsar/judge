@@ -12,6 +12,7 @@ from flask.ext.login import LoginManager,login_required,login_user,logout_user
 #from models import user
 from models.user import User
 
+#this bluprint is registered in blueprints.py
 mod = Blueprint('account',__name__)
 
 @mod.route('/account/signup',methods=['GET','POST'])
@@ -175,7 +176,7 @@ def reset_password(token):
     return render_template("account/set_password.html",form=form,token=token)
 
 @mod.route('/account/password/set/<token>',methods=['GET','POST'])
-def set_password():
+def set_password(token):
     secret = current_app.config["SECRET_KEY"]
     ts = URLSafeTimedSerializer(secret)
     try:

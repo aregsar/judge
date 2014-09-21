@@ -4,7 +4,11 @@ from datetime import datetime
 import uuid
 
 class Candidate(db.Model):
-     __tablename__ = "candidate"
+    __tablename__ = "candidates"
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(255),nullable=False,  index=True)
     state = db.Column(db.String(20),nullable=False)
+
+    def __init__(self,name):
+        self.name = name
+        self.state = "NA"
