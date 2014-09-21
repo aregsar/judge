@@ -85,6 +85,7 @@ def edit(id):
         abort(404)
     if judge.retired:
         form = RetiredJudgeEditForm()
+        form.name.data = judge.name
         if form.validate_on_submit():
             judge.name = form.name.data
             #judge.scope = form.scope.data
@@ -92,6 +93,7 @@ def edit(id):
         return render_template("judge/editretired.html",form=form,id=id)
     else:
         form = JudgeEditForm()
+        form.name.data = judge.name
         if form.validate_on_submit():
             judge.name = form.name.data
             #judge.scope = form.scope.data
