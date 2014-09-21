@@ -91,6 +91,18 @@ class User(db.Model):
         return '<email {}>'.format(self.email)
 
 
+#factory method
+def create_admin_users():
+    user = User(
+            email = "aregsar@gmail.com",
+            password = "panama",
+            barnumber = "1234",
+            username = "areg")
+
+    user.activate()
+    user.user_role = "admin"
+    db.session.add(user)
+    db.session.commit()
 
 
 #define after defining User

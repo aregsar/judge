@@ -1,8 +1,10 @@
+
+#utility module for recreating database in development
 from app import create_app
 app = create_app()
 with app.app_context():
-    from models.user import User
-    from models.judge import Judge, CreateRetiredJudge
+    from models.user import User, create_admin_users
+    from models.judge import Judge,create_judges
     from models.judgereview import JudgeReview
     from plugins import db
     print db
@@ -10,8 +12,11 @@ with app.app_context():
     db.create_all()
     user = User.query.filter_by(username="areg").first()
     print user
-    #judge = CreateRetiredJudge(name="areg",state="CA")
-    #judgereview = JudgeReview(judge_id=1,title="test review",body="bad judge",rating="1",username="areg",user_id=1)
+    if user == None:
+        create_admin_users()
+    user = User.query.filter_by(username="areg").first()
+    #create_judges()
+    print user
 
 #work with the database
 #$psql judgedb

@@ -36,3 +36,14 @@ def CreateActiveJudge(name,state,court,district,scope="State"):
 
 def CreateRetiredJudge(name,state,scope="Arbitrator"):
     return Judge(name=name,state=state,scope=scope,retired=True)
+
+def create_judges():
+    judge = CreateRetiredJudge(name="areg",state="CA")
+    db.session.add(judge)
+    judge = CreateRetiredJudge(name="armen",state="CA")
+    db.session.add(judge)
+    db.session.commit()
+
+#judge = CreateRetiredJudge(name="areg",state="CA")
+#judgereview = JudgeReview(judge_id=1,title="test review",body="bad judge",rating="1",username="areg",user_id=1)
+
