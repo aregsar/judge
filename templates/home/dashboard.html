@@ -9,7 +9,7 @@
            {{form.name(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
             <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
              {% if current_user.user_role == "admin" %}
-          <a href="{{ url_for('judge.add') }}">add active judge</a>
+          <a href="{{ url_for('judge.add') }}">add sitting judge</a>
           <br />
           <a href="{{ url_for('judge.addretired') }}">add retired judge</a>
           {% endif %}

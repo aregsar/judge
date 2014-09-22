@@ -6,13 +6,16 @@
       </div>
 
 <form method="POST" action="{{ url_for('review.add', id=id) }}" class="form-signin" role="form">
-           {{form.title(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
-           {{form.body(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
-           {{form.rating(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+           {{form.title(class='form-control',placeholder='Title',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+          {{form.body(class='form-control',placeholder='Judge Review',required=True,cols="35", rows="20")}}
+           {{form.rating(class='form-control',placeholder='Rating (1 to 5)',required=True)}}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+             {{ form.csrf_token }}
           </form>
 
-
+ {% for error in form.errors.rating %}
+        <span style="color: red;">{{error}}</span>
+        {% endfor %}
 
         <div class="blog-header ">
 

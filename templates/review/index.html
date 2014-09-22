@@ -12,17 +12,17 @@
 
  {% if current_user.user_role != "admin" %}
                     {% for review in reviews %}
-                        review by: <a href="{{ url_for('user.profile',id=reviewer.id) }}">{{review.reviewer_name}}</a>
+                        review by: <a href="{{ url_for('user.profile',id=review.reviewer_id) }}">{{review.reviewer_name}}</a>
                         On: {{review.created_at}}<br />
-                        <a href="{{ url_for('review.review',id=review.id) }}">details</a>
+                        <a href="{{ url_for('review.review',id=review.id) }}">details</a><br/><br/>
                     {% endfor %}
                 {% endif%}
 
                 {% if current_user.user_role == "admin" %}
-                 {% for reveiw in reviews %}
-                        review by: <a href="{{ url_for('user.profile',id=reviewer.id) }}">{{review.reviewer_name}}</a>
+                 {% for review in reviews %}
+                        review by: <a href="{{ url_for('user.profile',id=review.reviewer_id) }}">{{review.reviewer_name}}</a>
                         On: {{review.created_at}}<br />
-                        <a href="{{ url_for('review.review',id=review.id) }}">details</a><br /><a href="{{ url_for('review.edit',id=review.id) }}">edit</a>
+                        <a href="{{ url_for('review.review',id=review.id) }}">details</a>&nbsp;|&nbsp;<a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>
                     {% endfor %}
 
                   {% endif%}

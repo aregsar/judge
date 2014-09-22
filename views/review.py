@@ -1,10 +1,11 @@
-from flask import Blueprint,render_template,g,request
+from flask import Blueprint,render_template,g,request,redirect,url_for
 from forms.review.add_review_form import AddReviewForm
 from flask.ext.login import current_user
 from forms.judge_search_form import JudgeSearchForm
 from flask.ext.login import LoginManager,login_required,login_user,logout_user
 from plugins import db
 from models.judgereview import JudgeReview
+from models.judge import Judge
 
 mod = Blueprint('review',__name__)
 
@@ -16,11 +17,24 @@ def index(id):
     reviews= JudgeReview.query.filter_by(judge_id=id).all()
     return render_template("review/index.html",reviews=reviews)
 
-@mod.route('/judge/<id>/review/add')
+@mod.route('/judge/<id>/review/add',methods=['GET','POST'])
 @login_required
 def add(id):
-    #return "judge add review " + id
-    return render_template("review/add.html")
+    judge = Judge.query.get(id)
+    form = AddReviewForm()
+    #print "judge " + id
+    #print form.title.data
+    if form.validate_on_submit():
+        #print "judge " + id
+        review = JudgeReview(title=form.title.data,
+                            body=form.body.data,
+                            rating= form.rating.data,
+                            judge= judge,
+                            current_user=current_user)
+        db.session.add(review)
+        db.session.commit()
+        return redirect(url_for('review.index',id=judge.id))
+    return render_template("review/add.html",form=form,id=id)
 
 @mod.route('/review/<id>')
 @login_required
