@@ -3,7 +3,7 @@
 from app import create_app
 app = create_app()
 with app.app_context():
-    from models.user import User, create_admin_users
+    from models.user import User, create_test_users
     from models.judge import Judge,create_test_judges
     from models.judgereview import JudgeReview
     from plugins import db
@@ -13,10 +13,14 @@ with app.app_context():
     user = User.query.filter_by(username="areg").first()
     print user
     if user == None:
-        create_admin_users()
+        create_test_users()
     user = User.query.filter_by(username="areg").first()
-    #create_test_judges()
     print user
+    judge = Judge.query.filter_by(name="areg").first()
+    if judge == None:
+        create_test_judges()
+    judge = Judge.query.filter_by(name="areg").first()
+    print judge
 
 #work with the database
 #$psql judgedb

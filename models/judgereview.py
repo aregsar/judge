@@ -7,17 +7,18 @@ class JudgeReview(db.Model):
     __tablename__ = "judgereviews"
     id = db.Column(db.Integer,primary_key=True)
     judge_id = db.Column(db.Integer,nullable=False)
+    judge_name = db.Column(db.String(255),nullable=False)
     title = db.Column(db.String(255),nullable=False)
     #body = db.Column(db.String(65535),nullable=False)
     body = db.Column(db.Text(),nullable=False)
     #rating of range 1 to 5
     rating = db.Column(db.Integer,nullable=False)
-    #username of reviewer
-    created_by = db.Column(db.String(255),nullable=False)
-    #user id of reviewer
-    created_by_id = db.Column(db.Integer,nullable=False)
+    reviewer_id = db.Column(db.Integer,nullable=False)
+    reviewer_name = db.Column(db.String(255),nullable=False)
     created_at = db.Column(db.DateTime,nullable=False, index=True)
     updated_at = db.Column(db.DateTime,nullable=True)
+    active = db.Column(db.Boolean,nullable=False)
+    removed = db.Column(db.Boolean,nullable=False)
 
     #def __init__(self,judge_id,title,body,rating,user):
     def __init__(self,judge_id,title,body,rating,username,user_id):

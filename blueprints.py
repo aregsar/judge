@@ -9,5 +9,5 @@ def register_blueprints(app):
     app.register_blueprint(home.mod)
     app.register_blueprint(account.mod)
     app.register_blueprint(judge.mod)
-    # app.register_blueprint(review.mod)
-    # app.register_blueprint(user.mod)
+    app.register_blueprint(review.mod)
+    app.register_blueprint(user.mod)

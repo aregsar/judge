@@ -1,0 +1,23 @@
+{% extends "signedin.html" %}
+{% block body %}
+     <div class="container">
+      <div class="blog-header ">
+                <p class="lead blog-description">Submit a review</p>
+      </div>
+
+<form method="POST" action="{{ url_for('review.add', id=id) }}" class="form-signin" role="form">
+           {{form.title(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+           {{form.body(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+           {{form.rating(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+          </form>
+
+
+
+        <div class="blog-header ">
+
+        </div>
+
+    </div>
+
+ {% endblock %}}

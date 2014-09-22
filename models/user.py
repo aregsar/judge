@@ -92,15 +92,23 @@ class User(db.Model):
 
 
 #factory method
-def create_admin_users():
+def create_test_users():
     user = User(
             email = "aregsar@gmail.com",
             password = "panama",
             barnumber = "1234",
-            username = "areg")
+            username = "aregsar")
 
     user.activate()
     user.user_role = "admin"
+    db.session.add(user)
+    db.session.commit()
+    user = User(
+            email = "areg@cox.com",
+            password = "panama",
+            barnumber = "12345",
+            username = "areg")
+    user.activate()
     db.session.add(user)
     db.session.commit()
 

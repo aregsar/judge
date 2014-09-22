@@ -38,7 +38,7 @@ def CreateRetiredJudge(name,state,scope="Arbitrator"):
     return Judge(name=name,state=state,scope=scope,retired=True)
 
 def create_test_judges():
-    judge = CreateRetiredJudge(name="areg",state="CA")
+    judge = CreateActiveJudge(name="areg",state="CA",court="LA Superior", district="1st")
     db.session.add(judge)
     judge = CreateRetiredJudge(name="armen",state="CA")
     db.session.add(judge)
