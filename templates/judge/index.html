@@ -2,11 +2,8 @@
 {% extends "signedin.html" %}
 {% block body %}
      <div class="container">
-      <div class="blog-header ">
-                <p class="lead blog-description">Lookup a judge</p>
-      </div>
        <form method="GET" action="{{ url_for('judge.index') }}" class="form-signin" role="form">
-           {{form.name(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+           {{form.name(class='form-control',required=True,placeholder='Enter judge name',autofocus=True,onfocus='this.value = this.value;')}}
             <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
           </form>
 
@@ -14,9 +11,14 @@
 
         <div class="blog-header ">
                 {% if message %}
-                {{message}}
-                <a href="{{ url_for('judge.submit',name=name) }}">review {{name}}</a>
+                  {{message}}
+                  <a href="{{ url_for('judge.submit',name=name) }}">review {{name}}</a>
+                {% else %}
+                  <div class="blog-header ">
+                    <p class="lead blog-description">Results</p>
+                  </div>
                 {% endif %}
+
 
                 {% if current_user.user_role != "admin" %}
                     {% for judge in judges %}

@@ -1,11 +1,11 @@
 from flask import Blueprint,render_template,g,request,redirect,url_for
-from forms.review.add_review_form import AddReviewForm
-from flask.ext.login import current_user
-from forms.judge_search_form import JudgeSearchForm
-from flask.ext.login import LoginManager,login_required,login_user,logout_user
+from flask.ext.login import current_user,LoginManager,login_required,login_user,logout_user
 from plugins import db
 from models.judgereview import JudgeReview
 from models.judge import Judge
+from forms.review.add_review_form import AddReviewForm
+from forms.review.edit_review_form import EditReviewForm
+from forms.review.edit_review_admin_form import EditReviewAdminForm
 
 mod = Blueprint('review',__name__)
 
@@ -13,19 +13,20 @@ mod = Blueprint('review',__name__)
 @mod.route('/judge/<id>/reviews')
 @login_required
 def index(id):
-    #return "judge reviews " + id
-    reviews= JudgeReview.query.filter_by(judge_id=id).all()
-    return render_template("review/index.html",reviews=reviews)
+    judge = Judge.query.get(id)
+    if judge == None:
+        return render_template("judge/notfound.html")
+    reviews = JudgeReview.query.filter_by(judge_id=id).all()
+    return render_template("review/index.html",reviews=reviews,judge=judge)
 
 @mod.route('/judge/<id>/review/add',methods=['GET','POST'])
 @login_required
 def add(id):
     judge = Judge.query.get(id)
+    if judge == None:
+        return render_template("judge/notfound.html")
     form = AddReviewForm()
-    #print "judge " + id
-    #print form.title.data
     if form.validate_on_submit():
-        #print "judge " + id
         review = JudgeReview(title=form.title.data,
                             body=form.body.data,
                             rating= form.rating.data,
@@ -39,12 +40,25 @@ def add(id):
 @mod.route('/review/<id>')
 @login_required
 def review(id):
-    #return "review " + id
-    return render_template("review/review.html")
+    review = JudgeReview.query.get(id)
+    if review == None:
+        return render_template("review/notfound.html")
+    return render_template("review/review.html",review=review)
 
 
 @mod.route('/review/<id>/edit')
 @login_required
 def edit(id):
-    #return "judge edit review " + id
-    return render_template("review/edit.html")
+    review = JudgeReview.query.get(id)
+    if review == None:
+        return render_template("review/notfound.html")
+    if current_user.id == review.reviewer_id or current_user.user_role == "admin":
+        if current_user.user_role == "admin":
+            #form = EditReviewAdminForm(title=review.title,body=review.body,rating=review.rating)
+            #return render_template("review/editadmin.html",form=form,id=review.id)
+            form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
+            return render_template("review/edit.html",form=form,id=review.id)
+        else:
+            form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
+            return render_template("review/edit.html",form=form,id=review.id)
+    return "forbidden" #abort(403)

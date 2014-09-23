@@ -1,17 +1,22 @@
 {% extends "signedin.html" %}
 {% block body %}
-     <div class="container">
-      <div class="blog-header ">
-                <p class="lead blog-description">Review</p>
-      </div>
+<div class="container">
+    <div class="blog-header ">
 
-
-
-
-        <div class="blog-header ">
-
-        </div>
+         <p class="lead blog-description">Judge
+         <a href="{{ url_for('review.index',id=review.judge_id) }}">{{review.judge_name}}</a><br />
+         Reviewed By <a href="{{url_for('user.profile',id=review.reviewer_id)}}">{{review.reviewer_name}}</a><br />
+        {{review.created_at.strftime('%Y-%m-%d') }}&nbsp;
+        {% if current_user.id == review.reviewer_id or current_user.user_role == "admin"%}
+            <a href="{{url_for('review.edit',id=review.id)}}">edit</a>
+        {% endif %}
+        </p>
+    </div>
+    <div class="blog-header ">
+        {{review.rating}} of 5 gavels<br />
+        {{review.title}}<br />
+        {{review.body}}<br />
 
     </div>
-
- {% endblock %}}
+</div>
+{% endblock %}}

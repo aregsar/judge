@@ -3,6 +3,7 @@ from flask.ext.login import make_secure_token
 from datetime import datetime
 import uuid
 
+
 class JudgeReview(db.Model):
     __tablename__ = "judgereviews"
     id = db.Column(db.Integer,primary_key=True)

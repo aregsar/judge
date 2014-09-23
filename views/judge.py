@@ -84,7 +84,7 @@ def addretired():
 def edit(id):
     judge = Judge.query.get(id)
     if judge == None:
-        abort(404)
+        return render_template("judge/notfound.html")
     if judge.retired:
         form = RetiredJudgeEditForm()
         if form.validate_on_submit():
