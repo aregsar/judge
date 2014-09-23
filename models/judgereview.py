@@ -21,15 +21,15 @@ class JudgeReview(db.Model):
     active = db.Column(db.Boolean,nullable=False)
     removed = db.Column(db.Boolean,nullable=False)
 
-    def __init__(self,title,body,rating,judge,current_user):
-    #def __init__(self,judge_id,title,body,rating,judge_id, judge_name,reviewer_name,reviewer_id):
+    #def __init__(self,title,body,rating,judge,current_user):
+    def __init__(self,title,body,rating,judge_id, judge_name,reviewer_name,reviewer_id):
         self.title = title
-        self.judge_id = judge.id
-        self.judge_name = judge.name
+        self.judge_id = judge_id #judge.id
+        self.judge_name = judge_name #judge.name
         self.body = body
         self.rating = rating
-        self.reviewer_name = current_user.username
-        self.reviewer_id = current_user.id
+        self.reviewer_name = reviewer_name #current_user.username
+        self.reviewer_id = reviewer_id #current_user.id
         self.created_at = datetime.utcnow()
-        self.active =  False
+        self.active =  True
         self.removed = False

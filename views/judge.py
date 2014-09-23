@@ -13,6 +13,17 @@ from models.candidate import Candidate
 mod = Blueprint('judge',__name__)
 
 
+@mod.route('/judge/sitting')
+@login_required
+def sitting():
+    judges= Judge.query.filter_by(retired=False).all()
+    return render_template("judge/sitting.html",judges=judges)
+
+@mod.route('/judge/retired')
+@login_required
+def retired():
+    judges= Judge.query.filter_by(retired=True).all()
+    return render_template("judge/retired.html",judges=judges)
 
 
 @mod.route('/judge')
@@ -60,7 +71,8 @@ def add():
         judge = CreateActiveJudge(form.name.data,"CA","court","district",scope="State")
         db.session.add(judge)
         db.session.commit()
-        return redirect(url_for('judge.edit',id=judge.id))
+        return redirect(url_for('judge.profile',id=judge.id))
+        #return redirect(url_for('judge.edit',id=judge.id))
         #form.name.data = judge.name
         #return render_template("judge/edit.html",form=form,id=judge.id)
     return render_template("judge/add.html",form=form)
@@ -74,12 +86,22 @@ def addretired():
         judge = CreateRetiredJudge(form.name.data,"CA",scope="Arbitrator")
         db.session.add(judge)
         db.session.commit()
-        return redirect(url_for('judge.edit',id=judge.id))
+        return redirect(url_for('judge.profile',id=judge.id))
+        #return redirect(url_for('judge.edit',id=judge.id))
         #form.name.data = judge.name
         #return render_template("judge/editretired.html",form=form,id=judge.id)
     return render_template("judge/addretired.html",form=form)
 
-@mod.route('/judge/edit/<id>',methods=['GET','POST'])
+
+@mod.route('/judge/<id>')
+@login_required
+def profile(id):
+    judge = Judge.query.get(id)
+    if judge == None:
+        return render_template("judge/notfound.html")
+    return render_template("judge/profile.html",judge=judge)
+
+@mod.route('/judge/<id>/edit',methods=['GET','POST'])
 @login_required
 def edit(id):
     judge = Judge.query.get(id)
@@ -91,7 +113,8 @@ def edit(id):
             judge.name = form.name.data
             #judge.scope = form.scope.data
             db.session.commit()
-            return redirect(url_for('judge.edit',id=id))
+            #return redirect(url_for('judge.edit',id=id))
+            return redirect(url_for('judge.profile',id=id))
         form.name.data = judge.name
         return render_template("judge/editretired.html",form=form,id=id)
     else:
@@ -102,7 +125,8 @@ def edit(id):
             #judge.district = form.district.data
             #judge.court = form.court.data
             db.session.commit()
-            return redirect(url_for('judge.edit',id=id))
+            #return redirect(url_for('judge.edit',id=id))
+            return redirect(url_for('judge.profile',id=id))
         form.name.data = judge.name
         return render_template("judge/edit.html",form=form,id=id)
 

@@ -13,5 +13,5 @@ mod = Blueprint('user',__name__)
 
 @mod.route('/user/<id>')
 @login_required
-def profile():
+def profile(id):
     return "user id " + id

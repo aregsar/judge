@@ -11,5 +11,5 @@ class EditReviewAdminForm(Form):
     body = StringField(u'Review', widget=TextArea(), validators=[Required()])
     #rating = TextField('Rating', validators=[Required()])
     rating = IntegerField('Rating', validators=[Required()])
-    active = BooleanField('Published',default=True, validators=[Required()])
-    removed = BooleanField('Bannished', default=False,validators=[Required()])
+    active = BooleanField('Published',default=True)
+    removed = BooleanField('Bannished', default=False)

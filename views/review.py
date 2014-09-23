@@ -25,17 +25,25 @@ def add(id):
     judge = Judge.query.get(id)
     if judge == None:
         return render_template("judge/notfound.html")
-    form = AddReviewForm()
-    if form.validate_on_submit():
-        review = JudgeReview(title=form.title.data,
-                            body=form.body.data,
-                            rating= form.rating.data,
-                            judge= judge,
-                            current_user=current_user)
-        db.session.add(review)
-        db.session.commit()
-        return redirect(url_for('review.index',id=judge.id))
-    return render_template("review/add.html",form=form,id=id)
+    review = JudgeReview.query.filter_by(judge_id=id,reviewer_id=current_user.id).first()
+    if review == None:
+        form = AddReviewForm()
+        if form.validate_on_submit():
+            review = JudgeReview(title=form.title.data,
+                                body=form.body.data,
+                                rating= form.rating.data,
+                                judge_id = judge.id,
+                                judge_name = judge.name,
+                                #judge= judge,
+                                #current_user=current_user
+                                reviewer_id = current_user.id,
+                                reviewer_name = current_user.username)
+            db.session.add(review)
+            db.session.commit()
+            return redirect(url_for('review.index',id=judge.id))
+        return render_template("review/add.html",form=form,id=id)
+    else:
+        return redirect(url_for('review.edit',id=review.id))
 
 @mod.route('/review/<id>')
 @login_required
@@ -46,7 +54,7 @@ def review(id):
     return render_template("review/review.html",review=review)
 
 
-@mod.route('/review/<id>/edit')
+@mod.route('/review/<id>/edit',methods=['GET','POST'])
 @login_required
 def edit(id):
     review = JudgeReview.query.get(id)
@@ -54,11 +62,29 @@ def edit(id):
         return render_template("review/notfound.html")
     if current_user.id == review.reviewer_id or current_user.user_role == "admin":
         if current_user.user_role == "admin":
-            #form = EditReviewAdminForm(title=review.title,body=review.body,rating=review.rating)
-            #return render_template("review/editadmin.html",form=form,id=review.id)
-            form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
-            return render_template("review/edit.html",form=form,id=review.id)
+            form = EditReviewAdminForm(title=review.title,
+                                       body=review.body,
+                                       active = review.active,
+                                       removed = review.removed,
+                                       rating=review.rating)
+            if form.validate_on_submit():
+                review.body = form.body.data
+                review.title = form.title.data
+                review.rating = form.rating.data
+                review.active = form.active.data
+                review.removed = form.removed.data
+                db.session.commit()
+                return redirect(url_for('review.review',id=review.id))
+            return render_template("review/editadmin.html",form=form,id=review.id)
+            # form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
+            # return render_template("review/edit.html",form=form,id=review.id)
         else:
             form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
+            if form.validate_on_submit():
+                review.body = form.body.data
+                review.title = form.title.data
+                review.rating = form.rating.data
+                db.session.commit()
+                return redirect(url_for('review.review',id=review.id))
             return render_template("review/edit.html",form=form,id=review.id)
     return "forbidden" #abort(403)

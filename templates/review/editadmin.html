@@ -1,0 +1,36 @@
+{% extends "signedin.html" %}
+{% block body %}
+     <div class="container">
+      <div class="blog-header ">
+                <p class="lead blog-description">Edit review</p>
+      </div>
+
+
+
+
+        <div class="blog-header ">
+<form method="POST" action="{{ url_for('review.edit', id=id) }}" class="form-signin" role="form">
+           {{form.title(class='form-control',placeholder='Title',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+          {{form.body(class='form-control',placeholder='Judge Review',required=True,cols="35", rows="20")}}
+           {{form.rating(class='form-control',placeholder='Rating (1 to 5)',required=True)}}
+           active:{{form.active(class='form-control')}}
+           removed:{{form.removed(class='form-control')}}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+             {{ form.csrf_token }}
+          </form>
+
+ {% for error in form.errors.rating %}
+        <span style="color: red;">{{error}}</span>
+        {% endfor %}
+
+         {% for error in form.errors.title %}
+        <span style="color: red;">{{error}}</span>
+        {% endfor %}
+
+           {% for error in form.errors.body %}
+        <span style="color: red;">{{error}}</span>
+        {% endfor %}
+        </div>
+
+    </div>
+ {% endblock %}}
