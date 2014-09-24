@@ -3,12 +3,22 @@ from flask.ext.login import current_user,LoginManager,login_required,login_user,
 from plugins import db
 from models.judgereview import JudgeReview
 from models.judge import Judge
+from models.user import User
 from forms.review.add_review_form import AddReviewForm
 from forms.review.edit_review_form import EditReviewForm
 from forms.review.edit_review_admin_form import EditReviewAdminForm
 
 mod = Blueprint('review',__name__)
 
+@mod.route('/user/<id>/reviews')
+@login_required
+#def user(id):
+def reviewer(id):
+    user = User.query.get(id)
+    if user == None:
+        return render_template("user/notfound.html")
+    reviews = JudgeReview.query.filter_by(reviewer_id=id).all()
+    return render_template("review/indexbyuser.html",reviews=reviews,user=user)
 
 @mod.route('/judge/<id>/reviews')
 @login_required

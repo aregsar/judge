@@ -16,10 +16,11 @@ def index():
 @mod.route('/user/<id>')
 @login_required
 def profile(id):
+    judge_id = request.args.get('judge')
     user = User.query.get(id)
     if user == None:
         return render_template("user/notfound.html")
-    return render_template("user/profile.html",user=user)
+    return render_template("user/profile.html",user=user,judge_id=judge_id)
 
 
 @mod.route('/user/edit/<id>',methods=['GET','POST'])
