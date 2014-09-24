@@ -13,7 +13,17 @@
           <a href="{{ url_for('judge.sitting') }}">sitting judges</a>
         <br />
           <a href="{{ url_for('judge.retired') }}">retired judges</a>
+           <br />
+          <a href="{{ url_for('user.index') }}">users</a>
+
+           {#
+           <br />
+          <a href="{{ url_for('user.profile',id=id) }}">retired judges</a>
+           <br />
+          <a href="{{ url_for('user.edit',id=id) }}">retired judges</a>
+             #}
           {% endif %}
+
 
           </form>
 

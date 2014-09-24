@@ -29,7 +29,6 @@ def retired():
 @mod.route('/judge')
 @login_required
 def index():
-    #if current_user.is_authenticated():
     name = request.args.get('name')
     form = JudgeSearchForm(name=name)
     judges= Judge.query.filter_by(name=name).all()
@@ -65,6 +64,8 @@ def submit(name):
 @mod.route('/judge/add',methods=['GET','POST'])
 @login_required
 def add():
+    if current_user.user_role != "admin":
+        return render_template("judge/notfound.html")
     form = JudgeEditForm()
     if form.validate_on_submit():
         #judge = Judge(name=form.name.data)
@@ -80,9 +81,10 @@ def add():
 @mod.route('/judge/add/retired',methods=['GET','POST'])
 @login_required
 def addretired():
+    if current_user.user_role != "admin":
+        return render_template("judge/notfound.html")
     form = RetiredJudgeEditForm()
     if form.validate_on_submit():
-        #judge = Judge(name=form.name.data,retired=True)
         judge = CreateRetiredJudge(form.name.data,"CA",scope="Arbitrator")
         db.session.add(judge)
         db.session.commit()
@@ -104,6 +106,8 @@ def profile(id):
 @mod.route('/judge/<id>/edit',methods=['GET','POST'])
 @login_required
 def edit(id):
+    if current_user.user_role != "admin":
+        return render_template("judge/notfound.html")
     judge = Judge.query.get(id)
     if judge == None:
         return render_template("judge/notfound.html")
