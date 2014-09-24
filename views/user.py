@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,g,request
+from flask import Blueprint,render_template,g,request,redirect,url_for
 from flask.ext.login import current_user,LoginManager,login_required,login_user,logout_user
 from plugins import db
 from models.user import User
@@ -37,4 +37,4 @@ def edit(id):
         db.session.commit()
         #return redirect(url_for('judge.edit',id=id))
         return redirect(url_for('user.profile',id=id))
-    return render_template("user/edit.html",user=user)
+    return render_template("user/edit.html",form=form,user=user)

@@ -1,0 +1,23 @@
+{% extends "signedin.html" %}
+{% block body %}
+     <div class="container">
+      <div class="blog-header ">
+                <p class="lead blog-description">Edit sitting judge</p>
+      </div>
+ {% if current_user.user_role == "admin" %}
+
+
+<a href="{{ url_for('user.profile',id=user.id) }}">{{user.username}}</a>
+       <form method="POST" action="{{ url_for('user.edit',id=user.id) }}" class="form-signin" role="form">
+          banned:{{form.banned(class='form-control')}}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
+             {{ form.csrf_token }}
+          </form>
+
+ {% endif %}
+
+
+
+    </div>
+
+ {% endblock %}
