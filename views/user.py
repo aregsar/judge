@@ -30,7 +30,7 @@ def edit(id):
     user = User.query.get(id)
     if user == None:
         return render_template("user/notfound.html")
-    form = EditUserAdminForm()
+    form = EditUserAdminForm(banned=user.banned)
     if form.validate_on_submit():
         user.banned = form.banned.data
         db.session.commit()

@@ -1,0 +1,25 @@
+{% extends "signedin.html" %}
+{% block body %}
+<div class="container">
+    <div class="blog-header ">
+<a href="{{ url_for('user.index') }}">users</a><br /><br />
+
+{{user.username}}<br />
+        since: {{user.created_at.strftime('%Y-%m-%d') }}
+        {% if current_user.user_role == "admin"%}
+
+
+
+                         email: {{user.email}}<br />
+                         role: {{user.user_role}} <br />
+                         status:
+                          {% if user.banned == True %}Banned
+                          {% elif user.activated == True %}Active
+                          {% else %}Pending Activation
+                          {% endif%}
+        {% endif %}
+
+    </div>
+
+</div>
+{% endblock %}}
