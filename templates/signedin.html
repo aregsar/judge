@@ -41,11 +41,11 @@
           <a href="#">Back to top</a><br />
             Copyright&copy;&nbsp; 2014 JudgeJungle.
           </p>
-           <a href="#">About</a>
-          <a href="#">Contact</a>
-          <a href="#">Terms</a>
-          <a href="#">Privacy</a>
-          <a href="#">Security</a>
+          <a href="{{ url_for('company.about') }}">About</a>
+          <a href="{{ url_for('company.contact') }}">Contact</a>
+          <a href="{{ url_for('company.terms') }}">Terms</a>
+          <a href="{{ url_for('company.privacy') }}">Privacy</a>
+          <a href="{{ url_for('company.security') }}">Security</a>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/static/js/jquery-1.10.2.min.js"><\/script>')</script>
