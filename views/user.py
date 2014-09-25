@@ -1,8 +1,8 @@
 from flask import Blueprint,render_template,g,request,redirect,url_for
 from flask.ext.login import current_user,LoginManager,login_required,login_user,logout_user
 from plugins import db
-from models.user import User
 from forms.user.edit_user_admin_form import EditUserAdminForm
+from models.user import User
 
 mod = Blueprint('user',__name__)
 

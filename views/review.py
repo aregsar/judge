@@ -1,12 +1,12 @@
 from flask import Blueprint,render_template,g,request,redirect,url_for
 from flask.ext.login import current_user,LoginManager,login_required,login_user,logout_user
 from plugins import db
-from models.judgereview import JudgeReview
-from models.judge import Judge
-from models.user import User
 from forms.review.add_review_form import AddReviewForm
 from forms.review.edit_review_form import EditReviewForm
 from forms.review.edit_review_admin_form import EditReviewAdminForm
+from models.judgereview import JudgeReview
+from models.judge import Judge
+from models.user import User
 
 mod = Blueprint('review',__name__)
 

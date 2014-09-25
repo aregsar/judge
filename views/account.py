@@ -1,14 +1,14 @@
 import sys
-from flask import Blueprint,redirect, render_template, url_for, g, current_app,flash
 import uuid
+from itsdangerous import URLSafeTimedSerializer
+from flask import Blueprint,redirect, render_template, url_for, g, current_app,flash
+from flask.ext.login import LoginManager,login_required,login_user,logout_user
 from plugins import db, flaskuuid,bcrypt
 #NameError: global name 'SigninForm' is not defined
-#from forms import signin_form, signup_form, forgotpassword_form
-from forms.signin_form import SigninForm
-from forms.signup_form import SignupForm
-from forms.forgotpassword_form import ForgotPasswordForm
-from itsdangerous import URLSafeTimedSerializer
-from flask.ext.login import LoginManager,login_required,login_user,logout_user
+#from forms.account import signin_form, signup_form, forgotpassword_form
+from forms.account.signin_form import SigninForm
+from forms.account.signup_form import SignupForm
+from forms.account.forgotpassword_form import ForgotPasswordForm
 #from models import user
 from models.user import User
 

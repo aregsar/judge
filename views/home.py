@@ -1,10 +1,10 @@
 from flask import Blueprint,render_template,g
-
-#NameError: global name 'SigninForm' is not defined
-#from forms import signin_form
-from forms.signin_form import SigninForm
-from forms.judge_search_form import JudgeSearchForm
 from flask.ext.login import current_user
+#NameError: global name 'SigninForm' is not defined
+#from forms.account import signin_form
+from forms.account.signin_form import SigninForm
+from forms.judge.judge_search_form import JudgeSearchForm
+
 
 
 #this bluprint is registered in blueprints.py

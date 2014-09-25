@@ -1,14 +1,14 @@
 from flask import Blueprint,render_template,g,request,abort,redirect,url_for
-from forms.signin_form import SigninForm
-from flask.ext.login import current_user
-from forms.judge_search_form import JudgeSearchForm
-from forms.judge_submit_form import JudgeSubmitForm
-from forms.judge_edit_form import JudgeEditForm
-from forms.retired_judge_edit_form import RetiredJudgeEditForm
-from flask.ext.login import LoginManager,login_required,login_user,logout_user
+from flask.ext.login import current_user,LoginManager,login_required,login_user,logout_user
 from plugins import db
+#from forms.account.signin_form import SigninForm
+from forms.judge.judge_search_form import JudgeSearchForm
+from forms.judge.judge_submit_form import JudgeSubmitForm
+from forms.judge.judge_edit_form import JudgeEditForm
+from forms.judge.retired_judge_edit_form import RetiredJudgeEditForm
 from models.judge import Judge, CreateRetiredJudge,CreateActiveJudge
 from models.candidate import Candidate
+
 #this bluprint is registered in blueprints.py
 mod = Blueprint('judge',__name__)
 
