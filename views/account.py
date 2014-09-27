@@ -34,16 +34,17 @@ def signup():
             flash("account with bar number exists.")
             return render_template("account/signup.html",form=form)
         email = form.email.data
+        #email = email.strip()
         secret = current_app.config["SECRET_KEY"]
         ts = URLSafeTimedSerializer(secret)
         token = ts.dumps(email, salt=secret)
         confirm_url = url_for('account.confirm',token=token,_external=True)
 
         user = User(
-            email = email,
-            password = form.password.data,
-            barnumber = form.barnumber.data,
-            username = form.username.data)
+            email = email.strip(),
+            password = form.password.data.strip(),
+            barnumber = form.barnumber.data.strip(),
+            username = form.username.data.strip())
         try:
             db.session.add(user)
             db.session.commit()
@@ -106,7 +107,7 @@ def confirm(token):
         return render_template("account/confirmation_error.html")
 
 
-    user = User.query.filter_by(email=email).first()
+    #user = User.query.filter_by(email=email).first()
     #print user.activated
     form = SigninForm(email=email)
 
@@ -119,11 +120,11 @@ def confirm(token):
 def signin():
     form = SigninForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.strip()).first()
         #if (user and not user.is_banned() ):
         if user:
             # #if user.password_is_correct(form.password.data):
-            if bcrypt.check_password_hash(user.password, form.password.data):
+            if bcrypt.check_password_hash(user.password, form.password.data.strip()):
                 user.refresh_signin_token_and_date()
                 db.session.commit()
                 #store the authentcation state for login_user to access
@@ -149,7 +150,7 @@ def forgot_password():
     ts = URLSafeTimedSerializer(secret)
     form = ForgotPasswordForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=email).first_or_404()
+        user = User.query.filter_by(email=form.email.data.strip()).first_or_404()
         if user.is_not_banned():
             token = ts.dumps(self.email, salt=secret)
         if user.activated:
@@ -191,9 +192,9 @@ def set_password(token):
             email = ts.loads(form.token.data, salt=secret, max_age=86400)
         except:
             abort(404)
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.strip()).first()
         if (user and user.is_not_banned() and email == user.email):
-            user.set_password(form.password.data)
+            user.set_password(form.password.data.strip())
             db.session.add(user)
             db.session.commit()
             user.authenticated=True

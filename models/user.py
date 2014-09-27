@@ -90,6 +90,11 @@ class User(db.Model):
     def __repr__(self):
         return '<email {}>'.format(self.email)
 
+    def show_email(self,viewer):
+        if viewer.user_role == "admin":
+            return self.email
+        return ''
+
 
 #factory method
 def create_test_users():

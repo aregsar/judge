@@ -15,7 +15,10 @@
 
 
 <br />
-                         email: {{user.email}}<br />
+{% if current_user.user_role == "admin" %}
+                         email: {{user.email}}
+                         <br />
+{% endif%}
                          role: {{user.user_role}} <br />
                          status:
                           {% if user.banned == True %}Banned
