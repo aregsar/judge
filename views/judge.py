@@ -35,7 +35,8 @@ def index():
     message = None
     if len(judges) == 0:
         message = "Didn't find your judge? Submit them for review by clicking here."
-    return render_template("judge/index.html",form=form,judges=judges,name=name,message=message)
+    return render_template("judge/index.html",form=form,judges=judges,name=name,
+                           message=message)
 
 @mod.route('/judge/candidates')
 @login_required
@@ -101,7 +102,10 @@ def profile(id):
     judge = Judge.query.get(id)
     if judge == None:
         return render_template("judge/notfound.html")
-    return render_template("judge/profile.html",judge=judge)
+    can_show_edit_judge_link = False;
+    if current_user.user_role == "admin":
+        can_show_edit_judge_link = True
+    return render_template("judge/profile.html",judge=judge,can_show_edit_judge_link=can_show_edit_judge_link)
 
 @mod.route('/judge/<id>/edit',methods=['GET','POST'])
 @login_required

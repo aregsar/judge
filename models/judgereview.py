@@ -31,5 +31,5 @@ class JudgeReview(db.Model):
         self.reviewer_name = reviewer_name #current_user.username
         self.reviewer_id = reviewer_id #current_user.id
         self.created_at = datetime.utcnow()
-        self.active =  True
+        self.active =  False
         self.removed = False
