@@ -6,9 +6,11 @@
 {{user.username}}<br />
         since: {{user.created_at.strftime('%Y-%m-%d') }}
 <a href="{{ url_for('review.reviewer',id=user.id) }}">reviews</a>
+{#
  {% if judge_id != None %}&nbsp;|&nbsp;
  <a href="{{ url_for('judge.profile',id=judge_id) }}">judge</a>
  {% endif %}
+ #}
         {% if current_user.user_role == "admin" %}
 
 

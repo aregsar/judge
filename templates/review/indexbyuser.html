@@ -3,7 +3,12 @@
 <div class="container">
 
 <div class="blog-header ">
-                <p class="lead blog-description"><a href="{{ url_for('user.profile',id=user.id) }}">{{user.username}}</a><br /><br />Reviews</p>
+                <p class="lead blog-description"><a href="{{ url_for('user.profile',id=user.id) }}">{{user.username}}</a><br /><br />
+                {% if reviews|length > 0 %}
+                Reviews
+ {% else%}
+ No Reviews Found
+ {% endif%}</p>
 </div>
 
       {# <!-- <form method="GET" action="{{ url_for('judge.index') }}" class="form-signin" role="form">
