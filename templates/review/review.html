@@ -11,6 +11,7 @@
          Reviewed By <a href="{{url_for('user.profile',id=review.reviewer_id)}}">{{review.reviewer_name}}</a><br />
         {{review.created_at.strftime('%Y-%m-%d') }}&nbsp;
         {% if current_user.id == review.reviewer_id or current_user.user_role == "admin"%}
+        {%if not review.active%}Pending Approval{% endif%}
             <a href="{{url_for('review.edit',id=review.id)}}">edit</a>
         {% endif %}
         </p>

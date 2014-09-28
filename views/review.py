@@ -27,12 +27,12 @@ def can_edit_review(review):
         return True
     return False
 
-@mod.route('/judge/<id>/reviews/pending')
+@mod.route('/reviews/pending')
 @login_required
 def pending():
+    reviews = []
     if current_user.user_role == "admin":
         reviews = JudgeReview.query.filter_by(active=False).all()
-    reviews = []
     return render_template("review/pending.html",reviews=reviews)
 
 @mod.route('/user/<id>/reviews')
