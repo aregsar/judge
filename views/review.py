@@ -22,10 +22,14 @@ def can_view_review(review):
         return True
     return False
 
+
 def can_edit_review(review):
-    if current_user.id == review.reviewer_id or current_user.user_role == "admin":
+    if current_user.user_role == "admin":
+        return True
+    if review.active == False  and current_user.id == review.reviewer_id:
         return True
     return False
+
 
 @mod.route('/reviews/pending')
 @login_required
@@ -81,7 +85,12 @@ def add(id):
             return redirect(url_for('review.index',id=judge.id))
         return render_template("review/add.html",form=form,id=id)
     else:
-        return redirect(url_for('review.edit',id=review.id))
+        if review.active:
+            if can_view_review(review):
+                return redirect(url_for('review.review',id=review.id))
+            return "forbidden" #abort(403)
+        else:
+            return redirect(url_for('review.edit',id=review.id))
 
 @mod.route('/review/<id>')
 @login_required
@@ -89,9 +98,25 @@ def review(id):
     review = JudgeReview.query.get(id)
     if review == None:
         return render_template("review/notfound.html")
+    can_show_edit_review_link = True
+    if review.active:
+        can_show_edit_review_link= False
     if can_view_review(review):
-        return render_template("review/review.html",review=review)
+        return render_template("review/review.html",review=review,can_show_edit_review_link=can_show_edit_review_link)
     return "forbidden" #abort(403)
+
+# @mod.route('/review/<id>/report',methods=['GET','POST'])
+# @login_required
+# def report(id):
+#     if request.method == 'POST':
+#         review = JudgeReview.query.get(id)
+#         review.flagged = True
+#         review.flagger_id = current_user.id
+#         db.session.commit()
+#         return render_template("review/reported.html")
+#     return render_template("review/report.html",id=id)
+
+
 
 
 @mod.route('/review/<id>/edit',methods=['GET','POST'])

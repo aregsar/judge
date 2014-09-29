@@ -102,6 +102,7 @@ def profile(id):
     judge = Judge.query.get(id)
     if judge == None:
         return render_template("judge/notfound.html")
+    #can_show_add_review_link = False;
     can_show_edit_judge_link = False;
     if current_user.user_role == "admin":
         can_show_edit_judge_link = True
