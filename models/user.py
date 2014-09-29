@@ -3,6 +3,10 @@ from flask.ext.login import make_secure_token
 from datetime import datetime
 import uuid
 
+
+#User.__table__
+#User.__mapper__
+
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer,primary_key=True)

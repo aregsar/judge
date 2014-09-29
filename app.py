@@ -51,22 +51,26 @@ def create_app():
 
     @app.before_request
     def app_before_request():
-        g.db = 10
+        #g.db = connect_db()
         g.current_user = 1
         print g.current_user
 
     @app.after_request
     def app_after_req(response):
-        if g.current_user:
+        curr_user = getattr(g, 'current_user', None)
+        if curr_user is not None:
             g.current_user = 2
             print g.current_user
         return response
 
     @app.teardown_request
     def app_teardown_request(exception):
-        if g.db:
-            g.db#.close()
-        if g.current_user:
+        db = getattr(g, 'db', None)
+        if db is not None:
+            #db.close()
+            print g.db
+        curr_user = getattr(g, 'current_user', None)
+        if curr_user is not None:
             g.current_user = 3
             print g.current_user
 

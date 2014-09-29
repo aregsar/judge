@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,g
+from flask import Blueprint,render_template,g, current_app
 from flask.ext.login import current_user
 #NameError: global name 'SigninForm' is not defined
 #from forms.account import signin_form
@@ -19,11 +19,23 @@ mod = Blueprint('home',__name__)
 
 @mod.route('/')
 def index():
-    print current_user
+    #print current_user
     #1/0
     #return 'home.index'
     #abort(404)
     #print g.current_user
+
+    # dump users
+    # from models.user import User
+    # from sqlalchemy.engine import create_engine
+    # from sqlalchemy.sql import select
+    # engine = create_engine(current_app.config['SQLALCHEMY_DATABASE_URI'], echo=True)
+    # connection = engine.connect()
+    # s = select([User.__table__])
+    # result = connection.execute(s)
+    # print result.fetchall()
+    # connection.close()
+
 
     if current_user.is_authenticated():
         form = JudgeSearchForm()

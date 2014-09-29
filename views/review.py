@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,g,request,redirect,url_for
+from flask import Blueprint,render_template,g,request,redirect,url_for, current_app
 from flask.ext.login import current_user,LoginManager,login_required,login_user,logout_user
 from plugins import db
 from forms.review.add_review_form import AddReviewForm
