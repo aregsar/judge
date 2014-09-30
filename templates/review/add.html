@@ -9,9 +9,21 @@
 
         <div class="blog-header ">
 <form method="POST" action="{{ url_for('review.add', id=judge.id) }}" class="form-signin" role="form">
+<label for="male">Male</label>
+  <label for="male">Overall Rating</label>
+  {{form.rating(class='form-control',required=True)}}
+<label for="male">Knowledge of the law</label>
+  {{form.knowledge(class='form-control',required=True)}}
+  <label for="male">Courtroom decorum</label>
+  {{form.decorum(class='form-control',required=True)}}
+  <label for="male">Issues tentatives</label>
+  {{form.tentatives(class='form-control',required=True)}}
+  <label for="male">Curiosity towards attorneys</label>
+  {{form.curiosity(class='form-control',required=True)}}
+
            {{form.title(class='form-control',placeholder='Title',required=True,autofocus=True,onfocus='this.value = this.value;')}}
           {{form.body(class='form-control',placeholder='Judge Review',required=True,cols="35", rows="20")}}
-           {{form.rating(class='form-control',placeholder='Rating (1 to 5)',required=True)}}
+
             <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
              {{ form.csrf_token }}
           </form>
