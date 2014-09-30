@@ -54,7 +54,8 @@ def candidates():
 def submit(name):
     form = JudgeSubmitForm(name=name)
     if form.validate_on_submit():
-        judge = Candidate(name=name)
+        judge = Candidate(
+                name=name)
         db.session.add(judge)
         db.session.commit()
         return render_template("judge/submitted.html")
@@ -70,7 +71,10 @@ def add():
     form = JudgeEditForm()
     if form.validate_on_submit():
         #judge = Judge(name=form.name.data)
-        judge = CreateActiveJudge(form.name.data,"CA","court","district",scope="State")
+        #judge = CreateActiveJudge(form.name.data,"CA","court","district",scope=1)
+        judge = Judge(form.name.data.strip(),
+                       form.state.data.strip(),
+                       form.scope.data)
         db.session.add(judge)
         db.session.commit()
         return redirect(url_for('judge.profile',id=judge.id))
@@ -86,7 +90,11 @@ def addretired():
         return render_template("judge/notfound.html")
     form = RetiredJudgeEditForm()
     if form.validate_on_submit():
-        judge = CreateRetiredJudge(form.name.data,"CA",scope="Arbitrator")
+        #judge = CreateRetiredJudge(form.name.data,"CA",scope="Arbitrator")
+        judge = Judge(form.name.data.strip(),
+                       form.state.data.strip(),
+                       form.scope.data,
+                       retired=True)
         db.session.add(judge)
         db.session.commit()
         return redirect(url_for('judge.profile',id=judge.id))
@@ -118,27 +126,31 @@ def edit(id):
         return render_template("judge/notfound.html")
     if judge.retired:
         form = RetiredJudgeEditForm()
-        #form = RetiredJudgeEditForm(name=judge.name)
+        #form = RetiredJudgeEditForm(name=judge.name,scope=judge.scope,state=judge.state)
         if form.validate_on_submit():
-            judge.name = form.name.data
-            #judge.scope = form.scope.data
+            judge.name = form.name.data.strip()
+            judge.state = form.state.data.strip()
+            judge.scope = form.scope.data
             db.session.commit()
             #return redirect(url_for('judge.edit',id=id))
             return redirect(url_for('judge.profile',id=id))
         form.name.data = judge.name
+        form.state.data = judge.state
+        form.scope.data = judge.scope
         return render_template("judge/editretired.html",form=form,id=id)
     else:
         form = JudgeEditForm()
-        #form = JudgeEditForm(name=judge.name)
+        #form = JudgeEditForm(name=judge.name,scope=judge.scope,state=judge.state)
         if form.validate_on_submit():
-            judge.name = form.name.data
-            #judge.scope = form.scope.data
-            #judge.district = form.district.data
-            #judge.court = form.court.data
+            judge.name = form.name.data.strip()
+            judge.state = form.state.data.strip()
+            judge.scope = form.scope.data
             db.session.commit()
             #return redirect(url_for('judge.edit',id=id))
             return redirect(url_for('judge.profile',id=id))
         form.name.data = judge.name
+        form.state.data = judge.state
+        form.scope.data = judge.scope
         return render_template("judge/edit.html",form=form,id=id)
 
 

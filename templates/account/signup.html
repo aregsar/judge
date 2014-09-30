@@ -8,6 +8,9 @@
           {{ message }}<br />
           {% endfor %}
           <form method="POST" action="{{ url_for('account.signup') }}" class="form-signin" role="form">
+          {{form.firstname(class='form-control',placeholder='First name',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+          {{form.lastname(class='form-control',placeholder='Last name',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+          {{form.state(class='form-control',placeholder='State',required=True,autofocus=True,onfocus='this.value = this.value;')}}
              {{form.username(class='form-control',placeholder='User name',required=True,autofocus=True,onfocus='this.value = this.value;')}}
              {{form.barnumber(class='form-control',placeholder='Bar number',required=True)}}
             {{form.email(class='form-control',placeholder='Email address',required=True)}}

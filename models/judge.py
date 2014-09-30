@@ -8,9 +8,9 @@ class Judge(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(255),nullable=False,  index=True)
 
-    #for ative judges scope options are federal or state
-    #for retired judges scope options are mediator, arbitrator, both
-    scope = db.Column(db.String(255),nullable=False)
+    #for ative judges scope options are 1-federal or 2-state
+    #for retired judges scope options are 1-mediator, 2-arbitrator, 3-both
+    scope = db.Column(db.Integer,nullable=False)
     retired = db.Column(db.Boolean,nullable=False)
     state = db.Column(db.String(20),nullable=False)
     #court is null for retured judges
@@ -21,7 +21,7 @@ class Judge(db.Model):
     created_at = db.Column(db.DateTime,nullable=False, index=True)
     updated_at = db.Column(db.DateTime,nullable=True)
 
-    def __init__(self,name,scope,state=None,retired=False,court=None,district=None):
+    def __init__(self,name,state,scope,retired=False,court=None,district=None):
         self.name = name
         self.scope = scope
         self.state = state
@@ -31,10 +31,10 @@ class Judge(db.Model):
         self.created_at = datetime.utcnow()
 
 #factory methods
-def CreateActiveJudge(name,state,court,district,scope="State"):
+def CreateActiveJudge(name,state,court,district,scope=1):
     return Judge(name=name,state=state,scope=scope,court=court,district=district)
 
-def CreateRetiredJudge(name,state,scope="Arbitrator"):
+def CreateRetiredJudge(name,state,scope=1):
     return Judge(name=name,state=state,scope=scope,retired=True)
 
 def create_test_judges():
@@ -44,6 +44,4 @@ def create_test_judges():
     db.session.add(judge)
     db.session.commit()
 
-#judge = CreateRetiredJudge(name="areg",state="CA")
-#judgereview = JudgeReview(judge_id=1,title="test review",body="bad judge",rating="1",username="areg",user_id=1)
 

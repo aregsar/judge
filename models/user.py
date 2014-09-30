@@ -10,6 +10,9 @@ import uuid
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer,primary_key=True)
+    firstname = db.Column(db.String(255),nullable=False)
+    lastname = db.Column(db.String(255),nullable=False)
+    state = db.Column(db.String(2),nullable=False)
     username = db.Column(db.String(255),nullable=False, unique=True, index=True)
     barnumber = db.Column(db.String(255),nullable=False, unique=True, index=True)
     email = db.Column(db.String(255),nullable=False, unique=True, index=True)
@@ -31,7 +34,10 @@ class User(db.Model):
     #used to set the state of this object before passing it to flask logins login_user method
     authenticated = False
 
-    def __init__(self,email,password,barnumber,username):
+    def __init__(self,email,password,barnumber,username,firstname,lastname,state):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.state = state
         self.username = username
         self.password= bcrypt.generate_password_hash(password)
         #self.password= self.set_password(password)
@@ -106,6 +112,9 @@ def create_test_users():
             email = "aregsar@gmail.com",
             password = "panama",
             barnumber = "1234",
+            firstname = "aregsar",
+            lastname = "sarkissian",
+            state = "CA",
             username = "aregsar")
 
     user.activate()
@@ -116,6 +125,9 @@ def create_test_users():
             email = "areg@cox.com",
             password = "panama",
             barnumber = "12345",
+            firstname = "areg",
+            lastname = "sarkissian",
+            state = "CA",
             username = "areg")
     user.activate()
     db.session.add(user)

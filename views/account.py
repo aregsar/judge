@@ -44,7 +44,10 @@ def signup():
             email = email.strip(),
             password = form.password.data.strip(),
             barnumber = form.barnumber.data.strip(),
-            username = form.username.data.strip())
+            username = form.username.data.strip(),
+            firstname = form.firstname.data.strip(),
+            lastname = form.lastname.data.strip(),
+            state = form.state.data.strip())
         try:
             db.session.add(user)
             db.session.commit()
