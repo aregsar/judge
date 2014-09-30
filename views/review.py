@@ -89,7 +89,11 @@ def add(id):
         if form.validate_on_submit():
             review = JudgeReview(title=form.title.data,
                                 body=form.body.data,
-                                rating= form.rating.data,
+                                rating= int(form.rating.data),
+                                knowledge= int(form.knowledge.data),
+                                decorum= int(form.decorum.data),
+                                tentatives= int(form.tentatives.data),
+                                curiosity= int(form.curiosity.data),
                                 judge_id = judge.id,
                                 judge_name = judge.name,
                                 #judge= judge,
@@ -134,17 +138,25 @@ def edit(id):
     if can_edit_review(review):
         if current_user.user_role == "admin":
             form = EditReviewAdminForm(title=review.title,
-                                       body=review.body,
-                                       active = review.active,
-                                       removed = review.removed,
-                                       rating=review.rating)
+                                        body=review.body,
+                                        rating= str(review.rating),
+                                        knowledge= str(review.knowledge),
+                                        decorum= str(review.decorum),
+                                        tentatives= str(review.tentatives),
+                                        curiosity= str(review.curiosity),
+                                        active = review.active,
+                                        removed = review.removed)
             if form.validate_on_submit():
+                review.body = form.body.data
+                review.title = form.title.data
+                review.rating= int(form.rating.data)
+                review.knowledge= int(form.knowledge.data)
+                review.decorum= int(form.decorum.data)
+                review.tentatives= int(form.tentatives.data)
+                review.curiosity= int(form.curiosity.data)
                 if current_user.user_role == "admin":
                     review.active = form.active.data
                     review.removed = form.removed.data
-                review.body = form.body.data
-                review.title = form.title.data
-                review.rating = form.rating.data
                 db.session.commit()
                 return redirect(url_for('review.review',id=review.id))
             return render_template("review/editadmin.html",form=form,review=review)
@@ -155,7 +167,11 @@ def edit(id):
             if form.validate_on_submit():
                 review.body = form.body.data
                 review.title = form.title.data
-                review.rating = form.rating.data
+                review.rating= int(form.rating.data)
+                review.knowledge= int(form.knowledge.data)
+                review.decorum= int(form.decorum.data)
+                review.tentatives= int(form.tentatives.data)
+                review.curiosity= int(form.curiosity.data)
                 db.session.commit()
                 return redirect(url_for('review.review',id=review.id))
             return render_template("review/edit.html",form=form,review=review)
