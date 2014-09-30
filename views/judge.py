@@ -70,11 +70,12 @@ def add():
         return render_template("judge/notfound.html")
     form = JudgeEditForm()
     if form.validate_on_submit():
+        print "submitted"
         #judge = Judge(name=form.name.data)
         #judge = CreateActiveJudge(form.name.data,"CA","court","district",scope=1)
         judge = Judge(form.name.data.strip(),
                        form.state.data.strip(),
-                       form.scope.data)
+                       int(form.scope.data))#works without int conversion
         db.session.add(judge)
         db.session.commit()
         return redirect(url_for('judge.profile',id=judge.id))
@@ -93,7 +94,7 @@ def addretired():
         #judge = CreateRetiredJudge(form.name.data,"CA",scope="Arbitrator")
         judge = Judge(form.name.data.strip(),
                        form.state.data.strip(),
-                       form.scope.data,
+                       int(form.scope.data),#works without int conversion
                        retired=True)
         db.session.add(judge)
         db.session.commit()
@@ -130,13 +131,13 @@ def edit(id):
         if form.validate_on_submit():
             judge.name = form.name.data.strip()
             judge.state = form.state.data.strip()
-            judge.scope = form.scope.data
+            judge.scope = int(form.scope.data)#works without int conversion
             db.session.commit()
             #return redirect(url_for('judge.edit',id=id))
             return redirect(url_for('judge.profile',id=id))
         form.name.data = judge.name
         form.state.data = judge.state
-        form.scope.data = judge.scope
+        form.scope.data = str(judge.scope)#does not work without string conversion
         return render_template("judge/editretired.html",form=form,id=id)
     else:
         form = JudgeEditForm()
@@ -144,13 +145,13 @@ def edit(id):
         if form.validate_on_submit():
             judge.name = form.name.data.strip()
             judge.state = form.state.data.strip()
-            judge.scope = form.scope.data
+            judge.scope = int(form.scope.data)#works without int conversion
             db.session.commit()
             #return redirect(url_for('judge.edit',id=id))
             return redirect(url_for('judge.profile',id=id))
         form.name.data = judge.name
         form.state.data = judge.state
-        form.scope.data = judge.scope
+        form.scope.data = str(judge.scope)#does not work without string conversion
         return render_template("judge/edit.html",form=form,id=id)
 
 
