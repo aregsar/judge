@@ -5,8 +5,26 @@
 
 
         <div class="blog-header ">
+Judge Details<br /><br />
+Name: {{judge.name}}<br />
+State: {{judge.state}}<br />
+Type: {%if judge.retired%}
+    {%if judge.scope == 1 %}
+       Moderator
+    {%else%}
+       Arbitrator
+    {%endif%}
 
-{{judge.name}}<br /><a href="{{ url_for('review.index',id=judge.id) }}">reviews</a>&nbsp;|&nbsp;<a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>
+{%else%}
+{%if judge.scope == 1 %}
+       Federal
+    {%else%}
+       State
+    {%endif%}
+{%endif%}
+<br />
+
+<a href="{{ url_for('review.index',id=judge.id) }}">reviews</a>&nbsp;|&nbsp;<a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>
 {%if can_show_edit_judge_link%}
                 {#{% if current_usr.user_role == "admin" %}#}
 &nbsp;|&nbsp;
