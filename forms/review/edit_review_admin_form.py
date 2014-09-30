@@ -4,15 +4,19 @@ from wtforms import BooleanField, HiddenField, DateTimeField, IntegerField,Radio
 from wtforms.validators import Required,length
 from wtforms.widgets import TextArea
 
-RATING_CHOICES = [('1', '1'),('2', '2'),('3', '3'),
-                    ('4', '4'),('5', '5')]
+RATING_CHOICES = [('1', '1&nbsp;&nbsp;'),('2', '2&nbsp;&nbsp;'),
+('3', '3&nbsp;&nbsp;'),('4', '4&nbsp;&nbsp;'),('5', '5&nbsp;&nbsp;')]
+
+RATING_SELECT_CHOICES = [('1', '1'),('2', '2'),
+('3', '3'),('4', '4'),('5', '5')]
+
 class EditReviewAdminForm(Form):
 
     rating = RadioField('rating', choices=RATING_CHOICES,default='5', validators=[Required()])
-    knowledge = SelectField('knowledge', choices=RATING_CHOICES, validators=[Required()])
-    decorum = SelectField('decorum', choices=RATING_CHOICES, validators=[Required()])
-    tentatives = SelectField('tentatives', choices=RATING_CHOICES, validators=[Required()])
-    curiosity = SelectField('curiosity', choices=RATING_CHOICES, validators=[Required()])
+    knowledge = RadioField('knowledge', choices=RATING_CHOICES, validators=[Required()])
+    decorum = RadioField('decorum', choices=RATING_CHOICES, validators=[Required()])
+    tentatives = RadioField('tentatives', choices=RATING_CHOICES, validators=[Required()])
+    curiosity = RadioField('curiosity', choices=RATING_CHOICES, validators=[Required()])
 
     title = TextField('Title', validators=[Required(),length(max=255)])
     #body = TextField('Review', validators=[Required()])
