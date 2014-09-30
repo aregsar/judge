@@ -2,13 +2,13 @@
 {% block body %}
      <div class="container">
       <div class="blog-header ">
-                <p class="lead blog-description">Submit a review</p>
+                <p class="lead blog-description">Submit a review for judge {{judge.name}}</p>
       </div>
 
 
 
         <div class="blog-header ">
-<form method="POST" action="{{ url_for('review.add', id=id) }}" class="form-signin" role="form">
+<form method="POST" action="{{ url_for('review.add', id=judge.id) }}" class="form-signin" role="form">
            {{form.title(class='form-control',placeholder='Title',required=True,autofocus=True,onfocus='this.value = this.value;')}}
           {{form.body(class='form-control',placeholder='Judge Review',required=True,cols="35", rows="20")}}
            {{form.rating(class='form-control',placeholder='Rating (1 to 5)',required=True)}}

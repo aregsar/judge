@@ -61,6 +61,22 @@ def index(id):
     reviews = JudgeReview.query.filter_by(judge_id=id,active=True).all()
     return render_template("review/index.html",reviews=reviews,judge=judge)
 
+
+@mod.route('/review/<id>')
+@login_required
+def review(id):
+    review = JudgeReview.query.get(id)
+    if review == None:
+        return render_template("review/notfound.html")
+    can_show_edit_review_link = True
+    if review.active:
+        can_show_edit_review_link= False
+    if can_view_review(review):
+        return render_template("review/review.html",review=review,can_show_edit_review_link=can_show_edit_review_link)
+    return "forbidden" #abort(403)
+
+
+
 @mod.route('/judge/<id>/review/add',methods=['GET','POST'])
 @login_required
 def add(id):
@@ -83,7 +99,7 @@ def add(id):
             db.session.add(review)
             db.session.commit()
             return redirect(url_for('review.index',id=judge.id))
-        return render_template("review/add.html",form=form,id=id)
+        return render_template("review/add.html",form=form,judge=judge)
     else:
         if review.active:
             if can_view_review(review):
@@ -92,18 +108,7 @@ def add(id):
         else:
             return redirect(url_for('review.edit',id=review.id))
 
-@mod.route('/review/<id>')
-@login_required
-def review(id):
-    review = JudgeReview.query.get(id)
-    if review == None:
-        return render_template("review/notfound.html")
-    can_show_edit_review_link = True
-    if review.active:
-        can_show_edit_review_link= False
-    if can_view_review(review):
-        return render_template("review/review.html",review=review,can_show_edit_review_link=can_show_edit_review_link)
-    return "forbidden" #abort(403)
+
 
 # @mod.route('/review/<id>/report',methods=['GET','POST'])
 # @login_required
@@ -142,7 +147,7 @@ def edit(id):
                 review.rating = form.rating.data
                 db.session.commit()
                 return redirect(url_for('review.review',id=review.id))
-            return render_template("review/editadmin.html",form=form,id=review.id)
+            return render_template("review/editadmin.html",form=form,review=review)
             # form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
             # return render_template("review/edit.html",form=form,id=review.id)
         else:
@@ -153,5 +158,5 @@ def edit(id):
                 review.rating = form.rating.data
                 db.session.commit()
                 return redirect(url_for('review.review',id=review.id))
-            return render_template("review/edit.html",form=form,id=review.id)
+            return render_template("review/edit.html",form=form,review=review)
     return "forbidden" #abort(403)
