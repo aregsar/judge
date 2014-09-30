@@ -9,7 +9,7 @@ class RetiredJudgeEditForm(Form):
     #state = TextField('state', validators=[Required()])
 
     #scope = TextField('scope', validators=[Required()])
-    scope = RadioField('type', choices=[('1','Moderator'),('2','Arbitrator')],default='1')
+    scope = RadioField('type', choices=[('1','Moderator&nbsp;&nbsp;'),('2','Arbitrator&nbsp;&nbsp;')],default='1')
 
 
 

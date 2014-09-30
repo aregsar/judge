@@ -9,6 +9,6 @@ class JudgeEditForm(Form):
     #state = TextField('state', validators=[Required()])
 
     #scope = TextField('scope', validators=[Required()])
-    scope = RadioField('type', choices=[('1','State'),('2','Federal')],default='1')
+    scope = RadioField('type', choices=[('1','State&nbsp;&nbsp;'),('2','Federal&nbsp;&nbsp;')],default='1')
     #scope = RadioField('type', choices=[('1','State'),('2','Federal')],coerce=int,default=2, validators=[Required()])
 
