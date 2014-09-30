@@ -225,3 +225,8 @@ h6, .h6 {
 .navbar-header .navbar-brand {
     color: #ffffff;
 }
+
+ul
+{
+    list-style-type: none;
+}

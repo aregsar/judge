@@ -5,8 +5,9 @@
                 <p class="lead blog-description">Add a sitting judge</p>
       </div>
        <form method="POST" action="{{ url_for('judge.add') }}" class="form-signin" role="form">
+       {{form.state(class='form-control',placeholder='state',required=True,autofocus=True,onfocus='this.value = this.value;')}}
            {{form.name(class='form-control',placeholder='name',required=True,autofocus=True,onfocus='this.value = this.value;')}}
-{{form.state(class='form-control',placeholder='state',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+
 {{form.scope(class='form-control',placeholder='1-federal or 2-state',required=True)}}
             <button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
              {{ form.csrf_token }}

@@ -8,6 +8,11 @@
 Judge Details<br /><br />
 Name: {{judge.name}}<br />
 State: {{judge.state}}<br />
+Retired:{%if judge.retired%}
+          Yes
+        {%else%}
+          No
+        {%endif%}<br />
 Type: {%if judge.retired%}
     {%if judge.scope == 1 %}
        Moderator

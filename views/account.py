@@ -2,7 +2,7 @@ import sys
 import uuid
 from itsdangerous import URLSafeTimedSerializer
 from flask import Blueprint,redirect, render_template, url_for, g, current_app,flash
-from flask.ext.login import LoginManager,login_required,login_user,logout_user
+from flask.ext.login import LoginManager,login_required,login_user,logout_user,current_user
 from plugins import db, flaskuuid,bcrypt
 #NameError: global name 'SigninForm' is not defined
 #from forms.account import signin_form, signup_form, forgotpassword_form
@@ -14,6 +14,45 @@ from models.user import User
 
 #this bluprint is registered in blueprints.py
 mod = Blueprint('account',__name__)
+
+@mod.route('/account/pending')
+@login_required
+def pending():
+    accounts = []
+    if current_user.user_role == "admin":
+        #accounts = User.query.filter_by(approved=False).all()
+        accounts = User.query.filter_by(activated=False).all()
+    return render_template("account/pending.html",accounts=accounts)
+
+
+#TODO move this to user view and add a link to approve in the user profile page
+#for admin users only if not already approved
+@mod.route('/account/approve/<id>')
+@login_required
+def approve(id):
+    if current_user.user_role == "admin":
+        user = User.query.get(id)
+        if user:
+            secret = current_app.config["SECRET_KEY"]
+            ts = URLSafeTimedSerializer(secret)
+            token = ts.dumps(user.email, salt=secret)
+            confirm_url = url_for('account.confirm',token=token,_external=True)
+            html_email = render_template('account/confirmation_email.html',confirm_url=confirm_url)
+            #TODO: need an approved field indepencant of the activated field
+            #the approved filed will show the user in the admin screen so we can approve
+            #we also need to add the condition of approved user in the flask login user loader
+            #activated field is for email confirmation and we send the first email here
+            #and the user can self send more emails if the one we send is expired
+            #user.approved = True
+            #db.session.commit()
+            #subject = "JudgeJungle account activation email"
+            #send_email(email, subject, html_email)
+        else:
+            return "not found"
+    else:
+        return "not found"
+    return render_template("user/approved.html")
+
 
 @mod.route('/account/signup',methods=['GET','POST'])
 def signup():
