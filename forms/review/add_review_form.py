@@ -8,6 +8,7 @@ class AddReviewForm(Form):
     title = TextField('Title', validators=[Required(),length(max=255)])
     #body = TextField('Review', validators=[Required()])
     #cols="35", rows="20",
+    #body = TextAreaField("Review",  [validators.Required()])
     body = StringField(u'Review', widget=TextArea(), validators=[Required()])
     #rating = TextField('Rating', validators=[Required()])
     rating = IntegerField('Rating', validators=[Required()])
