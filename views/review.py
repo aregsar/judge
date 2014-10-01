@@ -102,7 +102,8 @@ def add(id):
                                 reviewer_name = current_user.username)
             db.session.add(review)
             db.session.commit()
-            return redirect(url_for('review.index',id=judge.id))
+            #return redirect(url_for('review.index',id=judge.id))
+            return redirect(url_for('review.reviewer',id=current_user.id))
         return render_template("review/add.html",form=form,judge=judge)
     else:
         if review.active:

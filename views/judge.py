@@ -18,19 +18,19 @@ mod = Blueprint('judge',__name__)
 @mod.route('/judge/tracked')
 @login_required
 def tracked():
-    judges= UserJudge.query.all()
+    judges= UserJudge.query.filter_by(user_id=current_user.id).all()
     return render_template("judge/tracked.html",judges=judges)
 
 
 @mod.route('/judge/track')
 @login_required
 def track():
-    return render_template("judge/track.html")
+    return redirect(url_for('judge.tracked'))
 
-@mod.route('/judge/untrack')
+@mod.route('/judge/untrack/<id>')
 @login_required
-def untrack():
-    return render_template("judge/untrack.html")
+def untrack(id):
+    return redirect(url_for('judge.tracked'))
 
 @mod.route('/judge/sitting')
 @login_required

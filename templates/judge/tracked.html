@@ -1,0 +1,25 @@
+
+{% extends "signedin.html" %}
+{% block body %}
+     <div class="container">
+
+
+
+        <div class="blog-header ">
+{% if users|length == 0 %}
+currently there are no judges that you are tracking
+{% endif%}
+
+
+
+                    {% for judge in judges %}
+                        {{judge.judge_name}}<br /><a href="{{ url_for('review.index',id=judge.judge_id) }}">reviews</a>&nbsp;|&nbsp;<a href="{{ url_for('review.add',id=judge.judge_id) }}">add a review</a>&nbsp;|&nbsp;<a href="{{ url_for('judge.untrack',id=judge.judge_id) }}">remove</a>
+                    {% endfor %}
+
+
+
+        </div>
+
+    </div>
+
+ {% endblock %}
