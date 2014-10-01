@@ -1,0 +1,33 @@
+{% extends "signedin.html" %}
+{% block body %}
+<div class="container">
+
+
+
+ <div class="blog-header ">
+ {% if current_user.user_role != "admin" %}
+                    <h2>Forbidden</h2>
+{% endif%}
+
+{% if current_user.user_role == "admin" %}
+{% if users|length == 0 %}
+No new user accounts pening approval
+{% endif%}
+
+                      {% for user in users %}
+                         username:
+                         <a href="{{ url_for('user.profile',id=user.id) }}">
+                         {{user.username}}</a>&nbsp;|&nbsp;
+                         <a href="{{ url_for('account.approve',id=user.id) }}">
+                         approve</a>
+
+                             <br/>
+                    {% endfor %}
+
+{% endif%}
+
+</div>
+
+</div>
+
+ {% endblock %}}

@@ -163,7 +163,13 @@ def edit(id):
             # form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
             # return render_template("review/edit.html",form=form,id=review.id)
         else:
-            form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
+            form = EditReviewForm(title=review.title,
+                                    body=review.body,
+                                    knowledge= str(review.knowledge),
+                                    decorum= str(review.decorum),
+                                    tentatives= str(review.tentatives),
+                                    curiosity= str(review.curiosity),
+                                    rating=str(review.rating))
             if form.validate_on_submit():
                 review.body = form.body.data
                 review.title = form.title.data

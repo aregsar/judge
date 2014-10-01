@@ -20,9 +20,9 @@ mod = Blueprint('account',__name__)
 def pending():
     accounts = []
     if current_user.user_role == "admin":
-        #accounts = User.query.filter_by(approved=False).all()
-        accounts = User.query.filter_by(activated=False).all()
-    return render_template("account/pending.html",accounts=accounts)
+        users = User.query.filter_by(approved=False).all()
+        return render_template("account/pending.html",users=users)
+    return "forbidden"
 
 
 #TODO move this to user view and add a link to approve in the user profile page
@@ -43,15 +43,18 @@ def approve(id):
             #we also need to add the condition of approved user in the flask login user loader
             #activated field is for email confirmation and we send the first email here
             #and the user can self send more emails if the one we send is expired
-            #user.approved = True
-            #db.session.commit()
+            try:
+                user.approve()
+                db.session.commit()
+            except:
+                return render_template("account/confirmation_error.html")
             #subject = "JudgeJungle account activation email"
             #send_email(email, subject, html_email)
         else:
             return "not found"
     else:
-        return "not found"
-    return render_template("user/approved.html")
+        return "forbidden"
+    return redirect(url_for("account.pending"))
 
 
 @mod.route('/account/signup',methods=['GET','POST'])
