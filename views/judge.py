@@ -18,19 +18,38 @@ mod = Blueprint('judge',__name__)
 @mod.route('/judge/tracked')
 @login_required
 def tracked():
-    judges= UserJudge.query.filter_by(user_id=current_user.id).all()
+    judges= UserJudge.query.filter_by(user_id=current_user.id,removed=False).all()
     return render_template("judge/tracked.html",judges=judges)
 
 
-@mod.route('/judge/track')
+@mod.route('/judge/track/<id>')
 @login_required
-def track():
+def track(id):
+    judge = Judge.query.get(id)
+    if judge == None:
+        return render_template("judge/notfound.html")
+    userjudge = UserJudge.query.filter_by(judge_id=judge.id).first()
+    if userjudge == None:
+        userjudge = UserJudge(judge_id=judge.id,
+                       judge_name=judge.name,
+                       user_id = current_user.id)
+        db.session.add(userjudge)
+        db.session.commit()
+    else:
+        userjudge.removed = False;
+        db.session.commit()
     return redirect(url_for('judge.tracked'))
 
 @mod.route('/judge/untrack/<id>')
 @login_required
 def untrack(id):
+    userjudge = UserJudge.query.filter_by(judge_id=id).first()
+    if userjudge is not None:
+        userjudge.removed = True;
+        db.session.commit()
     return redirect(url_for('judge.tracked'))
+
+
 
 @mod.route('/judge/sitting')
 @login_required
