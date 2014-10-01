@@ -8,10 +8,29 @@ from forms.judge.judge_edit_form import JudgeEditForm
 from forms.judge.retired_judge_edit_form import RetiredJudgeEditForm
 from models.judge import Judge, CreateRetiredJudge,CreateActiveJudge
 from models.candidate import Candidate
+from models.userjudge import UserJudge
 
 #this bluprint is registered in blueprints.py
 mod = Blueprint('judge',__name__)
 
+
+
+@mod.route('/judge/tracked')
+@login_required
+def tracked():
+    judges= UserJudge.query.all()
+    return render_template("judge/tracked.html",judges=judges)
+
+
+@mod.route('/judge/track')
+@login_required
+def track():
+    return render_template("judge/track.html")
+
+@mod.route('/judge/untrack')
+@login_required
+def untrack():
+    return render_template("judge/untrack.html")
 
 @mod.route('/judge/sitting')
 @login_required
@@ -52,13 +71,17 @@ def candidates():
 @mod.route('/judge/submit/<name>',methods=['GET','POST'])
 @login_required
 def submit(name):
-    form = JudgeSubmitForm(name=name)
+    #form = JudgeSubmitForm(judge_name=name)
+    form = JudgeSubmitForm()
+    print "submit"
     if form.validate_on_submit():
+        print "submit valid"
         judge = Candidate(
-                name=name)
+                name=form.judge_name.data.strip())
         db.session.add(judge)
         db.session.commit()
         return render_template("judge/submitted.html")
+    form.judge_name.data = name
     return render_template("judge/submit.html",form=form,name=name)
 
 

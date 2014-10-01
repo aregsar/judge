@@ -6,6 +6,8 @@ with app.app_context():
     from models.user import User, create_test_users
     from models.judge import Judge,create_test_judges
     from models.judgereview import JudgeReview
+    from models.userjudge import UserJudge
+    from models.candidate import Candidate
     from plugins import db
     print db
     db.drop_all()

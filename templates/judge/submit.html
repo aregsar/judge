@@ -5,7 +5,7 @@
                 <p class="lead blog-description">Submit judge for review</p>
       </div>
        <form method="POST" action="{{ url_for('judge.submit',name=name) }}" class="form-signin" role="form">
-           {{form.name(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
+           {{form.judge_name(class='form-control',required=True,autofocus=True,onfocus='this.value = this.value;')}}
             <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
              {{ form.csrf_token }}
           </form>
