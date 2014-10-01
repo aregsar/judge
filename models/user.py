@@ -1,5 +1,6 @@
 from plugins import db, bcrypt,login_manager,flaskuuid
 from flask.ext.login import make_secure_token
+from flask.ext.login import current_user
 from datetime import datetime
 import uuid
 
@@ -17,15 +18,17 @@ class User(db.Model):
     barnumber = db.Column(db.String(255),nullable=False, unique=True, index=True)
     email = db.Column(db.String(255),nullable=False, unique=True, index=True)
     password = db.Column(db.String(2048),nullable=False)
-    #user_role options: "member" or "mod" or "admin" or "sa"
-    user_role = db.Column(db.String(50),nullable=False)
+    password_reset_token = db.Column(db.String(2048),nullable=True, unique=True, index=True)
+    user_role = db.Column(db.String(50),nullable=False) #options: "member" or "mod" or "admin" or "sa"
+    approved = db.Column(db.Boolean,nullable=False)
+    approved_at = db.Column(db.DateTime,nullable=True)
+    activation_token = db.Column(db.String(2048),nullable=True, unique=True, index=True)
+    activated = db.Column(db.Boolean,nullable=False)
+    activated_at = db.Column(db.DateTime,nullable=True)
     signin_token = db.Column(db.String(2048),nullable=True, unique=True, index=True)
     signedin_at = db.Column(db.DateTime,nullable=True)
-    activated = db.Column(db.Boolean,nullable=False)
-    activation_token = db.Column(db.String(2048),nullable=True, unique=True, index=True)
-    activated_at = db.Column(db.DateTime,nullable=True)
     banned = db.Column(db.Boolean,nullable=False)
-    password_reset_token = db.Column(db.String(2048),nullable=True, unique=True, index=True)
+    lastvisit_at = db.Column(db.DateTime,nullable=True)
     created_at = db.Column(db.DateTime,nullable=False, index=True)
     updated_at = db.Column(db.DateTime,nullable=True)
 
@@ -53,16 +56,26 @@ class User(db.Model):
         self.updated_at = None
         self.password_reset_token = None
         self.authenticated = False
+        self.lastvisit_at = None
+        self.approved = False
+        self.approved_at = None
 
 
     def set_password(self,password):
         self.password = bcrypt.generate_password_hash(password)
 
-    def activate(self):
+    def approve(self):
         dt = datetime.utcnow()
-        self.activated = True
-        self.activated_at = dt
+        self.approved = True
+        self.approved_at = dt
         self.updated_at = dt
+
+    def activate(self):
+        if self.approved:
+            dt = datetime.utcnow()
+            self.activated = True
+            self.activated_at = dt
+            self.updated_at = dt
 
     def refresh_signin_token_and_date(self):
         dt = datetime.utcnow()
@@ -75,6 +88,16 @@ class User(db.Model):
     def is_banned(self):
         return self.banned
 
+
+    def ban(self):
+        if self.user_role != "admin":
+            if current_user.user_role == "admin":
+                self.banned = True
+                self.updated_at = datetime.utcnow()
+    def unban(self):
+        if current_user.user_role == "admin":
+            self.banned = False
+            self.updated_at = datetime.utcnow()
 
     #Flask-Login interface
     def get_id(self):
@@ -116,7 +139,7 @@ def create_test_users():
             lastname = "sarkissian",
             state = "CA",
             username = "aregsar")
-
+    user.approve()
     user.activate()
     user.user_role = "admin"
     db.session.add(user)
@@ -129,6 +152,7 @@ def create_test_users():
             lastname = "sarkissian",
             state = "CA",
             username = "areg")
+    user.approve()
     user.activate()
     db.session.add(user)
     db.session.commit()
@@ -147,6 +171,9 @@ def user_loader(user_id):
     #user = User.query.filter(User.email==user_id).first()
     if user:
         user.authenticated = True
+        #print user.lastvisit_at
+        #user.lastvisit_at = datetime.utcnow()
+        #db.session.commit()
     return user
 
 

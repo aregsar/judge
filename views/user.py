@@ -33,7 +33,11 @@ def edit(id):
         return render_template("user/notfound.html")
     form = EditUserAdminForm(banned=user.banned)
     if form.validate_on_submit():
-        user.banned = form.banned.data
+        #user.banned = form.banned.data
+        if form.banned.data == True:
+            user.ban()
+        else:
+            user.unban()
         db.session.commit()
         #return redirect(url_for('judge.edit',id=id))
         return redirect(url_for('user.profile',id=id))
