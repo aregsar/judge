@@ -29,8 +29,12 @@ class User(db.Model):
     signedin_at = db.Column(db.DateTime,nullable=True)
     banned = db.Column(db.Boolean,nullable=False)
     lastvisit_at = db.Column(db.DateTime,nullable=True)
+    total_reviews = db.Column(db.Integer,nullable=False)
+    total_review_averages = db.Column(db.Integer,nullable=False)
+    total_reviews_average = db.Column(db.Integer,nullable=False)
     created_at = db.Column(db.DateTime,nullable=False, index=True)
     updated_at = db.Column(db.DateTime,nullable=True)
+
 
     #SecureRandom.urlsafe_base64
 
@@ -57,8 +61,12 @@ class User(db.Model):
         self.password_reset_token = None
         self.authenticated = False
         self.lastvisit_at = None
-        self.approved = False
-        self.approved_at = None
+        self.approved = True
+        self.approved_at = self.created_at
+        self.total_reviews = 0
+        self.total_review_averages = 0
+        #total_reviews_average = total_review_averages/total_reviews
+        self.total_reviews_average = 0
 
 
     def set_password(self,password):
@@ -80,7 +88,7 @@ class User(db.Model):
     def refresh_signin_token_and_date(self):
         dt = datetime.utcnow()
         guid = uuid.uuid4().hex
-        print guid
+        #print guid
         self.signin_token = make_secure_token(guid)
         self.signedin_at = dt
         self.updated_at = dt
@@ -106,7 +114,7 @@ class User(db.Model):
         #return unicode(self.id)
 
     def is_active(self):
-        return self.activated and not self.banned
+        return self.approved and not self.banned
 
     def is_authenticated(self):
         return self.authenticated
@@ -127,35 +135,6 @@ class User(db.Model):
         if viewer.user_role == "admin":
             return self.email
         return ''
-
-
-#factory method
-def create_test_users():
-    user = User(
-            email = "aregsar@gmail.com",
-            password = "panama",
-            barnumber = "1234",
-            firstname = "aregsar",
-            lastname = "sarkissian",
-            state = "CA",
-            username = "aregsar")
-    user.approve()
-    user.activate()
-    user.user_role = "admin"
-    db.session.add(user)
-    db.session.commit()
-    user = User(
-            email = "areg@cox.com",
-            password = "panama",
-            barnumber = "12345",
-            firstname = "areg",
-            lastname = "sarkissian",
-            state = "CA",
-            username = "areg")
-    user.approve()
-    user.activate()
-    db.session.add(user)
-    db.session.commit()
 
 
 #flask login api for user if based authentication. works in conjunction with get_id
@@ -186,3 +165,30 @@ def user_loader(user_id):
     #     user.authenticated = True
     # return user
 
+#factory method
+def create_test_users():
+    user = User(
+            email = "aregsar@gmail.com",
+            password = "panama",
+            barnumber = "1234",
+            firstname = "aregsar",
+            lastname = "sarkissian",
+            state = "CA",
+            username = "aregsar")
+    user.approve()
+    user.activate()
+    user.user_role = "admin"
+    db.session.add(user)
+    db.session.commit()
+    user = User(
+            email = "areg@cox.com",
+            password = "panama",
+            barnumber = "12345",
+            firstname = "areg",
+            lastname = "sarkissian",
+            state = "CA",
+            username = "areg")
+    user.approve()
+    user.activate()
+    db.session.add(user)
+    db.session.commit()

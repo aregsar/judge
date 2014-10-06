@@ -17,7 +17,9 @@ class Judge(db.Model):
     court = db.Column(db.String(255),nullable=True,  index=True)
     #district options are appelate, suprerior (or null for retired judges)
     district = db.Column(db.String(255),nullable=True)
-
+    total_reviews = db.Column(db.Integer,nullable=False)
+    total_review_averages = db.Column(db.Integer,nullable=False)
+    total_reviews_average = db.Column(db.Integer,nullable=False)
     created_at = db.Column(db.DateTime,nullable=False, index=True)
     updated_at = db.Column(db.DateTime,nullable=True)
 
@@ -29,6 +31,10 @@ class Judge(db.Model):
         self.court = court
         self.district = district
         self.created_at = datetime.utcnow()
+        self.total_reviews = 0
+        self.total_review_averages = 0
+        #total_reviews_average = total_review_averages/total_reviews
+        self.total_reviews_average = 0
 
 #factory methods
 def CreateActiveJudge(name,state,court,district,scope=1):

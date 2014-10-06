@@ -222,3 +222,163 @@ Werkzeug==0.9.6
 itsdangerous==0.24
 wsgiref==0.1.2
 
+===========
+app
+
+-total_reviews = Reviews.GetCount()
+
+-total_judges
+
+-total_users
+
+-average_reviews_per_judge
+
+-average_reviews_per_user
+
+
+
+user
+#change password without a confirmation email
+#by supplying firstname,lastname,barnumber and email
+
+-total_reviews
+
+-total_review_averages
+
+-total_reviews_average = total_review_averages\ total_reviews
+
+
+
+judge
+
+-total_reviews
+
+-total_review_average_ratings
+
+-total_reviews_average_rating = total_review_average_ratings\ total_reviews
+
+
+
+
+
+review
+
+-average_rating = (overal_rating + isuues_rating + decourum_rating) \ 3
+
+
+
+Review.addReview(judge, reviewer, overal_rating ,isuues_rating ,decourum_rating)
+
+{
+
+average_rating = (overal_rating + isuues_rating + decourum_rating) \ 3
+
+review = Review(judge.id,reviewer.id,overal_rating ,isuues_rating ,decourum_rating, average_rating)
+
+
+
+reviewer.total_reviews = judge.total_reviews + 1
+
+reviewer. total_review_average_ratings = reviewer. total_review_average_ratings + average_rating
+
+reviewer. total_reviews_average_rating =  reviewer.total_review_average_ratings\ total_reviews
+
+
+
+judge.total_reviews = judge.total_reviews + 1
+
+judge. total_review_average_ratings = judge. total_review_average_ratings + average_rating
+
+judge. total_reviews_average_rating = judge.total_review_average_ratings\ total_reviews
+
+db.Add(review)
+
+db.commit()
+
+}
+
+==============
+
+http://css-tricks.com/css-sprites-with-inline-images/
+
+.clip               { position: absolute; top: 0; left: 0; }
+.pos-1              { clip:rect(0 48px 48px 0); }
+<img src="images/arrow-sprite.png" alt="arrow" class="clip pos-1" />
+
+=============
+.offscreen{clip:rect(0 0 0 0);position:absolute;left:-9999px;top:auto;overflow:hidden;width:1px;height:1px}
+
+.star-img{display:block;width:100%;height:100%;background:url(//s3-media3.ak.yelpcdn.com/assets/2/www/img/c2252a4cd43e/ico/stars/v2/stars_map.png) no-repeat}
+
+.rating .stars_0{background-position:-3px -3px}
+.rating .stars_1{background-position:-3px -21px}
+.rating .stars_1_half{background-position:-3px -39px}
+.rating .stars_2{background-position:-3px -57px}
+.rating .stars_2_half{background-position:-3px -75px}
+.rating .stars_3{background-position:-3px -93px}
+.rating .stars_3_half{background-position:-3px -111px}
+.rating .stars_4{background-position:-3px -129px}
+.rating .stars_4_half{background-position:-3px -147px}
+.rating .stars_5{background-position:-3px -165px}
+.rating-small{float:left;position:relative;overflow:hidden;width:49px;height:9px}.rating-small
+.stars_0{background-position:-3px -183px}
+.rating-small .stars_1{background-position:-3px -195px}.rating-small .stars_1_half{background-position:-3px -207px}.rating-small .stars_2{background-position:-3px -219px}.rating-small .stars_2_half{background-position:-3px -231px}.rating-small .stars_3{background-position:-3px -243px}.rating-small .stars_3_half{background-position:-3px -255px}.rating-small .stars_4{background-position:-3px -267px}.rating-small .stars_4_half{background-position:-3px -279px}.rating-small .stars_5{background-position:-3px -291px}
+.rating-large{overflow:hidden;position:relative;width:106px;height:18px}
+.rating-large .stars_0{background-position:-3px -303px}.rating-large .stars_1{background-position:-3px -324px}
+.rating-large
+.stars_1_half{background-position:-3px -345px}.rating-large .stars_2{background-position:-3px -366px}.rating-large .stars_2_half{background-position:-3px -387px}.rating-large .stars_3{background-position:-3px -408px}.rating-large .stars_3_half{background-position:-3px -429px}.rating-large .stars_4{background-position:-3px -450px}.rating-large .stars_4_half{background-position:-3px -471px}.rating-large .stars_5{background-position:-3px -492px}.rating-very-large{overflow:hidden;position:relative;width:126px;height:22px}.rating-very-large
+.stars_0{background-position:-3px -514px}.rating-very-large .stars_1{background-position:-3px -539px}.rating-very-large .stars_1_half{background-position:-3px -564px}.rating-very-large .stars_2{background-position:-3px -589px}.rating-very-large .stars_2_half{background-position:-3px -614px}.rating-very-large .stars_3{background-position:-3px -639px}.rating-very-large .stars_3_half{background-position:-3px -664px}.rating-very-large .stars_4{background-position:-3px -689px}.rating-very-large .stars_4_half{background-position:-3px -714px}.rating-very-large .stars_5{background-position:-3px -739px}
+
+<div class="rating">
+<i class="star-img stars_4" title="4.0 star rating">
+<img alt="4.0 star rating" class="offscreen" height="303" src="http://s3-media3.fl.yelpcdn.com/assets/2/www/img/c2252a4cd43e/ico/stars/v2/stars_map.png" width="84">
+</i>
+</div>
+
+@media print{
+.star-img{position:absolute;background:none;width:auto;height:auto}
+.star-img img{position:relative;top:0;left:-3px;width:auto;height:auto}
+.rating .stars_0{top:-3px}
+.rating .stars_1{top:-21px}
+.rating .stars_1_half{top:-39px}
+.rating .stars_2{top:-57px}
+.rating .stars_2_half{top:-75px}
+.rating .stars_3{top:-93px}
+.rating .stars_3_half{top:-111px}
+.rating .stars_4{top:-129px}
+.rating .stars_4_half{top:-147px}
+.rating .stars_5{top:-165px}
+.rating-small .stars_0{top:-183px}
+.rating-small .stars_1{top:-195px}
+.rating-small .stars_1_half{top:-207px}
+.rating-small .stars_2{top:-219px}
+.rating-small .stars_2_half{top:-231px}
+.rating-small .stars_3{top:-243px}
+.rating-small .stars_3_half{top:-255px}
+.rating-small .stars_4{top:-267px}
+.rating-small .stars_4_half{top:-279px}
+.rating-small .stars_5{top:-291px}
+.rating-large .stars_0{top:-303px}
+.rating-large .stars_1{top:-324px}
+.rating-large .stars_1_half{top:-345px}
+.rating-large .stars_2{top:-366px}
+.rating-large .stars_2_half{top:-387px}
+.rating-large .stars_3{top:-408px}
+.rating-large .stars_3_half{top:-429px}
+.rating-large .stars_4{top:-450px}
+.rating-large .stars_4_half{top:-471px}
+.rating-large .stars_5{top:-492px}
+.rating-very-large .stars_0{top:-514px}
+.rating-very-large .stars_1{top:-539px}
+.rating-very-large .stars_1_half{top:-564px}
+.rating-very-large .stars_2{top:-589px}
+.rating-very-large .stars_2_half{top:-614px}
+.rating-very-large .stars_3{top:-639px}
+.rating-very-large .stars_3_half{top:-664px}
+.rating-very-large .stars_4{top:-689px}
+.rating-very-large .stars_4_half{top:-714px}
+.rating-very-large .stars_5{top:-739px}
+}
+
+====================
+

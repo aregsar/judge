@@ -98,9 +98,6 @@ def signup():
             #e = sys.exc_info()[0]
             #flash("Error: %s" % e)
             flash("There was an error while creating your account.")
-            flash("Please try resubmitting the form again.")
-            flash("If the error persits please try again in a few minutes")
-            flash("You can always check for updates to the status of our website on twitter.com\judgejungle")
             return render_template("account/signup.html",form=form)
         try:
 
@@ -110,7 +107,6 @@ def signup():
             #set up a test only view to display the email. link to it from account/created.html
             confirmation_email_url = url_for('account.confirmation_email',token=token,_external=True)
             html = render_template('account/created.html',confirmation_email_url=confirmation_email_url)
-            #
 
             #subject = "JudgeJungle account activation email"
             #send_email(email, subject, html_email)
@@ -139,25 +135,13 @@ def confirm(token):
     except:
         return render_template("account/confirmation_failed.html")
 
-    #print user.activated
-
     try:
         user.activate()
         db.session.commit()
     except:
         #flash("There was an error while confirming your account.")
-        #flash("Please try the confirmation link again.")
-        #flash("If the error persits please try the confirmation link again. in a few minutes")
-        #flash("You can always check for updates to the status of our website on twitter.com\judgejungle")
         return render_template("account/confirmation_error.html")
-
-
-    #user = User.query.filter_by(email=email).first()
-    #print user.activated
     form = SigninForm(email=email)
-
-    # #return redirect(url_for('account.signin'))
-    # flash("Account verified. Please sign in")
     return render_template("account/confirm.html",form=form)
 
 
@@ -166,14 +150,14 @@ def signin():
     form = SigninForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.strip()).first()
-        #if (user and not user.is_banned() ):
         if user:
-            # #if user.password_is_correct(form.password.data):
             if bcrypt.check_password_hash(user.password, form.password.data.strip()):
                 user.refresh_signin_token_and_date()
                 db.session.commit()
-                #store the authentcation state for login_user to access
+                #store the authentcation state for login_user
+                #to access via user.is_authenticated()
                 user.authenticated=True
+                #login_user uses user.is_authenticated() and user.is_active()
                 login_user(user, remember=True)
                 return redirect(url_for("home.index"))
     flash("invalid email or password")

@@ -24,6 +24,11 @@ with app.app_context():
     judge = Judge.query.filter_by(name="areg").first()
     print judge
 
+#can_view_resource(current_user,resource_owner_user,resource=None)
+#can_edit_resource(current_user,resource_owner_user,resource=None)
+#can_approve_resource(current_user,resource_owner_user,resource=None)
+#can_destroy_resource(current_user,resource_owner_user,resource=None)
+
 #work with the database
 #$psql judgedb
 #list tables in judgedb
