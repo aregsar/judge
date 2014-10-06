@@ -9,7 +9,7 @@
           {{form.email(class='form-control',placeholder='Email address')}}
             <input type="password" name="password" class="form-control" placeholder="Password" autofocus>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            Forgot password?  <a href="{{ url_for('account.forgot_password') }}">Reset password</a>
+            Forgot password?  <a href="{{ url_for('account.set_password') }}">Reset password</a>
             {{ form.csrf_token }}
           </form>
         </div>
