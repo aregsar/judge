@@ -4,13 +4,17 @@
 
 <div class="blog-header ">
                 <p class="lead blog-description">
-{% if reviews|length > 0 %}
+ {#% if reviews|length > 0 %}
                 Reviews For Judge
  {% else%}
  No Reviews Found For Judge
- {% endif%}
+ {% endif%#}
  <br />
- <a href="{{ url_for('judge.profile',id=judge.id) }}">{{judge.name}}</a>
+ <a href="{{ url_for('judge.profile',id=judge.id) }}">{{judge.name}}</a><br />
+ {{judge.total_reviews}}&nbsp;reviews&nbsp;
+ {%if judge.total_reviews > 0 %}
+                         (average {{judge.total_reviews_average}} out of 5)
+                        {% endif%}<br />
                 </p>
 </div>
 
@@ -20,23 +24,27 @@
           </form> --> #}
  <div class="blog-header ">
  {% if current_user.user_role != "admin" %}
-                    {% for review in reviews %}
-                     {{review.created_at.strftime('%Y-%m-%d') }}
-                        by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">{{review.reviewer_name}}</a>
-                       <br />
-                        <a href="{{ url_for('review.review',id=review.id) }}">details</a><br/><br/>
-                    {% endfor %}
-                {% endif%}
+      {% for review in reviews %}
+          by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">{{review.reviewer_name}}</a>&nbsp;{{review.created_at.strftime('%Y-%m-%d') }}
+          <br />
+          (average rating {{review.average_rating}} of 5)
+          <br />
+          {{review.excerpt}} <br />
+          <a href="{{ url_for('review.review',id=review.id) }}">details</a><br/><br/>
+      {% endfor %}
+  {% endif%}
 
-                {% if current_user.user_role == "admin" %}
-                 {% for review in reviews %}
-                 {{review.created_at.strftime('%Y-%m-%d') }}
-                        by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">{{review.reviewer_name}}</a>
-                        <br />
-                        <a href="{{ url_for('review.review',id=review.id) }}">details</a>&nbsp;|&nbsp;<a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>
-                    {% endfor %}
+  {% if current_user.user_role == "admin" %}
+   {% for review in reviews %}
+          by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">{{review.reviewer_name}}</a>&nbsp;{{review.created_at.strftime('%Y-%m-%d') }}
+          <br />
+          (average rating {{review.average_rating}} of 5)
+          <br />
+          {{review.excerpt}} <br />
+          <a href="{{ url_for('review.review',id=review.id) }}">details</a>&nbsp;|&nbsp;<a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>
+      {% endfor %}
 
-                  {% endif%}
+    {% endif%}
 
 </div>
 

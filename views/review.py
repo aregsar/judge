@@ -87,7 +87,7 @@ def add(id):
     if review == None:
         form = AddReviewForm()
         if form.validate_on_submit():
-            review = JudgeReview(title=form.title.data,
+            review = JudgeReview(
                                 body=form.body.data,
                                 rating= int(form.rating.data),
                                 knowledge= int(form.knowledge.data),
@@ -100,6 +100,7 @@ def add(id):
                                 #current_user=current_user
                                 reviewer_id = current_user.id,
                                 reviewer_name = current_user.username)
+            review.add_rating_averages(judge, current_user)
             db.session.add(review)
             db.session.commit()
             #return redirect(url_for('review.index',id=judge.id))

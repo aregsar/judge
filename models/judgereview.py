@@ -11,6 +11,7 @@ class JudgeReview(db.Model):
     judge_name = db.Column(db.String(255),nullable=False)
     title = db.Column(db.String(255),nullable=False)
     #body = db.Column(db.String(65535),nullable=False)
+    excerpt = db.Column(db.String(255),nullable=False)
     body = db.Column(db.Text(),nullable=False)
     #rating of range 1 to 5
     rating = db.Column(db.Integer,nullable=False)
@@ -28,11 +29,12 @@ class JudgeReview(db.Model):
 
 
     #def __init__(self,title,body,rating,judge,current_user):
-    def __init__(self,title,body,rating,knowledge,decorum,tentatives,curiosity,
-                 judge_id, judge_name,reviewer_name,reviewer_id):
-        self.title = title
+    def __init__(self,body,rating,knowledge,decorum,tentatives,curiosity,
+                 judge_id, judge_name,reviewer_name,reviewer_id,title=None):
+        self.title = ''
         self.judge_id = judge_id #judge.id
         self.judge_name = judge_name #judge.name
+        self.excerpt = (body[:10] + '...') if len(body) > 10 else body
         self.body = body
         self.rating = rating
         self.knowledge = knowledge
@@ -48,10 +50,27 @@ class JudgeReview(db.Model):
         ratings_total = rating + knowledge + decorum + tentatives + curiosity
         self.average_rating = int(round(ratings_total / 5.0))
 
-    def set_rating_averages(self, judge, reviewer):
+    def add_rating_averages(self, judge, reviewer):
         reviewer.total_reviews = reviewer.total_reviews + 1
         reviewer.total_review_averages = reviewer.total_review_averages + self.average_rating
-        reviewer.total_reviews_average =  reviewer.total_reviews_average / reviewer.total_reviews
+        reviewer.total_reviews_average =  reviewer.total_review_averages / reviewer.total_reviews
         judge.total_reviews = judge.total_reviews + 1
         judge.total_review_averages = judge.total_review_averages + self.average_rating
-        judge.total_reviews_average =  judge.total_reviews_average / judge.total_reviews
+        judge.total_reviews_average =  judge.total_review_averages / judge.total_reviews
+
+
+
+    def edit_rating(self, body, judge, reviewer,rating,knowledge,decorum,tentatives,curiosity):
+        self.excerpt = (body[:10] + '...') if len(body) > 10 else body
+        self.body = body
+        #remove current rating average from total
+        reviewer.total_review_averages = reviewer.total_review_averages - self.average_rating
+        judge.total_review_averages = judge.total_review_averages - self.average_rating
+        #calculate new total rating average
+        ratings_total = rating + knowledge + decorum + tentatives + curiosity
+        self.average_rating = int(round(ratings_total / 5.0))
+        #update the total averages
+        reviewer.total_review_averages = reviewer.total_review_averages + self.average_rating
+        reviewer.total_reviews_average =  reviewer.total_review_averages / reviewer.total_reviews
+        judge.total_review_averages = judge.total_review_averages + self.average_rating
+        judge.total_reviews_average =  judge.total_review_averages / judge.total_reviews
