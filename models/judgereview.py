@@ -42,7 +42,7 @@ class JudgeReview(db.Model):
         self.reviewer_name = reviewer_name #current_user.username
         self.reviewer_id = reviewer_id #current_user.id
         self.created_at = datetime.utcnow()
-        self.active =  False
+        self.active =  True
         self.removed = False
 
         ratings_total = rating + knowledge + decorum + tentatives + curiosity

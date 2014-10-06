@@ -44,7 +44,6 @@ def signup():
         user.refresh_signin_token_and_date()
 
         try:
-
             db.session.add(user)
             db.session.commit()
         except: #sqlalchemy.exc.IntegrityError

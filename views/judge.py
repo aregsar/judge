@@ -69,7 +69,11 @@ def retired():
 def index():
     name = request.args.get('name')
     form = JudgeSearchForm(name=name)
-    judges= Judge.query.filter_by(name=name).all()
+    if name != 'all':
+        #judges= Judge.query.filter_by(name=name).all()
+        judges= Judge.query.filter(Judge.name.like('%'+ name + '%')).all()
+    else:
+        judges= Judge.query.all()
     message = None
     if len(judges) == 0:
         message = "Didn't find your judge? Submit them for review by clicking here."

@@ -236,60 +236,11 @@ app
 -average_reviews_per_user
 
 
-
-user
-#change password without a confirmation email
-#by supplying firstname,lastname,barnumber and email
-
--total_reviews
-
--total_review_averages
-
--total_reviews_average = total_review_averages\ total_reviews
-
-
-
-judge
-
--total_reviews
-
--total_review_average_ratings
-
--total_reviews_average_rating = total_review_average_ratings\ total_reviews
-
-
-
-
-
-review
-
--average_rating = (overal_rating + isuues_rating + decourum_rating) \ 3
-
-
-
 Review.addReview(judge, reviewer, overal_rating ,isuues_rating ,decourum_rating)
 
 {
 
 average_rating = (overal_rating + isuues_rating + decourum_rating) \ 3
-
-review = Review(judge.id,reviewer.id,overal_rating ,isuues_rating ,decourum_rating, average_rating)
-
-
-
-reviewer.total_reviews = judge.total_reviews + 1
-
-reviewer. total_review_average_ratings = reviewer. total_review_average_ratings + average_rating
-
-reviewer. total_reviews_average_rating =  reviewer.total_review_average_ratings\ total_reviews
-
-
-
-judge.total_reviews = judge.total_reviews + 1
-
-judge. total_review_average_ratings = judge. total_review_average_ratings + average_rating
-
-judge. total_reviews_average_rating = judge.total_review_average_ratings\ total_reviews
 
 db.Add(review)
 
