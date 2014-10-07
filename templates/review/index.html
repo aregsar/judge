@@ -28,7 +28,7 @@
         by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
         {{review.reviewer_name}}</a><br />
         <br />
-        {{review.excerpt}} <br />
+        {{review.excerpt}}<br />
         <a href="{{ url_for('review.review',id=review.id) }}">details</a><br/><br/>
       {% endfor %}
     {% else %}
@@ -39,7 +39,7 @@
         by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
         {{review.reviewer_name}}</a><br />
         <br />
-        {{review.excerpt}} <br />
+        {{review.excerpt}}<br />
         <a href="{{ url_for('review.review',id=review.id) }}">details</a>&nbsp;|&nbsp;
         <a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>
       {% endfor %}

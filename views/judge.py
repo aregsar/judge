@@ -71,9 +71,9 @@ def index():
     form = JudgeSearchForm(name=name)
     if name != 'all':
         #judges= Judge.query.filter_by(name=name).all()
-        judges= Judge.query.filter(Judge.name.like('%'+ name + '%')).all()
+        judges= Judge.query.filter(Judge.name.like(name + '%')).filter_by(state='CA').order_by(Judge.name).limit(20).all()
     else:
-        judges= Judge.query.all()
+        judges= Judge.query.filter_by(state='CA').order_by(Judge.name).limit(20).all()
     message = None
     if len(judges) == 0:
         message = "Didn't find your judge? Submit them for review by clicking here."

@@ -58,21 +58,32 @@ def index(id):
     judge = Judge.query.get(id)
     if judge == None:
         return render_template("judge/notfound.html")
-    reviews = JudgeReview.query.filter_by(judge_id=id,active=True).all()
+    reviews = JudgeReview.query.filter_by(judge_id=id,active=True).order_by(JudgeReview.id.desc()).limit(20).all()
     return render_template("review/index.html",reviews=reviews,judge=judge)
 
+#TODO:ajax load more
+@mod.route('/judge/<id>/reviews/<last_review_id>')
+@login_required
+def more(id):
+    judge = Judge.query.get(id)
+    if judge == None:
+        return render_template("judge/notfound.html")
+    #reviews = JudgeReview.query.filter_by(judge_id=id,active=True).filter(JudgeReview.id > last_review_id).order_by(JudgeReview.id.desc()).limit(20).all()
+    reviews = []
+    return render_template("review/index.html",reviews=reviews)
 
 @mod.route('/review/<id>')
 @login_required
 def review(id):
     review = JudgeReview.query.get(id)
+    reviewer = User.query.get(review.reviewer_id)
     if review == None:
         return render_template("review/notfound.html")
     can_show_edit_review_link = True
     if review.active:
         can_show_edit_review_link= False
     if can_view_review(review):
-        return render_template("review/review.html",review=review,can_show_edit_review_link=can_show_edit_review_link)
+        return render_template("review/review.html",reviewer = reviewer, review=review,can_show_edit_review_link=can_show_edit_review_link)
     return "forbidden" #abort(403)
 
 
@@ -104,7 +115,8 @@ def add(id):
             db.session.add(review)
             db.session.commit()
             #return redirect(url_for('review.index',id=judge.id))
-            return redirect(url_for('review.reviewer',id=current_user.id))
+            #return redirect(url_for('review.reviewer',id=current_user.id))
+            return redirect(url_for('review.index',id=id))
         return render_template("review/add.html",form=form,judge=judge)
     else:
         if review.active:

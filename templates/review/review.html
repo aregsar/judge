@@ -3,21 +3,15 @@
 <div class="container">
     <div class="blog-header ">
 
-         <p class="lead blog-description">Judge
-         <a href="{{ url_for('judge.profile',id=review.judge_id) }}">{{review.judge_name}}</a>
-
-{#<a href="{{ url_for('review.index',id=review.judge_id) }}">reviews</a>#}
+         <p class="lead blog-description">
+         Judge <a href="{{ url_for('judge.profile',id=review.judge_id) }}">{{review.judge_name}}</a>
          <br />
-         Reviewed By <a href="{{url_for('user.profile',id=review.reviewer_id)}}">{{review.reviewer_name}}</a><br />
-        {{review.created_at.strftime('%Y-%m-%d') }}&nbsp;
+         Reviewed by <a href="{{url_for('user.profile',id=review.reviewer_id)}}">{{review.reviewer_name}}</a>
+         ({{reviewer.total_reviews}} reviews)<br />
+        {{review.created_at.strftime('%Y-%m-%d') }}<br />
 
-        {%if not review.active%}
-                Pending Approval
-        {% endif %}
 
-        {% if current_user.user_role == "admin"%}
-                <a href="{{url_for('review.edit',id=review.id)}}">edit</a>
-        {% elif not review.active and current_user.id == review.reviewer_id %}
+        {% if current_user.user_role == "admin" %}
                 <a href="{{url_for('review.edit',id=review.id)}}">edit</a>
         {% endif %}
 
@@ -25,19 +19,18 @@
     </div>
 
     <div class="blog-header ">
-        <h5>Overall Rating</h5>
-        {{review.rating}} of 5 gavels<br /><br />
-         <h5>Knowledge of the law</h5>
-         {{review.knowledge}} of 5 gavels<br /><br />
-          <h5>Courtroom decorum</h5>
-          {{review.decorum}} of 5 gavels<br /><br />
-           <h5>Issues tentatives</h5>
-           {{review.tentatives}} of 5 gavels<br /><br />
-            <h5>Curiosity towards attorneys</h5>
-            {{review.curiosity}} of 5 gavels<br /><br />
-              <h4>Title</h4>
-        <h5>{{review.title}}</h5>
-          <h4>Review</h4>
+    <h4>Average rating for this review </h4>
+    <h4>{{review.average_rating}} out of 5 gavels</h4>
+        <h5>Overall Rating {{review.rating}} of 5 gavels</h5>
+         <h5>Knowledge of the law {{review.knowledge}} of 5 gavels</h5>
+
+          <h5>Courtroom decorum {{review.decorum}} of 5 gavels</h5>
+
+           <h5>Issues tentatives  {{review.tentatives}} of 5 gavels</h5>
+
+            <h5>Curiosity towards attorneys {{review.curiosity}} of 5 gavels</h5>
+
+
         {{review.body}}<br />
 
     </div>

@@ -26,7 +26,7 @@
     {%if judge.total_reviews > 0 %}
     {{judge.total_reviews_average}} out of 5 gavels<br />
     {% endif%}
-    <a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>&nbsp;|&nbsp;
+    <a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>
     <br />
     <br />
     {% endfor %}
