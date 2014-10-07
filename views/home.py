@@ -36,6 +36,17 @@ def index():
     # print result.fetchall()
     # connection.close()
 
+    # connection = engine.connect()
+    # result = connection.execute("select username from users")
+    # for row in result:
+    #   print "username:", row['username']
+    # connection.close()
+
+    #using session
+    #session.query(User).update({"email": "a@g.com"})
+    #result = session.execute("select * from table where id=:id", {'id':7})
+    #result = session.execute(select([mytable]).where(mytable.c.id==7))
+
 
     if current_user.is_authenticated():
         form = JudgeSearchForm()
