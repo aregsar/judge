@@ -257,9 +257,16 @@ http://css-tricks.com/css-sprites-with-inline-images/
 <img src="images/arrow-sprite.png" alt="arrow" class="clip pos-1" />
 
 =============
-.offscreen{clip:rect(0 0 0 0);position:absolute;left:-9999px;top:auto;overflow:hidden;width:1px;height:1px}
+all positions relative to top or left of the image
+clip: rect(top-pos,right-pos,bot-pos,left-pos);
 
-.star-img{display:block;width:100%;height:100%;background:url(//s3-media3.ak.yelpcdn.com/assets/2/www/img/c2252a4cd43e/ico/stars/v2/stars_map.png) no-repeat}
+
+.offscreen{clip:rect(0 0 0 0);position:absolute;left:-9999px;
+top:auto;overflow:hidden;width:1px;height:1px}
+
+.star-img{display:block;width:100%;
+height:100%;background:url(//s3-media3.ak.yelpcdn.com/assets/2/www/img/
+c2252a4cd43e/ico/stars/v2/stars_map.png) no-repeat}
 
 .rating .stars_0{background-position:-3px -3px}
 .rating .stars_1{background-position:-3px -21px}
@@ -282,9 +289,16 @@ http://css-tricks.com/css-sprites-with-inline-images/
 
 <div class="rating">
 <i class="star-img stars_4" title="4.0 star rating">
-<img alt="4.0 star rating" class="offscreen" height="303" src="http://s3-media3.fl.yelpcdn.com/assets/2/www/img/c2252a4cd43e/ico/stars/v2/stars_map.png" width="84">
+<img alt="4.0 star rating" class="offscreen"
+height="303" src="http://s3-media3.fl.yelpcdn.com/assets/2/www/img/
+c2252a4cd43e/ico/stars/v2/stars_map.png" width="84">
 </i>
 </div>
+
+
+
+
+
 
 @media print{
 .star-img{position:absolute;background:none;width:auto;height:auto}

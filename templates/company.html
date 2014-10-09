@@ -7,6 +7,8 @@
         <title>Judge.com</title>
         <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/css/app.css">
+        <link rel="shortcut icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon">
+        <link rel="icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon">
     </head>
     <body>
 
@@ -30,6 +32,7 @@
             </div><!--/.nav-collapse -->
           </div>
     </div>
+<img alt="gavel" href="{{url_for('static',filename='png/gavels_v1.png')}}" />
 
         <!-- Body -->
         {% block body %}

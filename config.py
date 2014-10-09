@@ -16,16 +16,53 @@ class Config:
     #ENV can be set to "DEV" or "TEST" or "STAGE" or "PROD"
     ENV = os.environ.get('FLASK_ENVIRONMENT')
     DEBUG = bool(os.environ.get('FLASK_DEBUG'))
+    #SSL_DISABLE = False
 
     #SqlAlchemy looks for this specific app.config['SQLALCHEMY_DATABASE_URL']
     #export DATABASE_URL='postgres://localhost/judgedb'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_RECORD_QUERIES = True
 
     #secret key generation from python shell
     #import os
     #os.urandom(24)
     #export SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
     SECRET_KEY = os.environ['SECRET_KEY']
+    #SECRET_KEY = os.environ.get('JUDGE_SECRET_KEY')
+
+    JUDGE_JUDGES_PER_PAGE = 20
+    JUDGE_JUDGE_REVIEWS_PAGE = 50
+    JUDGE_USERS_PER_PAGE = 30
+    JUDGE_SLOW_DB_QUERY_TIME=0.5
+
+
+
+        ## Fixup the reverse proxy server headers
+        ## when SSL termination happens at load balancer proxy
+        # from werkzeug.contrib.fixers import ProxyFix
+        # app.wsgi_app = ProxyFix(app.wsgi_app)
+
+        ## Heroku Logging
+        ## log to stderr
+        # @classmethod
+        # def init_app(cls, app):
+        #   import logging
+        #   from logging import StreamHandler
+        #   file_handler = StreamHandler()
+        #   file_handler.setLevel(logging.WARNING)
+        #   app.logger.addHandler(file_handler)
+
+        ## SysLog Logging
+        ## log to syslog
+        # @classmethod
+        # def init_app(cls, app):
+        #   import logging
+        #   from logging.handlers import SysLogHandler
+        #   syslog_handler = SysLogHandler()
+        #   syslog_handler.setLevel(logging.WARNING)
+        #   app.logger.addHandler(syslog_handler)
+
 
     #app has these special config keys as properties???
     #app.secret_key
