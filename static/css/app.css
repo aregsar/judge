@@ -238,5 +238,14 @@ ul.form-control li {
 all positions relative to top or left of the image
 clip: rect(top-pos,right-pos,bot-pos,left-pos);
 */
-.clip               { position: absolute; top: 0; left: 0; }
-.pos-1              { clip:rect(3px 3px 13px 60px); }
+
+.rating        { position: relative; height: 15px; width: 84px; }
+.clip-1               { position: absolute; top: 0; left: 0; }
+.pos-1             { clip: rect(3px 87px 18px 3px); }
+
+.clip-2               { position: absolute; top: -21px; left: 0; }
+.pos-2           { clip: rect(21px 87px 35px 3px); }
+
+.clip-10             { position: absolute; top: -165px; left: 0; }
+.pos-10             { clip: rect(165px 87px 183px 3px);}
+

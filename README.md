@@ -250,15 +250,60 @@ db.commit()
 
 ==============
 
-http://css-tricks.com/css-sprites-with-inline-images/
-
-.clip               { position: absolute; top: 0; left: 0; }
-.pos-1              { clip:rect(0 48px 48px 0); }
-<img src="images/arrow-sprite.png" alt="arrow" class="clip pos-1" />
-
-=============
 all positions relative to top or left of the image
 clip: rect(top-pos,right-pos,bot-pos,left-pos);
+
+http://css-tricks.com/css-sprites-with-inline-images/
+
+.clip{
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.pos-1{
+clip:rect(0 48px 48px 0);
+}
+
+<div class="rating">
+<img src="images/arrow-sprite.png" alt="arrow" class="clip pos-1" />
+</div>
+
+.rating        { position: relative; height: 15px; width: 84px; }
+=============
+
+
+
+.offscreen{
+clip:rect(0 0 0 0);
+position:absolute;
+left:-9999px;
+top:auto;
+overflow:hidden;
+width:1px;
+height:1px
+}
+
+.stars_0{
+background-position:-3px -3px
+}
+
+.star-img{
+display:block;
+width:100%;
+height:100%;
+background:url(//s3-media3....../v2/stars_map.png) no-repeat
+}
+
+<i class="star-img stars_0">
+<img class="offscreen"
+height="303"  width="84" src="http://s3-media3....../v2/stars_map.png">
+</i>
+
+
+
+
+===================
 
 
 .offscreen{clip:rect(0 0 0 0);position:absolute;left:-9999px;
@@ -268,6 +313,7 @@ top:auto;overflow:hidden;width:1px;height:1px}
 height:100%;background:url(//s3-media3.ak.yelpcdn.com/assets/2/www/img/
 c2252a4cd43e/ico/stars/v2/stars_map.png) no-repeat}
 
+.rating{position:relative;overflow:hidden;width:84px;height:18px}
 .rating .stars_0{background-position:-3px -3px}
 .rating .stars_1{background-position:-3px -21px}
 .rating .stars_1_half{background-position:-3px -39px}
@@ -278,14 +324,41 @@ c2252a4cd43e/ico/stars/v2/stars_map.png) no-repeat}
 .rating .stars_4{background-position:-3px -129px}
 .rating .stars_4_half{background-position:-3px -147px}
 .rating .stars_5{background-position:-3px -165px}
-.rating-small{float:left;position:relative;overflow:hidden;width:49px;height:9px}.rating-small
-.stars_0{background-position:-3px -183px}
-.rating-small .stars_1{background-position:-3px -195px}.rating-small .stars_1_half{background-position:-3px -207px}.rating-small .stars_2{background-position:-3px -219px}.rating-small .stars_2_half{background-position:-3px -231px}.rating-small .stars_3{background-position:-3px -243px}.rating-small .stars_3_half{background-position:-3px -255px}.rating-small .stars_4{background-position:-3px -267px}.rating-small .stars_4_half{background-position:-3px -279px}.rating-small .stars_5{background-position:-3px -291px}
+.rating-small{float:left;position:relative;overflow:hidden;width:49px;height:9px}
+.rating-small .stars_0{background-position:-3px -183px}
+.rating-small .stars_1{background-position:-3px -195px}
+.rating-small .stars_1_half{background-position:-3px -207px}
+.rating-small .stars_2{background-position:-3px -219px}
+.rating-small .stars_2_half{background-position:-3px -231px}
+.rating-small .stars_3{background-position:-3px -243px}
+.rating-small .stars_3_half{background-position:-3px -255px}
+.rating-small .stars_4{background-position:-3px -267px}
+.rating-small .stars_4_half{background-position:-3px -279px}
+.rating-small .stars_5{background-position:-3px -291px}
 .rating-large{overflow:hidden;position:relative;width:106px;height:18px}
-.rating-large .stars_0{background-position:-3px -303px}.rating-large .stars_1{background-position:-3px -324px}
-.rating-large
-.stars_1_half{background-position:-3px -345px}.rating-large .stars_2{background-position:-3px -366px}.rating-large .stars_2_half{background-position:-3px -387px}.rating-large .stars_3{background-position:-3px -408px}.rating-large .stars_3_half{background-position:-3px -429px}.rating-large .stars_4{background-position:-3px -450px}.rating-large .stars_4_half{background-position:-3px -471px}.rating-large .stars_5{background-position:-3px -492px}.rating-very-large{overflow:hidden;position:relative;width:126px;height:22px}.rating-very-large
-.stars_0{background-position:-3px -514px}.rating-very-large .stars_1{background-position:-3px -539px}.rating-very-large .stars_1_half{background-position:-3px -564px}.rating-very-large .stars_2{background-position:-3px -589px}.rating-very-large .stars_2_half{background-position:-3px -614px}.rating-very-large .stars_3{background-position:-3px -639px}.rating-very-large .stars_3_half{background-position:-3px -664px}.rating-very-large .stars_4{background-position:-3px -689px}.rating-very-large .stars_4_half{background-position:-3px -714px}.rating-very-large .stars_5{background-position:-3px -739px}
+.rating-large .stars_0{background-position:-3px -303px}
+.rating-large .stars_1{background-position:-3px -324px}
+.rating-large .stars_1_half{background-position:-3px -345px}
+.rating-large .stars_2{background-position:-3px -366px}
+.rating-large .stars_2_half{background-position:-3px -387px}
+.rating-large .stars_3{background-position:-3px -408px}
+.rating-large .stars_3_half{background-position:-3px -429px}
+.rating-large .stars_4{background-position:-3px -450px}
+.rating-large .stars_4_half{background-position:-3px -471px}
+.rating-large .stars_5{background-position:-3px -492px}
+.rating-very-large{overflow:hidden;position:relative;width:126px;height:22px}
+.rating-very-large .stars_0{background-position:-3px -514px}
+.rating-very-large .stars_1{background-position:-3px -539px}
+.rating-very-large .stars_1_half{background-position:-3px -564px}
+.rating-very-large .stars_2{background-position:-3px -589px}
+.rating-very-large .stars_2_half{background-position:-3px -614px}
+.rating-very-large .stars_3{background-position:-3px -639px}
+.rating-very-large .stars_3_half{background-position:-3px -664px}
+.rating-very-large .stars_4{background-position:-3px -689px}
+.rating-very-large .stars_4_half{background-position:-3px -714px}
+.rating-very-large .stars_5{background-position:-3px -739px}
+
+
 
 <div class="rating">
 <i class="star-img stars_4" title="4.0 star rating">
