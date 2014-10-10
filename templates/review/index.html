@@ -23,8 +23,15 @@
     <div class="blog-header ">
     {% if current_user.user_role != "admin" %}
       {% for review in reviews %}
-        {{review.average_rating}} out of 5 gavels
-        <br />
+         <div class="rating">
+          <img alt="gavel" class="{{review.average_rating_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div>
+        <div class="rating">
+          <img alt="gavel" class="{{review.average_rating_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div>
+
         {{review.created_at.strftime('%Y-%m-%d') }}<br />
         by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
         {{review.reviewer_name}}</a><br />
@@ -34,9 +41,12 @@
       {% endfor %}
     {% else %}
       {% for review in reviews %}
-        {{review.average_rating}} out of 5 gavels
-        <br />
-        {{review.created_at.strftime('%Y-%m-%d') }}<br />
+ {{review.created_at.strftime('%Y-%m-%d') }}
+        <div class="rating">
+          <img alt="gavel" class="{{review.average_rating_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div>
+
         by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
         {{review.reviewer_name}}</a><br />
         <br />

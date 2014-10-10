@@ -16,19 +16,41 @@
         {% endif %}
 
         </p>
-    </div>
 
-    <div class="blog-header ">
-    <h4>Average rating for this review </h4>
-    <h4>{{review.average_rating}} out of 5 gavels</h4>
-        <h5>Overall Rating {{review.rating}} of 5 gavels</h5>
-         <h5>Knowledge of the law {{review.knowledge}} of 5 gavels</h5>
+    <h4>Average review rating</h4>
 
-          <h5>Courtroom decorum {{review.decorum}} of 5 gavels</h5>
+    <div class="rating">
+          <img alt="gavel" class="{{review.average_rating_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br /><br />
+        <h5>Overall Rating</h5>
+         <div class="rating">
+          <img alt="gavel" class="{{review.rating_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br />
+         <h5>Knowledge of the law</h5>
+          <div class="rating">
+          <img alt="gavel" class="{{review.knowledge_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br />
 
-           <h5>Issues tentatives  {{review.tentatives}} of 5 gavels</h5>
+          <h5>Courtroom decorum</h5>
+           <div class="rating">
+          <img alt="gavel" class="{{review.decorum_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br />
 
-            <h5>Curiosity towards attorneys {{review.curiosity}} of 5 gavels</h5>
+           <h5>Issues tentatives</h5>
+            <div class="rating">
+          <img alt="gavel" class="{{review.tentatives_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br />
+
+            <h5>Curiosity towards attorneys</h5>
+             <div class="rating">
+          <img alt="gavel" class="{{review.curiosity_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br /><br />
 
 
         {{review.body}}<br />

@@ -249,7 +249,7 @@ all positions relative to top or left of the image*/
 /* specified the negative offset to move up the rating clip from the image to the top*/
 .clip-1 { position: absolute; top: -3px; left: 0; }
 
-.clip-2 { position: absolute; top: -21px; left: 0; }
+.clip-2 { position: absolute; top: -21px; left: -3px; }
 .pos-2  { clip: rect(21px 87px 36px 3px); }
 
 /*
@@ -257,7 +257,7 @@ all positions relative to top or left of the image*/
 .pos-3  { clip: rect(39px 87px 54px 3px); }
 */
 
-.clip-4 { position: absolute; top: -57px; left: 0; }
+.clip-4 { position: absolute; top: -57px; left: -3px; }
 .pos-4  { clip: rect(57px 87px 72px 3px); }
 
 /*
@@ -265,7 +265,7 @@ all positions relative to top or left of the image*/
 .pos-5  { clip: rect(75px 87px 90px 3px); }
 */
 
-.clip-6 { position: absolute; top: -93px; left: 0; }
+.clip-6 { position: absolute; top: -93px; left: -3px; }
 .pos-6 { clip: rect(93px 87px 108px 3px); }
 
 /*
@@ -273,7 +273,7 @@ all positions relative to top or left of the image*/
 .pos-7  { clip: rect(111px 87px 126px 3px); }
 */
 
-.clip-8 { position: absolute; top: -129px; left: 0; }
+.clip-8 { position: absolute; top: -129px; left: -3px; }
 .pos-8  { clip: rect(129px 87px 144px 3px); }
 
 /*
@@ -281,6 +281,6 @@ all positions relative to top or left of the image*/
 .pos-9  { clip: rect(147px 87px 162px 3px); }
 */
 
-.clip-10 { position: absolute; top: -165px; left: 0; }
+.clip-10 { position: absolute; top: -165px; left: -3px; }
 .pos-10  { clip: rect(165px 87px 180px 3px);}
 

@@ -50,6 +50,29 @@ class JudgeReview(db.Model):
         ratings_total = rating + knowledge + decorum + tentatives + curiosity
         self.average_rating = int(round(ratings_total / 5.0))
 
+    def average_rating_class(self):
+        reviewrating = str(self.average_rating * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def rating_class(self):
+        reviewrating = str(self.rating * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def knowledge_class(self):
+        reviewrating = str(self.knowledge * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+    def decorum_class(self):
+        reviewrating = str(self.decorum * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def tentatives_class(self):
+        reviewrating = str(self.tentatives * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def curiosity_class(self):
+        reviewrating = str(self.curiosity * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
     def add_rating_averages(self, judge, reviewer):
         reviewer.total_reviews = reviewer.total_reviews + 1
         reviewer.total_review_averages = reviewer.total_review_averages + self.average_rating
