@@ -36,6 +36,16 @@ class Judge(db.Model):
         #total_reviews_average = total_review_averages/total_reviews
         self.total_reviews_average = 0
 
+    def total_reviews_average_class(self):
+        judgerating = str(self.total_reviews_average * 2)
+        return 'clip-' + judgerating + ' pos-' + judgerating
+
+    # def total_reviews_average_clip(self):
+    #     return 'clip-' + str(self.total_reviews_average)
+
+    # def total_reviews_average_pos(self):
+    #     return 'pos-' + str(self.total_reviews_average)
+
 #factory methods
 def CreateActiveJudge(name,state,court,district,scope=1):
     return Judge(name=name,state=state,scope=scope,court=court,district=district)

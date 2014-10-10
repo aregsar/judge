@@ -234,18 +234,53 @@ ul.form-control li {
     display:inline-block;
 }
 
+
+
+/* class for div that wraps the ratings image */
+/* removes the absolute positioning of the clipped image */
+.rating { position: relative; height: 15px; width: 84px; }
+
+/* class for imaage inside div with class rating */
+/* absolute positions of the clip rect(top-pos,right-pos,bot-pos,left-pos)
+all positions relative to top or left of the image*/
+.pos-1  { clip: rect(3px 87px 18px 3px); }
+
+/* class for imaage inside div with class rating */
+/* specified the negative offset to move up the rating clip from the image to the top*/
+.clip-1 { position: absolute; top: -3px; left: 0; }
+
+.clip-2 { position: absolute; top: -21px; left: 0; }
+.pos-2  { clip: rect(21px 87px 36px 3px); }
+
 /*
-all positions relative to top or left of the image
-clip: rect(top-pos,right-pos,bot-pos,left-pos);
+.clip-3 { position: absolute; top: -39px; left: 0; }
+.pos-3  { clip: rect(39px 87px 54px 3px); }
 */
 
-.rating        { position: relative; height: 15px; width: 84px; }
-.clip-1               { position: absolute; top: 0; left: 0; }
-.pos-1             { clip: rect(3px 87px 18px 3px); }
+.clip-4 { position: absolute; top: -57px; left: 0; }
+.pos-4  { clip: rect(57px 87px 72px 3px); }
 
-.clip-2               { position: absolute; top: -21px; left: 0; }
-.pos-2           { clip: rect(21px 87px 35px 3px); }
+/*
+.clip-5 { position: absolute; top: -75px; left: 0; }
+.pos-5  { clip: rect(75px 87px 90px 3px); }
+*/
 
-.clip-10             { position: absolute; top: -165px; left: 0; }
-.pos-10             { clip: rect(165px 87px 183px 3px);}
+.clip-6 { position: absolute; top: -93px; left: 0; }
+.pos-6 { clip: rect(93px 87px 108px 3px); }
+
+/*
+.clip-7 { position: absolute; top: -111px; left: 0; }
+.pos-7  { clip: rect(111px 87px 126px 3px); }
+*/
+
+.clip-8 { position: absolute; top: -129px; left: 0; }
+.pos-8  { clip: rect(129px 87px 144px 3px); }
+
+/*
+.clip-9{ position: absolute; top: -147px; left: 0; }
+.pos-9  { clip: rect(147px 87px 162px 3px); }
+*/
+
+.clip-10 { position: absolute; top: -165px; left: 0; }
+.pos-10  { clip: rect(165px 87px 180px 3px);}
 

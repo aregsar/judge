@@ -31,6 +31,8 @@ with app.app_context():
 
 #work with the database
 #$psql judgedb
+#list all databases
+#judgedb \l
 #list tables in judgedb
 #judgedb \d
 #judgedb=# SELECT * FROM pg_catalog.pg_tables
