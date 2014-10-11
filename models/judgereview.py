@@ -9,7 +9,6 @@ class JudgeReview(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     judge_id = db.Column(db.Integer,nullable=False)
     judge_name = db.Column(db.String(255),nullable=False)
-    title = db.Column(db.String(255),nullable=False)
     #body = db.Column(db.String(65535),nullable=False)
     excerpt = db.Column(db.String(255),nullable=False)
     body = db.Column(db.Text(),nullable=False)
@@ -28,10 +27,10 @@ class JudgeReview(db.Model):
     updated_at = db.Column(db.DateTime,nullable=True)
 
 
-    #def __init__(self,title,body,rating,judge,current_user):
+
     def __init__(self,body,rating,knowledge,decorum,tentatives,curiosity,
                  judge_id, judge_name,reviewer_name,reviewer_id,title=None):
-        self.title = ''
+
         self.judge_id = judge_id #judge.id
         self.judge_name = judge_name #judge.name
         self.excerpt = (body[:10] + '...') if len(body) > 10 else body

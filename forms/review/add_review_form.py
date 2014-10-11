@@ -17,7 +17,6 @@ class AddReviewForm(Form):
     decorum = RadioField('decorum', choices=RATING_CHOICES,default='5', validators=[Required()])
     tentatives = RadioField('tentatives', choices=RATING_CHOICES,default='5', validators=[Required()])
     curiosity = RadioField('curiosity', choices=RATING_CHOICES,default='5', validators=[Required()])
-    title = TextField('Title', validators=[Required(),length(max=255)])
     body = StringField('Review', widget=TextArea(), validators=[Required()])
     #body = StringField(u'Review', widget=TextArea(), validators=[Required()])
     #body = TextField('Review', validators=[Required()])

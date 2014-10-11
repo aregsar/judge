@@ -151,7 +151,7 @@ def edit(id):
     #if current_user.id == review.reviewer_id or current_user.user_role == "admin":
     if can_edit_review(review):
         if current_user.user_role == "admin":
-            form = EditReviewAdminForm(title=review.title,
+            form = EditReviewAdminForm(
                                         body=review.body,
                                         rating= str(review.rating),
                                         knowledge= str(review.knowledge),
@@ -162,7 +162,6 @@ def edit(id):
                                         removed = review.removed)
             if form.validate_on_submit():
                 review.body = form.body.data
-                review.title = form.title.data
                 review.rating= int(form.rating.data)
                 review.knowledge= int(form.knowledge.data)
                 review.decorum= int(form.decorum.data)
@@ -177,7 +176,7 @@ def edit(id):
             # form = EditReviewForm(title=review.title,body=review.body,rating=review.rating)
             # return render_template("review/edit.html",form=form,id=review.id)
         else:
-            form = EditReviewForm(title=review.title,
+            form = EditReviewForm(
                                     body=review.body,
                                     knowledge= str(review.knowledge),
                                     decorum= str(review.decorum),
@@ -186,7 +185,6 @@ def edit(id):
                                     rating=str(review.rating))
             if form.validate_on_submit():
                 review.body = form.body.data
-                review.title = form.title.data
                 review.rating= int(form.rating.data)
                 review.knowledge= int(form.knowledge.data)
                 review.decorum= int(form.decorum.data)

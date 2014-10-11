@@ -18,7 +18,7 @@ class EditReviewAdminForm(Form):
     tentatives = RadioField('tentatives', choices=RATING_CHOICES, validators=[Required()])
     curiosity = RadioField('curiosity', choices=RATING_CHOICES, validators=[Required()])
 
-    title = TextField('Title', validators=[Required(),length(max=255)])
+
     #body = TextField('Review', validators=[Required()])
     #cols="35", rows="20",
     body = StringField('Review', widget=TextArea(), validators=[Required()])
