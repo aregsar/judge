@@ -77,6 +77,30 @@ flash('username or password invalid')
 def Signin():
 g.db = connect_db()
 g.db.close()
+
+-------------------------------------
+    # dump users
+    # from models.user import User
+    # from sqlalchemy.engine import create_engine
+    # from sqlalchemy.sql import select
+    # engine = create_engine(current_app.config['SQLALCHEMY_DATABASE_URI'], echo=True)
+    # connection = engine.connect()
+    # s = select([User.__table__])
+    # result = connection.execute(s)
+    # print result.fetchall()
+    # connection.close()
+
+    # connection = engine.connect()
+    # result = connection.execute("select username from users")
+    # for row in result:
+    #   print "username:", row['username']
+    # connection.close()
+
+    #use session
+    #session.query(User).update({"email": "a@g.com"})
+    #result = session.execute("select * from table where id=:id", {'id':7})
+    #result = session.execute(select([mytable]).where(mytable.c.id==7))
+
 -------------------------------------
 
 

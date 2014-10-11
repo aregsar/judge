@@ -17,6 +17,9 @@ mod = Blueprint('account',__name__)
 
 @mod.route('/account/signup',methods=['GET','POST'])
 def signup():
+    if current_user.is_authenticated():
+        return redirect(url_for('home.index'))
+        #return redirect('/')
     #print current_app.name
     form = SignupForm()
     if form.validate_on_submit():
@@ -60,7 +63,6 @@ def signup():
             login_user(user, remember=True)
             return redirect(url_for("home.index"))
             #return render_template('account/created.html',confirmation_email_url='#')
-
         except:
             #e = sys.exc_info()[0]
             #flash("Error: %s" % e)
@@ -68,9 +70,19 @@ def signup():
             #redirect(url_for("account.error_signup_email_delivery"))
     return render_template("account/signup.html",form=form)
 
+@mod.route('/account/signin')
+def signinform():
+    if current_user.is_authenticated():
+        return redirect(url_for('home.index'))
+        #return redirect('/')
+    form = SigninForm()
+    return render_template("account/signin.html",form=form)
 
-@mod.route('/account/signin',methods=['GET','POST'])
+@mod.route('/account/signin',methods=['POST'])
 def signin():
+    if current_user.is_authenticated():
+        return redirect(url_for('home.index'))
+        #return redirect('/')
     form = SigninForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.strip()).first()
