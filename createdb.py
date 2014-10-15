@@ -20,11 +20,11 @@ with app.app_context():
         create_test_users()
     user = User.query.filter_by(username="areg").first()
     print user
-    judge = Judge.query.filter_by(name="areg").first()
-    if judge == None:
-        create_test_judges()
-    judge = Judge.query.filter_by(name="areg").first()
-    print judge
+    # judge = Judge.query.filter_by(name="areg").first()
+    # if judge == None:
+    #     create_test_judges()
+    # judge = Judge.query.filter_by(name="areg").first()
+    # print judge
 
 
 

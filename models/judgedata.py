@@ -234,7 +234,7 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
     def add_judge_to_database(judgedata):
         judge = CreateActiveJudge(name=judgedata.full_name(),state="CA",court=judgedata.Court_Name, district="")
         print judge
-        #db.session.add(judge)
+        db.session.add(judge)
 
 
 
