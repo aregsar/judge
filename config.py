@@ -16,6 +16,7 @@ class Config:
     #ENV can be set to "DEV" or "TEST" or "STAGE" or "PROD"
     ENV = os.environ.get('FLASK_ENVIRONMENT')
     DEBUG = bool(os.environ.get('FLASK_DEBUG'))
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
     #SSL_DISABLE = False
 
     #SqlAlchemy looks for this specific app.config['SQLALCHEMY_DATABASE_URL']

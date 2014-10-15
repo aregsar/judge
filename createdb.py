@@ -20,6 +20,8 @@ with app.app_context():
         create_test_users()
     user = User.query.filter_by(username="areg").first()
     print user
+
+    JudgeDataRecord.load_file_data('migrations/judges.csv')
     # judge = Judge.query.filter_by(name="areg").first()
     # if judge == None:
     #     create_test_judges()
@@ -35,7 +37,7 @@ with app.app_context():
     #         matrix.append(row)
 
     # matrix.pop(0)#remove header row
-    JudgeDataRecord.load_file_data('migrations/judges.csv')
+
 
 #can_view_resource(current_user,resource_owner_user,resource=None)
 #can_edit_resource(current_user,resource_owner_user,resource=None)
