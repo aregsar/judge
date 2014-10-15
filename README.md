@@ -1,6 +1,27 @@
 judge
 =====
 
+
+Python ideaoms:
+print '%s,%i,%c'.format(name,age,sex)
+print '{},{},{}'.format(name,age,sex)
+print '{name},{age},{sex}'.format(name=name,age=age,sex=sex)
+print '{user.name},{user.age},{user.sex}'.format(user=user)
+
+print ''.join(['a','b','c'])
+print ','.join(['a','b','c'])
+print ''.join('a','b','c') #not sure if this works
+
+book = book.strip().upper().replace(':',',')
+
+for index,book in enumerate(books):
+    print str(index)
+
+def dictfunc(*args,**kwargs):
+    pass
+
+=======
+
 [
     {"keys": ["f5"], "command": "refresh_folder_list" }
 ]
@@ -443,4 +464,959 @@ c2252a4cd43e/ico/stars/v2/stars_map.png" width="84">
 }
 
 ====================
+#interactive cli
+pip install ipython
+
+#export your .xlsx to a .csv file
+import csv
+with open('file.csv','rb') as file:
+    contents = csv.reader(file)
+    matrix = list()
+    for row in contents:
+        matrix.append(row)
+
+matrix.pop(0)
+#for row in matrix:
+for index,row in enumerate(matrix):
+    judgeid = row[0]
+    print judgeid
+
+
+
+#access F13 with matrix[5][12]
+print matrix[0]
+print matrix[1]
+print matrix[2246]
+print matrix[0][0]
+print matrix[0][1]
+print matrix[1][0]
+print matrix[1][1]
+
+
+===========================
+
+['Judge Identification Number',
+ 'Judge Last Name',
+ 'Judge First Name',
+ 'Judge Middle Name',
+ 'Suffix',
+ 'Birth month',
+ 'Birth day',
+ 'Birth year',
+ 'Place of Birth (City)',
+ 'Place of Birth (State)',
+ 'Death month',
+ 'Death day',
+ 'Death year',
+ 'Place of Death (City)',
+ 'Place of Death (State)',
+ 'Gender',
+ 'Race or Ethnicity',
+ 'Judge Identification Number',
+ 'Court Name',
+ 'Court Type',
+ 'President name',
+ 'Party Affiliation of President',
+ 'Renominating President name',
+ 'Party Affiliation of Renominating President',
+ 'Nomination Date Senate Executive Journal',
+ 'ABA Rating',
+ 'Recess Appointment date',
+ 'Vice last name (predecessor)',
+ 'Vice first name (predecessor)',
+ 'Authorization legislation',
+ 'Referral date (referral to Judicial Committee)',
+ 'Report number',
+ 'Committee action',
+ 'Committee action date',
+ 'Hearings',
+ 'Senate voice vote',
+ 'Senate vote Ayes/Nays',
+ 'Senate Vote Date (Confirmation Date)',
+ 'Commission Date',
+ 'Commission Year',
+ 'Date of Service as Chief Judge (begin)',
+ 'Date of Service as Chief Judge (end)',
+ 'Second Date of Service as Chief Judge (begin)',
+ 'Second Date of Service as Chief Judge (end)',
+ 'Retirement from Active Service',
+ 'Date of Termination',
+ 'Termination specific reason',
+ 'Judge Identification Number',
+ 'Court Name (2)',
+ 'Court Type (2)',
+ 'President name (2)',
+ 'Party Affiliation of President (2)',
+ 'Renominating President name (2)',
+ 'Party Affiliation of Renominating President (2)',
+ 'Nomination Date Senate Executive Journal (2)',
+ 'ABA Rating (2)',
+ 'Recess Appointment date (2)',
+ 'Vice last name (predecessor) (2)',
+ 'Vice first name (predecessor) (2)',
+ 'Authorization legislation (2)',
+ 'referral date (referral to Judicial Committee) (2)',
+ 'Report number (2)',
+ 'committee action (2)',
+ 'Committee action date (2)',
+ 'Hearings (2)',
+ 'Senate voice vote (2)',
+ 'Senate vote Ayes/Nays (2)',
+ 'Senate Vote Date (Confirmation Date) (2)',
+ 'Commission Date (2)',
+ 'Date of Service as Chief Judge (begin) (2)',
+ 'Date of Service as Chief Judge (end) (2)',
+ 'Second Date of Service as Chief Judge (begin) (2)',
+ 'Second Date of Service as Chief Judge (end) (2)',
+ 'Retirement from Active Service (2)',
+ 'Date of Termination (2)',
+ 'Termination specific reason (2)',
+ 'Judge Identification Number',
+ 'Court Name (3)',
+ 'Court Type (3)',
+ 'President name (3)',
+ 'Party Affiliation of President (3)',
+ 'Renominating President name (3)',
+ 'Party Affiliation of Renominating President (3)',
+ 'Nomination Date Senate Executive Journal (3)',
+ 'ABA Rating (3)',
+ 'Recess Appointment date (3)',
+ 'Vice last name (predecessor) (3)',
+ 'Vice first name (predecessor) (3)',
+ 'Authorization legislation (3)',
+ 'referral date (referral to Judicial Committee) (3)',
+ 'Report number (3)',
+ 'committee action (3)',
+ 'Committee action date (3)',
+ 'Hearings (3)',
+ 'Senate voice vote (3)',
+ 'Senate vote Ayes/Nays (3)',
+ 'Senate Vote Date (Confirmation Date) (3)',
+ 'Commission Date (3)',
+ 'Date of Service as Chief Judge (begin) (3)',
+ 'Date of Service as Chief Judge (end) (3)',
+ 'Second Date of Service as Chief Judge (begin) (3)',
+ 'Second Date of Service as Chief Judge (end) (3)',
+ 'Retirement from Active Service (3)',
+ 'Date of Termination (3)',
+ 'Termination specific reason (3)',
+ 'Judge Identification Number',
+ 'Court Name (4)',
+ 'Court Type (4)',
+ 'President name (4)',
+ 'Party Affiliation of President (4)',
+ 'Renominating President name (4)',
+ 'Party Affiliation of Renominating President (4)',
+ 'Nomination Date Senate Executive Journal (4)',
+ 'ABA Rating (4)',
+ 'Recess Appointment date (4)',
+ 'Vice last name (predecessor) (4)',
+ 'Vice first name (predecessor) (4)',
+ 'Authorization legislation (4)',
+ 'referral date (referral to Judicial Committee) (4)',
+ 'Report number (4)',
+ 'committee action (4)',
+ 'Committee action date (4)',
+ 'Hearings (4)',
+ 'Senate voice vote (4)',
+ 'Senate vote Ayes/Nays (4)',
+ 'Senate Vote Date (Confirmation Date) (4)',
+ 'Commission Date (4)',
+ 'Date of Service as Chief Judge (begin) (4)',
+ 'Date of Service as Chief Judge (end) (4)',
+ 'Second Date of Service as Chief Judge (begin) (4)',
+ 'Second Date of Service as Chief Judge (end) (4)',
+ 'Retirement from Active Service (4)',
+ 'Date of Termination (4)',
+ 'Termination specific reason (4)',
+ 'Judge Identification Number',
+ 'Court Name (5)',
+ 'Court Type (5)',
+ 'President name (5)',
+ 'Party Affiliation of President (5)',
+ 'Renominating President name (5)',
+ 'Party Affiliation of Renominating President (5)',
+ 'Nomination Date Senate Executive Journal (5)',
+ 'ABA Rating (5)',
+ 'Recess Appointment date (5)',
+ 'Vice last name (predecessor) (5)',
+ 'Vice first name (predecessor) (5)',
+ 'Authorization legislation (5)',
+ 'referral date (referral to Judicial Committee) (5)',
+ 'Report number (5)',
+ 'committee action (5)',
+ 'Committee action date (5)',
+ 'Hearings (5)',
+ 'Senate voice vote (5)',
+ 'Senate vote Ayes/Nays (5)',
+ 'Senate Vote Date (Confirmation Date) (5)',
+ 'Commission Date (5)',
+ 'Date of Service as Chief Judge (begin) (5)',
+ 'Date of Service as Chief Judge (end) (5)',
+ 'Second Date of Service as Chief Judge (begin) (5)',
+ 'Second Date of Service as Chief Judge (end) (5)',
+ 'Retirement from Active Service (5)',
+ 'Date of Termination (5)',
+ 'Termination specific reason (5)',
+ 'Judge Identification Number',
+ 'Court Name (6)',
+ 'Court Type (6)',
+ 'President name (6)',
+ 'Party Affiliation of President (6)',
+ 'Nomination Date Senate Executive Journal (6)',
+ 'Renominating President name (6)',
+ 'Party Affiliation of Renominating President (6)',
+ 'ABA Rating (6)',
+ 'Recess Appointment date (6)',
+ 'Vice last name (predecessor) (6)',
+ 'Vice first name (predecessor) (6)',
+ 'Authorization legislation (6)',
+ 'referral date (referral to Judicial Committee) (6)',
+ 'Report number (6)',
+ 'committee action (6)',
+ 'Committee action date (6)',
+ 'Hearings (6)',
+ 'Senate voice vote (6)',
+ 'Senate vote Ayes/Nays (6)',
+ 'Senate Vote Date (Confirmation Date) (6)',
+ 'Commission Date (6)',
+ 'Date of Service as Chief Judge (begin) (6)',
+ 'Date of Service as Chief Judge (end) (6)',
+ 'Second Date of Service as Chief Judge (begin) (6)',
+ 'Second Date of Service as Chief Judge (end) (6)',
+ 'Retirement from Active Service (6)',
+ 'Date of Termination (6)',
+ 'Termination specific reason (6)',
+ 'Name of School',
+ 'Degree',
+ 'Degree year',
+ 'Name of School (2)',
+ 'Degree (2)',
+ 'Degree year (2)',
+ 'Name of School (3)',
+ 'Degree (3)',
+ 'Degree year (3)',
+ 'Name of School (4)',
+ 'Degree (4)',
+ 'Degree year (4)',
+ 'Name of School (5)',
+ 'Degree  (5)',
+ 'Degree year (5)',
+ 'Employment text field',
+ 'Bankruptcy and Magistrate service']
+
+
+
+
+
+
+===========================================
+===========================================
+===========================================
+
+
+
+
+
+
+
+
+'Judge Identification Number',
+ 'Judge Last Name',
+ 'Judge First Name',
+ 'Judge Middle Name',
+ 'Suffix',
+ 'Birth month',
+ 'Birth day',
+ 'Birth year',
+ 'Place of Birth (City)',
+ 'Place of Birth (State)',
+ 'Death month',
+ 'Death day',
+ 'Death year',
+ 'Place of Death (City)',
+ 'Place of Death (State)',
+ 'Gender',
+ 'Race or Ethnicity',
+ 'Judge Identification Number',
+ 'Court Name',
+ 'Court Type',
+ 'President name',
+ 'Party Affiliation of President',
+ 'Renominating President name',
+ 'Party Affiliation of Renominating President',
+ 'Nomination Date Senate Executive Journal',
+ 'ABA Rating',
+ 'Recess Appointment date',
+ 'Vice last name (predecessor)',
+ 'Vice first name (predecessor)',
+ 'Authorization legislation',
+ 'Referral date (referral to Judicial Committee)',
+ 'Report number',
+ 'Committee action',
+ 'Committee action date',
+ 'Hearings',
+ 'Senate voice vote',
+ 'Senate vote Ayes/Nays',
+ 'Senate Vote Date (Confirmation Date)',
+ 'Commission Date',
+ 'Commission Year',
+ 'Date of Service as Chief Judge (begin)',
+ 'Date of Service as Chief Judge (end)',
+ 'Second Date of Service as Chief Judge (begin)',
+ 'Second Date of Service as Chief Judge (end)',
+ 'Retirement from Active Service',
+ 'Date of Termination',
+ 'Termination specific reason',
+ 'Judge Identification Number',
+ 'Court Name (2)',
+ 'Court Type (2)',
+ 'President name (2)',
+ 'Party Affiliation of President (2)',
+ 'Renominating President name (2)',
+ 'Party Affiliation of Renominating President (2)',
+ 'Nomination Date Senate Executive Journal (2)',
+ 'ABA Rating (2)',
+ 'Recess Appointment date (2)',
+ 'Vice last name (predecessor) (2)',
+ 'Vice first name (predecessor) (2)',
+ 'Authorization legislation (2)',
+ 'referral date (referral to Judicial Committee) (2)',
+ 'Report number (2)',
+ 'committee action (2)',
+ 'Committee action date (2)',
+ 'Hearings (2)',
+ 'Senate voice vote (2)',
+ 'Senate vote Ayes/Nays (2)',
+ 'Senate Vote Date (Confirmation Date) (2)',
+ 'Commission Date (2)',
+ 'Date of Service as Chief Judge (begin) (2)',
+ 'Date of Service as Chief Judge (end) (2)',
+ 'Second Date of Service as Chief Judge (begin) (2)',
+ 'Second Date of Service as Chief Judge (end) (2)',
+ 'Retirement from Active Service (2)',
+ 'Date of Termination (2)',
+ 'Termination specific reason (2)',
+ 'Judge Identification Number',
+ 'Court Name (3)',
+ 'Court Type (3)',
+ 'President name (3)',
+ 'Party Affiliation of President (3)',
+ 'Renominating President name (3)',
+ 'Party Affiliation of Renominating President (3)',
+ 'Nomination Date Senate Executive Journal (3)',
+ 'ABA Rating (3)',
+ 'Recess Appointment date (3)',
+ 'Vice last name (predecessor) (3)',
+ 'Vice first name (predecessor) (3)',
+ 'Authorization legislation (3)',
+ 'referral date (referral to Judicial Committee) (3)',
+ 'Report number (3)',
+ 'committee action (3)',
+ 'Committee action date (3)',
+ 'Hearings (3)',
+ 'Senate voice vote (3)',
+ 'Senate vote Ayes/Nays (3)',
+ 'Senate Vote Date (Confirmation Date) (3)',
+ 'Commission Date (3)',
+ 'Date of Service as Chief Judge (begin) (3)',
+ 'Date of Service as Chief Judge (end) (3)',
+ 'Second Date of Service as Chief Judge (begin) (3)',
+ 'Second Date of Service as Chief Judge (end) (3)',
+ 'Retirement from Active Service (3)',
+ 'Date of Termination (3)',
+ 'Termination specific reason (3)',
+ 'Judge Identification Number',
+ 'Court Name (4)',
+ 'Court Type (4)',
+ 'President name (4)',
+ 'Party Affiliation of President (4)',
+ 'Renominating President name (4)',
+ 'Party Affiliation of Renominating President (4)',
+ 'Nomination Date Senate Executive Journal (4)',
+ 'ABA Rating (4)',
+ 'Recess Appointment date (4)',
+ 'Vice last name (predecessor) (4)',
+ 'Vice first name (predecessor) (4)',
+ 'Authorization legislation (4)',
+ 'referral date (referral to Judicial Committee) (4)',
+ 'Report number (4)',
+ 'committee action (4)',
+ 'Committee action date (4)',
+ 'Hearings (4)',
+ 'Senate voice vote (4)',
+ 'Senate vote Ayes/Nays (4)',
+ 'Senate Vote Date (Confirmation Date) (4)',
+ 'Commission Date (4)',
+ 'Date of Service as Chief Judge (begin) (4)',
+ 'Date of Service as Chief Judge (end) (4)',
+ 'Second Date of Service as Chief Judge (begin) (4)',
+ 'Second Date of Service as Chief Judge (end) (4)',
+ 'Retirement from Active Service (4)',
+ 'Date of Termination (4)',
+ 'Termination specific reason (4)',
+ 'Judge Identification Number',
+ 'Court Name (5)',
+ 'Court Type (5)',
+ 'President name (5)',
+ 'Party Affiliation of President (5)',
+ 'Renominating President name (5)',
+ 'Party Affiliation of Renominating President (5)',
+ 'Nomination Date Senate Executive Journal (5)',
+ 'ABA Rating (5)',
+ 'Recess Appointment date (5)',
+ 'Vice last name (predecessor) (5)',
+ 'Vice first name (predecessor) (5)',
+ 'Authorization legislation (5)',
+ 'referral date (referral to Judicial Committee) (5)',
+ 'Report number (5)',
+ 'committee action (5)',
+ 'Committee action date (5)',
+ 'Hearings (5)',
+ 'Senate voice vote (5)',
+ 'Senate vote Ayes/Nays (5)',
+ 'Senate Vote Date (Confirmation Date) (5)',
+ 'Commission Date (5)',
+ 'Date of Service as Chief Judge (begin) (5)',
+ 'Date of Service as Chief Judge (end) (5)',
+ 'Second Date of Service as Chief Judge (begin) (5)',
+ 'Second Date of Service as Chief Judge (end) (5)',
+ 'Retirement from Active Service (5)',
+ 'Date of Termination (5)',
+ 'Termination specific reason (5)',
+ 'Judge Identification Number',
+ 'Court Name (6)',
+ 'Court Type (6)',
+ 'President name (6)',
+ 'Party Affiliation of President (6)',
+ 'Nomination Date Senate Executive Journal (6)',
+ 'Renominating President name (6)',
+ 'Party Affiliation of Renominating President (6)',
+ 'ABA Rating (6)',
+ 'Recess Appointment date (6)',
+ 'Vice last name (predecessor) (6)',
+ 'Vice first name (predecessor) (6)',
+ 'Authorization legislation (6)',
+ 'referral date (referral to Judicial Committee) (6)',
+ 'Report number (6)',
+ 'committee action (6)',
+ 'Committee action date (6)',
+ 'Hearings (6)',
+ 'Senate voice vote (6)',
+ 'Senate vote Ayes/Nays (6)',
+ 'Senate Vote Date (Confirmation Date) (6)',
+ 'Commission Date (6)',
+ 'Date of Service as Chief Judge (begin) (6)',
+ 'Date of Service as Chief Judge (end) (6)',
+ 'Second Date of Service as Chief Judge (begin) (6)',
+ 'Second Date of Service as Chief Judge (end) (6)',
+ 'Retirement from Active Service (6)',
+ 'Date of Termination (6)',
+ 'Termination specific reason (6)',
+ 'Name of School',
+ 'Degree',
+ 'Degree year',
+ 'Name of School (2)',
+ 'Degree (2)',
+ 'Degree year (2)',
+ 'Name of School (3)',
+ 'Degree (3)',
+ 'Degree year (3)',
+ 'Name of School (4)',
+ 'Degree (4)',
+ 'Degree year (4)',
+ 'Name of School (5)',
+ 'Degree  (5)',
+ 'Degree year (5)',
+ 'Employment text field',
+ 'Bankruptcy and Magistrate service']
+
+=======================
+import pandas as pd
+xl = pd.ExcelFile(path + filename)
+xl.sheet_names
+
+>>> [u'Sheet1', u'Sheet2', u'Sheet3']
+
+df = xl.parse("Sheet1")
+df.head()
+======================
+import xlrd
+import MySQLdb
+
+# Open the workbook and define the worksheet
+book = xlrd.open_workbook("pytest.xls")
+sheet = book.sheet_by_name("source")
+numcolumns = sheet.ncols
+numrows = sheet.nrows
+columns = str(sheet.ncols)
+rows = str(sheet.nrows)
+
+for r in range(1, numrows):
+      product      = sheet.cell(r,).value
+      customer = sheet.cell(r,1).value
+      rep          = sheet.cell(r,2).value
+      date     = sheet.cell(r,3).value
+      actual       = sheet.cell(r,4).value
+      expected = sheet.cell(r,5).value
+      open        = sheet.cell(r,6).value
+      closed       = sheet.cell(r,7).value
+      city     = sheet.cell(r,8).value
+      state        = sheet.cell(r,9).value
+      zip         = sheet.cell(r,10).value
+      pop          = sheet.cell(r,11).value
+      region   = sheet.cell(r,12).value
+
+query = """INSERT INTO orders (product, customer_type, rep, date, actual, expected,
+ open_opportunities, closed_opportunities, city, state, zip, population, region) VALUES (%s,
+ %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+
+values = (product, customer, rep, date, actual, expected, open, closed, city, state, zip, pop, region)
+
+cursor.execute(query, values)
+==========================
+#interactive cli
+pip install ipython
+
+def add_federal_judges(include,Court_Name_Column):
+    for index in include:
+        Judge_Identification_Number = matrix[index][0]
+        Judge_Last_Name = matrix[index][1]
+        Judge_Middle_Name = matrix[index][2]
+        Judge_First_Name = matrix[index][3]
+        Suffix = matrix[index][4]
+        Court_Name = matrix[index][Court_Name_Column]
+        #Court_Name = matrix[index][18]
+        add_federal_judge(Judge_Identification_Number
+        ,Judge_Last_Name,Judge_Middle_Name,Judge_First_Name,Suffix
+        ,Court_Name)
+
+def add_federal_judge(Judge_Identification_Number
+        ,Judge_Last_Name,Judge_Middle_Name,Judge_First_Name,Suffix
+        ,Court_Name):
+    pass#
+
+#export your .xlsx to a .csv file
+import csv
+with open('file.csv','rb') as file:
+    contents = csv.reader(file)
+    matrix = list()
+    for row in contents:
+        matrix.append(row)
+
+
+matrix.pop(0)
+include = list()
+defered = list()
+other = list()
+#figure out if a row is in, out or deffered to next pass
+for index,row in enumerate(matrix):
+    if row[45].trim() == '':
+        include.add(index)
+    elif(row[45] == 'Reassignment' or
+        row[45] == 'Appointment to Another Judicial Position' or
+        row[45] == 'Recess Appointment-Not Confirmed' ):
+        defered.add(index)
+    else:
+        other.add(index)
+
+add_federal_judges(include,Couurt_Name_Column=18)
+
+include2 = list()
+defered2 = list()
+other2 = list()
+for index in defered:
+    if matrix[index][45].trim() == '':
+        include2.add(index)
+    elif( matrix[index][74] == 'Reassignment' or
+        matrix[index]row[74] == 'Appointment to Another Judicial Position' or
+        matrix[index]row[74] == 'Recess Appointment-Not Confirmed' ):
+        defered2.add(index)
+    else:
+        other2.add(index)
+
+add_federal_judges(include2,Couurt_Name_Column=47)
+
+include3 = list()
+defered3 = list()
+other3 = list()
+
+for index in defered2:
+    if matrix[index][103].trim() == '':
+        include3.add(index)
+    elif( matrix[index][103] == 'Reassignment' or
+        matrix[index]row[103] == 'Appointment to Another Judicial Position' or
+        matrix[index]row[103] == 'Recess Appointment-Not Confirmed' ):
+        defered3.add(index)
+    else:
+        other3.add(index)
+
+add_federal_judges(include3,Couurt_Name_Column=76)
+
+if len(defered3) > 0:
+    print "there is more: " + len(defered3)
+
+
+
+
+#for row in matrix:
+for index,row in enumerate(matrix):
+    Judge_Identification_Number = row[0]
+    Judge Last Name = row[1]
+    Judge Middle Name = row[2]
+    Judge First Name = row[3]
+    Suffix = row[4]
+    Judge_Identification_Number_a = row[17]
+    Court_Name = row[18]
+    Court_Type = row[19]
+    Termination_specific_reason  = row[45]
+    Judge_Identification_Number_b = row[46]
+    Court_Name_2 = row[47]
+    Court_Type_2 = row[48]
+    Termination_specific_reason_2  = row[74]
+    Judge_Identification_Number_c = row[75]
+    Court_Name_3 = row[76]
+    Court_Type_3 = row[77]
+    Termination_specific_reason_3  = row[103]
+    Judge_Identification_Number_d = row[104]
+    Court_Name_4 = row[105]
+    Court_Type_4 = row[106]
+    Termination_specific_reason_4  = row[132]
+    Judge_Identification_Number_e = row[133]
+    Court_Name_5 = row[134]
+    Court_Type_5 = row[135]
+    Termination_specific_reason_4  = row[161]
+    Judge_Identification_Number_f = row[162]
+    Court_Name_5 = row[163]
+    Court_Type_5 = row[164]
+    judgeids = '%i,%i,%i,%i,%i,%i,%i,%i'.format(Judge_Identification_Number_a,
+        Judge_Identification_Number_b,
+        Judge_Identification_Number_c,
+        Judge_Identification_Number_d,
+        Judge_Identification_Number_e,
+        Judge_Identification_Number_f
+    )
+    print judgeids
+
+
+
+
+#access F13 with matrix[5][12]
+print matrix[0]
+print matrix[1]
+print matrix[2246]
+print matrix[0][0]
+print matrix[0][1]
+print matrix[1][0]
+print matrix[1][1]
+==========================
+==========================
+0 Judge Identification Number
+1 Judge Last Name
+2 Judge Middle Name
+3 Judge First Name
+4 Suffix
+17 Judge Identification Number
+18 Court Name
+19 Court Type
+
+45 Termination specific reason <values: (Empty)=>add judge and court name as sitting judge,
+[Retirement]=>add as retired judge without court name (for now dont add),
+[Death, Resignation,Impeachment & Conviction ]=>remove from list ,
+[Reassignment, Appointment to Another Judicial Position, Recess Appointment-Not Confirmed] => defer to next pass
+>
+46 Judge Identification Number
+47 Court Name (2)
+48 Court Type (2)
+
+74Termination specific reason (2)
+75Judge Identification Number
+76 Court Name (3)
+77 Court Type (3)
+
+103 Termination specific reason (3)
+104 Judge Identification Number
+105 Court Name (5)
+106 Court Type (5)
+
+132 Termination specific reason (4)
+133 Judge Identification Number
+134 Court Name (5)
+135 Court Type (5)
+
+US State (derived from Court Name based on court type)
+
+==============================
+==============================
+ 0 'Judge Identification Number',
+ 1 'Judge Last Name',
+ 2 'Judge First Name',
+ 3 'Judge Middle Name',
+ 4 'Suffix',
+ 'Birth month',
+ 'Birth day',
+ 'Birth year',
+ 'Place of Birth (City)',
+ 'Place of Birth (State)',
+ 'Death month',
+ 'Death day',
+ 'Death year',
+ 'Place of Death (City)',
+ 'Place of Death (State)',
+ 'Gender',
+ 'Race or Ethnicity',
+ 17'Judge Identification Number',
+ 18 'Court Name',
+ 19 'Court Type',
+ 'President name',
+ 'Party Affiliation of President',
+ 'Renominating President name',
+ 'Party Affiliation of Renominating President',
+ 'Nomination Date Senate Executive Journal',
+ 'ABA Rating',
+ 'Recess Appointment date',
+ 'Vice last name (predecessor)',
+ 'Vice first name (predecessor)',
+ 'Authorization legislation',
+ 'Referral date (referral to Judicial Committee)',
+ 'Report number',
+ 'Committee action',
+ 'Committee action date',
+ 'Hearings',
+ 'Senate voice vote',
+ 'Senate vote Ayes/Nays',
+ 'Senate Vote Date (Confirmation Date)',
+ 'Commission Date',
+ 'Commission Year',
+ 'Date of Service as Chief Judge (begin)',
+ 'Date of Service as Chief Judge (end)',
+ 'Second Date of Service as Chief Judge (begin)',
+ 'Second Date of Service as Chief Judge (end)',
+ 'Retirement from Active Service',
+ 'Date of Termination',
+ 45'Termination specific reason',
+ 46'Judge Identification Number',
+ 47'Court Name (2)',
+ 48'Court Type (2)',
+ 'President name (2)',
+ 'Party Affiliation of President (2)',
+ 'Renominating President name (2)',
+ 'Party Affiliation of Renominating President (2)',
+ 'Nomination Date Senate Executive Journal (2)',
+ 'ABA Rating (2)',
+ 'Recess Appointment date (2)',
+ 'Vice last name (predecessor) (2)',
+ 'Vice first name (predecessor) (2)',
+ 'Authorization legislation (2)',
+ 'referral date (referral to Judicial Committee) (2)',
+ 'Report number (2)',
+ 'committee action (2)',
+ 'Committee action date (2)',
+ 'Hearings (2)',
+ 'Senate voice vote (2)',
+ 'Senate vote Ayes/Nays (2)',
+ 'Senate Vote Date (Confirmation Date) (2)',
+ 'Commission Date (2)',
+ 'Date of Service as Chief Judge (begin) (2)',
+ 'Date of Service as Chief Judge (end) (2)',
+ 'Second Date of Service as Chief Judge (begin) (2)',
+ 'Second Date of Service as Chief Judge (end) (2)',
+ 'Retirement from Active Service (2)',
+ 'Date of Termination (2)',
+ 74 'Termination specific reason (2)',
+ 75'Judge Identification Number',
+ 76'Court Name (3)',
+ 77'Court Type (3)',
+ 'President name (3)',
+ 'Party Affiliation of President (3)',
+ 'Renominating President name (3)',
+ 'Party Affiliation of Renominating President (3)',
+ 'Nomination Date Senate Executive Journal (3)',
+ 'ABA Rating (3)',
+ 'Recess Appointment date (3)',
+ 'Vice last name (predecessor) (3)',
+ 'Vice first name (predecessor) (3)',
+ 'Authorization legislation (3)',
+ 'referral date (referral to Judicial Committee) (3)',
+ 'Report number (3)',
+ 'committee action (3)',
+ 'Committee action date (3)',
+ 'Hearings (3)',
+ 'Senate voice vote (3)',
+ 'Senate vote Ayes/Nays (3)',
+ 'Senate Vote Date (Confirmation Date) (3)',
+ 'Commission Date (3)',
+ 'Date of Service as Chief Judge (begin) (3)',
+ 'Date of Service as Chief Judge (end) (3)',
+ 'Second Date of Service as Chief Judge (begin) (3)',
+ 'Second Date of Service as Chief Judge (end) (3)',
+ 'Retirement from Active Service (3)',
+ 'Date of Termination (3)',
+ 103'Termination specific reason (3)',
+ 104'Judge Identification Number',
+ 105'Court Name (4)',
+ 106'Court Type (4)',
+ 'President name (4)',
+ 'Party Affiliation of President (4)',
+ 'Renominating President name (4)',
+ 'Party Affiliation of Renominating President (4)',
+ 'Nomination Date Senate Executive Journal (4)',
+ 'ABA Rating (4)',
+ 'Recess Appointment date (4)',
+ 'Vice last name (predecessor) (4)',
+ 'Vice first name (predecessor) (4)',
+ 'Authorization legislation (4)',
+ 'referral date (referral to Judicial Committee) (4)',
+ 'Report number (4)',
+ 'committee action (4)',
+ 'Committee action date (4)',
+ 'Hearings (4)',
+ 'Senate voice vote (4)',
+ 'Senate vote Ayes/Nays (4)',
+ 'Senate Vote Date (Confirmation Date) (4)',
+ 'Commission Date (4)',
+ 'Date of Service as Chief Judge (begin) (4)',
+ 'Date of Service as Chief Judge (end) (4)',
+ 'Second Date of Service as Chief Judge (begin) (4)',
+ 'Second Date of Service as Chief Judge (end) (4)',
+ 'Retirement from Active Service (4)',
+ 'Date of Termination (4)',
+ 132'Termination specific reason (4)',
+ 133'Judge Identification Number',
+ 134'Court Name (5)',
+ 135'Court Type (5)',
+ 'President name (5)',
+ 'Party Affiliation of President (5)',
+ 'Renominating President name (5)',
+ 'Party Affiliation of Renominating President (5)',
+ 'Nomination Date Senate Executive Journal (5)',
+ 'ABA Rating (5)',
+ 'Recess Appointment date (5)',
+ 'Vice last name (predecessor) (5)',
+ 'Vice first name (predecessor) (5)',
+ 'Authorization legislation (5)',
+ 'referral date (referral to Judicial Committee) (5)',
+ 'Report number (5)',
+ 'committee action (5)',
+ 'Committee action date (5)',
+ 'Hearings (5)',
+ 'Senate voice vote (5)',
+ 'Senate vote Ayes/Nays (5)',
+ 'Senate Vote Date (Confirmation Date) (5)',
+ 'Commission Date (5)',
+ 'Date of Service as Chief Judge (begin) (5)',
+ 'Date of Service as Chief Judge (end) (5)',
+ 'Second Date of Service as Chief Judge (begin) (5)',
+ 'Second Date of Service as Chief Judge (end) (5)',
+ 'Retirement from Active Service (5)',
+ 'Date of Termination (5)',
+ 161'Termination specific reason (5)',
+ 162'Judge Identification Number',
+ 163'Court Name (6)',
+ 164'Court Type (6)',
+ 'President name (6)',
+ 'Party Affiliation of President (6)',
+ 'Nomination Date Senate Executive Journal (6)',
+ 'Renominating President name (6)',
+ 'Party Affiliation of Renominating President (6)',
+ 'ABA Rating (6)',
+ 'Recess Appointment date (6)',
+ 'Vice last name (predecessor) (6)',
+ 'Vice first name (predecessor) (6)',
+ 'Authorization legislation (6)',
+ 'referral date (referral to Judicial Committee) (6)',
+ 'Report number (6)',
+ 'committee action (6)',
+ 'Committee action date (6)',
+ 'Hearings (6)',
+ 'Senate voice vote (6)',
+ 'Senate vote Ayes/Nays (6)',
+ 'Senate Vote Date (Confirmation Date) (6)',
+ 'Commission Date (6)',
+ 'Date of Service as Chief Judge (begin) (6)',
+ 'Date of Service as Chief Judge (end) (6)',
+ 'Second Date of Service as Chief Judge (begin) (6)',
+ 'Second Date of Service as Chief Judge (end) (6)',
+ 'Retirement from Active Service (6)',
+ 'Date of Termination (6)',
+ 'Termination specific reason (6)',
+ 'Name of School',
+ 'Degree',
+ 'Degree year',
+ 'Name of School (2)',
+ 'Degree (2)',
+ 'Degree year (2)',
+ 'Name of School (3)',
+ 'Degree (3)',
+ 'Degree year (3)',
+ 'Name of School (4)',
+ 'Degree (4)',
+ 'Degree year (4)',
+ 'Name of School (5)',
+ 'Degree  (5)',
+ 'Degree year (5)',
+ 'Employment text field',
+ 'Bankruptcy and Magistrate service']
+
+
+==============================
+
+#service oriented coding in an object oriented way
+class JudgeData
+    #immutable state is only set once at initialization
+    def __init__(self,row)
+        self.Judge_Identification_Number = row[0]
+        self.Judge Last Name = row[1]
+        Judge Middle Name = row[2]
+        Judge First Name = row[3]
+        Suffix = row[4]
+        Judge_Identification_Number_a = row[17]
+        Court_Name = row[18]
+        Court_Type = row[19]
+        Termination_specific_reason  = row[45]
+        Judge_Identification_Number_b = row[46]
+        Court_Name_2 = row[47]
+        Court_Type_2 = row[48]
+        Termination_specific_reason_2  = row[74]
+        Judge_Identification_Number_c = row[75]
+        Court_Name_3 = row[76]
+        Court_Type_3 = row[77]
+        Termination_specific_reason_3  = row[103]
+        Judge_Identification_Number_d = row[104]
+        Court_Name_4 = row[105]
+        Court_Type_4 = row[106]
+        Termination_specific_reason_4  = row[132]
+        Judge_Identification_Number_e = row[133]
+        Court_Name_5 = row[134]
+        self.Court_Type_5 = row[135]
+        self.Termination_specific_reason_4  = row[161]
+        self.Judge_Identification_Number_f = row[162]
+        self.Court_Name_5 = row[163]
+        self.Court_Type_5 = row[164]
+
+    #query
+    #returns result based on internal state, does not change or effect internal state
+    def can_add_self_to_database(self)
+        #add logic
+        return true
+
+    #command
+    #changes backing data store, does not change or effect internal state
+    def add_self_to_database(self,dbsession)
+        pass
+
+    #command executor: executes based on query result
+    def add_self_to_database_if_allowed(self,dbsession)
+        if(can_add_to_database()):
+            add_to_database(dbsession)
+
+
+    def add_all_allowed_judges_to_database(judgedata_list,dbsession)
+        for judgedata in judgedata_list
+            judgedata.add_self_to_database_if_allowed(dbsession)
+
+
+
+
+
 

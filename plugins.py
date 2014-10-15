@@ -4,6 +4,7 @@ from flask.ext.uuid import FlaskUUID
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import LoginManager
 from flask.ext.moment import Moment
+from flask_debugtoolbar import DebugToolbarExtension
 
 #all application plugins that can be imported from this module
 db = SQLAlchemy()
@@ -11,6 +12,7 @@ flaskuuid = FlaskUUID()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 moment = Moment()
+debug_toolbar = DebugToolbarExtension()
 
 #initilalize the plugins in this method
 #which is called from the factory method creates the flask application
@@ -20,6 +22,7 @@ def init_plugins(app):
     bcrypt.init_app(app)
     moment.init_app(app)
     login_manager.init_app(app)
+    debug_toolbar.init_app(app)
     #uncomment this line to use the default flask login login view functionality
     #login_manager.login_view =  "account.signin"
 
