@@ -1,10 +1,11 @@
 
 #utility module for recreating database in development
-import csv
+#import csv
 from app import create_app
 app = create_app()
 with app.app_context():
     from models.user import User, create_test_users
+    from models.judgedata import JudgeDataRecord,JudgeData
     from models.judge import Judge,create_test_judges
     from models.judgereview import JudgeReview
     from models.userjudge import UserJudge
@@ -27,14 +28,14 @@ with app.app_context():
 
 
 
-    with open('migrations/judges.csv','rb') as file:
-        contents = csv.reader(file)
-        matrix = list()
-        for row in contents:
-            matrix.append(row)
+    # with open('migrations/judges.csv','rb') as file:
+    #     contents = csv.reader(file)
+    #     matrix = list()
+    #     for row in contents:
+    #         matrix.append(row)
 
-    matrix.pop(0)#remove header row
-    Judge.add_all_allowed_judges_to_database(matrix)
+    # matrix.pop(0)#remove header row
+    JudgeDataRecord.load_file_data('migrations/judges.csv')
 
 #can_view_resource(current_user,resource_owner_user,resource=None)
 #can_edit_resource(current_user,resource_owner_user,resource=None)

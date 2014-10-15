@@ -1420,3 +1420,291 @@ class JudgeData
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0 'Judge Identification Number',
+ 1 'Judge Last Name',
+ 2 'Judge First Name',
+ 3 'Judge Middle Name',
+ 4 'Suffix',
+ 'Birth month',
+ 'Birth day',
+ 'Birth year',
+ 'Place of Birth (City)',
+ 'Place of Birth (State)',
+ 'Death month',
+ 'Death day',
+ 'Death year',
+ 'Place of Death (City)',
+ 'Place of Death (State)',
+ 'Gender',
+ 'Race or Ethnicity',
+ 17'Judge Identification Number',
+ 18 'Court Name',
+ 19 'Court Type',
+ 'President name',
+ 'Party Affiliation of President',
+ 'Renominating President name',
+ 'Party Affiliation of Renominating President',
+ 'Nomination Date Senate Executive Journal',
+ 'ABA Rating',
+ 'Recess Appointment date',
+ 'Vice last name (predecessor)',
+ 'Vice first name (predecessor)',
+ 'Authorization legislation',
+ 'Referral date (referral to Judicial Committee)',
+ 'Report number',
+ 'Committee action',
+ 'Committee action date',
+ 'Hearings',
+ 'Senate voice vote',
+ 'Senate vote Ayes/Nays',
+ 'Senate Vote Date (Confirmation Date)',
+ 'Commission Date',
+ 'Commission Year',
+ 'Date of Service as Chief Judge (begin)',
+ 'Date of Service as Chief Judge (end)',
+ 'Second Date of Service as Chief Judge (begin)',
+ 'Second Date of Service as Chief Judge (end)',
+ 'Retirement from Active Service',
+ 'Date of Termination',
+ 45'Termination specific reason',
+ 46'Judge Identification Number',
+ 47'Court Name (2)',
+ 48'Court Type (2)',
+ 'President name (2)',
+ 'Party Affiliation of President (2)',
+ 'Renominating President name (2)',
+ 'Party Affiliation of Renominating President (2)',
+ 'Nomination Date Senate Executive Journal (2)',
+ 'ABA Rating (2)',
+ 'Recess Appointment date (2)',
+ 'Vice last name (predecessor) (2)',
+ 'Vice first name (predecessor) (2)',
+ 'Authorization legislation (2)',
+ 'referral date (referral to Judicial Committee) (2)',
+ 'Report number (2)',
+ 'committee action (2)',
+ 'Committee action date (2)',
+ 'Hearings (2)',
+ 'Senate voice vote (2)',
+ 'Senate vote Ayes/Nays (2)',
+ 'Senate Vote Date (Confirmation Date) (2)',
+ 'Commission Date (2)',
+ 'Date of Service as Chief Judge (begin) (2)',
+ 'Date of Service as Chief Judge (end) (2)',
+ 'Second Date of Service as Chief Judge (begin) (2)',
+ 'Second Date of Service as Chief Judge (end) (2)',
+ 'Retirement from Active Service (2)',
+ 'Date of Termination (2)',
+ 74 'Termination specific reason (2)',
+ 75'Judge Identification Number',
+ 76'Court Name (3)',
+ 77'Court Type (3)',
+ 'President name (3)',
+ 'Party Affiliation of President (3)',
+ 'Renominating President name (3)',
+ 'Party Affiliation of Renominating President (3)',
+ 'Nomination Date Senate Executive Journal (3)',
+ 'ABA Rating (3)',
+ 'Recess Appointment date (3)',
+ 'Vice last name (predecessor) (3)',
+ 'Vice first name (predecessor) (3)',
+ 'Authorization legislation (3)',
+ 'referral date (referral to Judicial Committee) (3)',
+ 'Report number (3)',
+ 'committee action (3)',
+ 'Committee action date (3)',
+ 'Hearings (3)',
+ 'Senate voice vote (3)',
+ 'Senate vote Ayes/Nays (3)',
+ 'Senate Vote Date (Confirmation Date) (3)',
+ 'Commission Date (3)',
+ 'Date of Service as Chief Judge (begin) (3)',
+ 'Date of Service as Chief Judge (end) (3)',
+ 'Second Date of Service as Chief Judge (begin) (3)',
+ 'Second Date of Service as Chief Judge (end) (3)',
+ 'Retirement from Active Service (3)',
+ 'Date of Termination (3)',
+ 103'Termination specific reason (3)',
+ 104'Judge Identification Number',
+ 105'Court Name (4)',
+ 106'Court Type (4)',
+ 'President name (4)',
+ 'Party Affiliation of President (4)',
+ 'Renominating President name (4)',
+ 'Party Affiliation of Renominating President (4)',
+ 'Nomination Date Senate Executive Journal (4)',
+ 'ABA Rating (4)',
+ 'Recess Appointment date (4)',
+ 'Vice last name (predecessor) (4)',
+ 'Vice first name (predecessor) (4)',
+ 'Authorization legislation (4)',
+ 'referral date (referral to Judicial Committee) (4)',
+ 'Report number (4)',
+ 'committee action (4)',
+ 'Committee action date (4)',
+ 'Hearings (4)',
+ 'Senate voice vote (4)',
+ 'Senate vote Ayes/Nays (4)',
+ 'Senate Vote Date (Confirmation Date) (4)',
+ 'Commission Date (4)',
+ 'Date of Service as Chief Judge (begin) (4)',
+ 'Date of Service as Chief Judge (end) (4)',
+ 'Second Date of Service as Chief Judge (begin) (4)',
+ 'Second Date of Service as Chief Judge (end) (4)',
+ 'Retirement from Active Service (4)',
+ 'Date of Termination (4)',
+ 132'Termination specific reason (4)',
+ 133'Judge Identification Number',
+ 134'Court Name (5)',
+ 135'Court Type (5)',
+ 'President name (5)',
+ 'Party Affiliation of President (5)',
+ 'Renominating President name (5)',
+ 'Party Affiliation of Renominating President (5)',
+ 'Nomination Date Senate Executive Journal (5)',
+ 'ABA Rating (5)',
+ 'Recess Appointment date (5)',
+ 'Vice last name (predecessor) (5)',
+ 'Vice first name (predecessor) (5)',
+ 'Authorization legislation (5)',
+ 'referral date (referral to Judicial Committee) (5)',
+ 'Report number (5)',
+ 'committee action (5)',
+ 'Committee action date (5)',
+ 'Hearings (5)',
+ 'Senate voice vote (5)',
+ 'Senate vote Ayes/Nays (5)',
+ 'Senate Vote Date (Confirmation Date) (5)',
+ 'Commission Date (5)',
+ 'Date of Service as Chief Judge (begin) (5)',
+ 'Date of Service as Chief Judge (end) (5)',
+ 'Second Date of Service as Chief Judge (begin) (5)',
+ 'Second Date of Service as Chief Judge (end) (5)',
+ 'Retirement from Active Service (5)',
+ 'Date of Termination (5)',
+ 161'Termination specific reason (5)',
+ 162'Judge Identification Number',
+ 163'Court Name (6)',
+ 164'Court Type (6)',
+ 'President name (6)',
+ 'Party Affiliation of President (6)',
+ 'Nomination Date Senate Executive Journal (6)',
+ 'Renominating President name (6)',
+ 'Party Affiliation of Renominating President (6)',
+ 'ABA Rating (6)',
+ 'Recess Appointment date (6)',
+ 'Vice last name (predecessor) (6)',
+ 'Vice first name (predecessor) (6)',
+ 'Authorization legislation (6)',
+ 'referral date (referral to Judicial Committee) (6)',
+ 'Report number (6)',
+ 'committee action (6)',
+ 'Committee action date (6)',
+ 'Hearings (6)',
+ 'Senate voice vote (6)',
+ 'Senate vote Ayes/Nays (6)',
+ 'Senate Vote Date (Confirmation Date) (6)',
+ 'Commission Date (6)',
+ 'Date of Service as Chief Judge (begin) (6)',
+ 'Date of Service as Chief Judge (end) (6)',
+ 'Second Date of Service as Chief Judge (begin) (6)',
+ 'Second Date of Service as Chief Judge (end) (6)',
+ 'Retirement from Active Service (6)',
+ 'Date of Termination (6)',
+ 'Termination specific reason (6)',
+ 'Name of School',
+ 'Degree',
+ 'Degree year',
+ 'Name of School (2)',
+ 'Degree (2)',
+ 'Degree year (2)',
+ 'Name of School (3)',
+ 'Degree (3)',
+ 'Degree year (3)',
+ 'Name of School (4)',
+ 'Degree (4)',
+ 'Degree year (4)',
+ 'Name of School (5)',
+ 'Degree  (5)',
+ 'Degree year (5)',
+ 'Employment text field',
+ 'Bankruptcy and Magistrate service']
+
+
