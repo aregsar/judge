@@ -15,6 +15,22 @@ class JudgeData:
     def full_name(self):
         return self.Judge_First_Name + ' ' + self.Judge_Middle_Name + ' ' + self.Judge_Last_Name + ' ' + self.Suffix
 
+    def __repr__(self):
+        return '<judge id={id}  \
+            ,last={last}  \
+            ,middle={middle}  \
+            ,first={first}  \
+            ,suffix={suffix}  \
+            ,court={court}  \
+            ,term={Termination_specific_reason}  \
+            >'.format(id=self.Judge_Identification_Number,
+            last=self.Judge_Last_Name,
+            middle=self.Judge_First_Name,
+            first=self.Judge_Middle_Name,
+            suffix=self.Suffix,
+            court=self.Court_Name,
+            term=self.Termination_specific_reason)
+
 
 
 class JudgeDataRecord():
@@ -122,7 +138,7 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
             for row in contents:
                 matrix.append(row)
 
-        #matrix.pop(0)#remove header row
+        matrix.pop(0)#remove header row
         JudgeDataRecord.add_all_allowed_judges_to_database(matrix)
 
     @staticmethod
@@ -133,7 +149,7 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
                 break
             record = JudgeDataRecord(judgedatarow)
             print record
-            #record.add_to_database_if_allowed()
+            record.add_to_database_if_allowed()
             index += 1
         db.session.commit()
 #########################################################################################
@@ -141,67 +157,68 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
     def add_to_database_if_allowed(self):
         judgedata = self.create_judgedata_to_add_to_database()
         if judgedata:
-            JudgeDataRecord.add_judge_to_database(judgedata)
+            print judgedata
+            #JudgeDataRecord.add_judge_to_database(judgedata)
 
     #query
     #returns result based on internal state, does not change or effect internal state
     def create_judgedata_to_add_to_database(self):
         #in
-        if len(self.Termination_specific_reason_1.trim()) == 0:
-            return JudgeData(self,self.Court_Name_1,self.Termination_specific_reason_1.trim())
+        if len(self.Termination_specific_reason_1.strip()) == 0:
+            return JudgeData(self,self.Court_Name_1,self.Termination_specific_reason_1.strip())
         #out
-        if expired(self.Termination_specific_reason_1):
+        if self.expired(self.Termination_specific_reason_1):
             return None
         #check next set of data
         #in
-        if len(self.Termination_specific_reason_2.trim()) == 0:
-            return JudgeData(self,self.Court_Name_2,self.Termination_specific_reason_2.trim())
+        if len(self.Termination_specific_reason_2.strip()) == 0:
+            return JudgeData(self,self.Court_Name_2,self.Termination_specific_reason_2.strip())
         #out
-        if expired(Termination_specific_reason_2.trim()):
+        if self.expired(Termination_specific_reason_2.strip()):
             return None
         #check next set of data
         #in
-        if len(self.Termination_specific_reason_3.trim()) == 0:
-            return JudgeData(self,self.Court_Name_3,self.Termination_specific_reason_3.trim())
+        if len(self.Termination_specific_reason_3.strip()) == 0:
+            return JudgeData(self,self.Court_Name_3,self.Termination_specific_reason_3.strip())
         #out
-        if expired(Termination_specific_reason_3.trim()):
-            return None
-
-        #check next set of data
-        #in
-        if len(self.Termination_specific_reason_4.trim()) == 0:
-            return JudgeData(self,self.Court_Name_4,self.Termination_specific_reason_4.trim())
-        #out
-        if expired(Termination_specific_reason_4.trim()):
+        if self.expired(Termination_specific_reason_3.strip()):
             return None
 
         #check next set of data
         #in
-        if len(self.Termination_specific_reason_5.trim()) == 0:
-            return JudgeData(self,self.Court_Name_5,self.Termination_specific_reason_5.trim())
+        if len(self.Termination_specific_reason_4.strip()) == 0:
+            return JudgeData(self,self.Court_Name_4,self.Termination_specific_reason_4.strip())
         #out
-        if expired(Termination_specific_reason_5.trim()):
+        if self.expired(Termination_specific_reason_4.strip()):
+            return None
+
+        #check next set of data
+        #in
+        if len(self.Termination_specific_reason_5.strip()) == 0:
+            return JudgeData(self,self.Court_Name_5,self.Termination_specific_reason_5.strip())
+        #out
+        if self.expired(Termination_specific_reason_5.strip()):
             return ""
 
         #check next set of data
         #in
-        if len(self.Termination_specific_reason_6.trim()) == 0:
-            return JudgeData(self,self.Court_Name_6,self.Termination_specific_reason_6.trim())
+        if len(self.Termination_specific_reason_6.strip()) == 0:
+            return JudgeData(self,self.Court_Name_6,self.Termination_specific_reason_6.strip())
         #out
-        if expired(Termination_specific_reason_6.trim()):
+        if self.expired(Termination_specific_reason_6.strip()):
             return ""
 
     def expired(self,Termination_specific_reason):
-        Termination_specific_reason = Termination_specific_reason.trim()
+        Termination_specific_reason = Termination_specific_reason.strip()
         if Termination_specific_reason == "Retirement":
-            return true
+            return True
         if Termination_specific_reason == "Death":
-            return true
+            return True
         if Termination_specific_reason == "Resignation":
-            return true
+            return True
         if Termination_specific_reason == "Impeachment & Conviction":
-            return true
-        return false
+            return True
+        return False
 
 
     #command
