@@ -12,6 +12,7 @@ class JudgeData:
         self.Court_Name = court_name
         self.Termination_specific_reason = Termination_specific_reason
 
+
     def full_name(self):
         return self.Judge_First_Name + ' ' + self.Judge_Middle_Name + ' ' + self.Judge_Last_Name + ' ' + self.Suffix
 
@@ -22,7 +23,7 @@ class JudgeData:
             ,first={first}  \
             ,suffix={suffix}  \
             ,court={court}  \
-            ,term={Termination_specific_reason}  \
+            ,term={term}  \
             >'.format(id=self.Judge_Identification_Number,
             last=self.Judge_Last_Name,
             middle=self.Judge_First_Name,
@@ -144,22 +145,28 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
     @staticmethod
     def add_all_allowed_judges_to_database(judgedatarow_list):
         index=0
+        judges=0
         for judgedatarow in judgedatarow_list:
-            if index > 10:
-                break
             record = JudgeDataRecord(judgedatarow)
-            print record
-            record.add_to_database_if_allowed()
+            # if index > 2000:
+            #     print record
+            #     record.add_to_database_if_allowed()
+            #     break
             index += 1
+            if record.add_to_database_if_allowed():
+                judges += 1
+        print str(index) + " total records"
+        print str(judges) + " active judges"
         db.session.commit()
 #########################################################################################
     #command executor: executes based on query result
     def add_to_database_if_allowed(self):
         judgedata = self.create_judgedata_to_add_to_database()
         if judgedata:
-            print judgedata
-            #JudgeDataRecord.add_judge_to_database(judgedata)
-
+            #print judgedata
+            JudgeDataRecord.add_judge_to_database(judgedata)
+            return True
+        return False
     #query
     #returns result based on internal state, does not change or effect internal state
     def create_judgedata_to_add_to_database(self):
@@ -224,9 +231,9 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
     #command
     #changes backing data store, does not change or effect internal state
     @staticmethod
-    def add_judge_to_database(self,judgedata):
-        judge = CreateActiveJudge(name=judgedata.full_name,state="CA",court=judgedata.Court_Name, district="")
-        print judgedata
+    def add_judge_to_database(judgedata):
+        judge = CreateActiveJudge(name=judgedata.full_name(),state="CA",court=judgedata.Court_Name, district="")
+        print judge
         #db.session.add(judge)
 
 

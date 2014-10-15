@@ -46,6 +46,14 @@ class Judge(db.Model):
     # def total_reviews_average_pos(self):
     #     return 'pos-' + str(self.total_reviews_average)
 
+    def __repr__(self):
+        return '<name={name}  \
+            ,court={court}  \
+            ,state={state}  \
+            >'.format(name=self.name,
+            court=self.court,
+            state=self.state)
+
 #factory methods
 def CreateActiveJudge(name,state,court,district,scope=1):
     return Judge(name=name,state=state,scope=scope,court=court,district=district)
