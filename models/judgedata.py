@@ -145,7 +145,7 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
     def add_all_allowed_judges_to_database(judgedatarow_list):
         index=0
         for judgedatarow in judgedatarow_list:
-            if index > 0:
+            if index > 10:
                 break
             record = JudgeDataRecord(judgedatarow)
             print record
@@ -174,14 +174,14 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
         if len(self.Termination_specific_reason_2.strip()) == 0:
             return JudgeData(self,self.Court_Name_2,self.Termination_specific_reason_2.strip())
         #out
-        if self.expired(Termination_specific_reason_2.strip()):
+        if self.expired(self.Termination_specific_reason_2.strip()):
             return None
         #check next set of data
         #in
         if len(self.Termination_specific_reason_3.strip()) == 0:
             return JudgeData(self,self.Court_Name_3,self.Termination_specific_reason_3.strip())
         #out
-        if self.expired(Termination_specific_reason_3.strip()):
+        if self.expired(self.Termination_specific_reason_3.strip()):
             return None
 
         #check next set of data
@@ -189,7 +189,7 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
         if len(self.Termination_specific_reason_4.strip()) == 0:
             return JudgeData(self,self.Court_Name_4,self.Termination_specific_reason_4.strip())
         #out
-        if self.expired(Termination_specific_reason_4.strip()):
+        if self.expired(self.Termination_specific_reason_4.strip()):
             return None
 
         #check next set of data
@@ -197,7 +197,7 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
         if len(self.Termination_specific_reason_5.strip()) == 0:
             return JudgeData(self,self.Court_Name_5,self.Termination_specific_reason_5.strip())
         #out
-        if self.expired(Termination_specific_reason_5.strip()):
+        if self.expired(self.Termination_specific_reason_5.strip()):
             return ""
 
         #check next set of data
