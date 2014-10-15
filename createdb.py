@@ -1,5 +1,6 @@
 
 #utility module for recreating database in development
+import csv
 from app import create_app
 app = create_app()
 with app.app_context():
@@ -23,6 +24,17 @@ with app.app_context():
         create_test_judges()
     judge = Judge.query.filter_by(name="areg").first()
     print judge
+
+
+
+    with open('migrations/judges.csv','rb') as file:
+        contents = csv.reader(file)
+        matrix = list()
+        for row in contents:
+            matrix.append(row)
+
+    matrix.pop(0)#remove header row
+    Judge.add_all_allowed_judges_to_database(matrix)
 
 #can_view_resource(current_user,resource_owner_user,resource=None)
 #can_edit_resource(current_user,resource_owner_user,resource=None)

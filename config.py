@@ -22,7 +22,8 @@ class Config:
     #export DATABASE_URL='postgres://localhost/judgedb'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_RECORD_QUERIES = True
+    SQLALCHEMY_RECORD_QUERIES = True #records queries
+    #SQLALCHEMY_ECHO = True #logs queries
 
     #secret key generation from python shell
     #import os
