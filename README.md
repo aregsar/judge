@@ -25,18 +25,47 @@ def dictfunc(*args,**kwargs):
 [
     {"keys": ["f5"], "command": "refresh_folder_list" }
 ]
+=============
+HEROKU
+
+http://judgejungle.herokuapp.com/
+
 
 git push heroku master
 Permission denied (publickey)
+#solution is to execute
 $ heroku keys:add
+
+
 
 $ gunicorn -b 127.0.0.1:4000 app:judgeapp
 $ heroku ps:scale web=1
 $ heroku ps
 $ heroku run python createdb.py
 
-HEROKU_POSTGRESQL_ONYX_URL
-http://judgejungle.herokuapp.com/
+Preparing static assets
+Collectstatic configuration error. To debug, run:
+$ heroku run python ./manage.py collectstatic --noinput
+
+
+
+#the .env file in project is only used locally by foreman
+$ heroku config
+$ heroku config:get
+$ heroku config:set
+$ heroku config:unset
+
+DATABASE_URL:               postgres://bnrdvdaaqshbvl:FeO9CfI4hk3MfPGw4rSRNkMSua@ec2-54-83-199-115.compute-1.amazonaws.com:5432/dfdvvpcbvta6f2
+HEROKU_POSTGRESQL_JADE_URL: postgres://jsxsbzqcfhuzcw:OfDZfU0VcgrmFrLTxS2Vy9Kuav@ec2-54-204-38-16.compute-1.amazonaws.com:5432/dcmo0m39l5mh3r
+HEROKU_POSTGRESQL_ONYX_URL: postgres://bnrdvdaaqshbvl:FeO9CfI4hk3MfPGw4rSRNkMSua@ec2-54-83-199-115.compute-1.amazonaws.com:5432/dfdvvpcbvta6f2
+
+$ heroku config:set FLASK_DEBUG=False
+$ heroku config:set FLASK_ENVIRONMENT=PROD
+$ heroku config:set SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
+
+$ heroku run python createdb.py
+
+========================
 
 cmd-opt / #to comment or uncomment blocks and lines
 (venv)$ pip install -r requirements.txt
@@ -45,7 +74,7 @@ cmd-opt / #to comment or uncomment blocks and lines
 realpython discover flask part 9 sqlalchemy
 around 16 minute mark there is discussion around avoiding circular imports
 
-==========
+=======================
 #using flask-uuid
 #@app.route('/<uuid(strict=False):id>'>
 #@app.route('/<uuid:id>')
