@@ -38,15 +38,15 @@
     <a href="{{ url_for('review.index',id=judge.id) }}"> {{judge.name}}</a> <br />
     {{judge.total_reviews}} review{%if judge.total_reviews != 1 %}s{% endif%}<br />
     {%if judge.total_reviews > 0 %}
-    <div class="rating">
-      <img alt="gavel" class="{{judge.total_reviews_average_class()}}"
-        src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-    </div>
-    {% endif%}
-    <a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>&nbsp;|&nbsp;
-    <a href="{{ url_for('judge.edit',id=judge.id) }}">edit judge</a>
-    <br />
-    <br />
+      <div class="rating">
+        <img alt="gavel" class="{{judge.total_reviews_average_class()}}"
+          src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+      </div>
+      {% endif%}
+      <a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>&nbsp;|&nbsp;
+      <a href="{{ url_for('judge.edit',id=judge.id) }}">edit judge</a>
+      <br />
+      <br />
     {% endfor %}
   {% endif%}
   </div>

@@ -10,7 +10,32 @@
         No Reviews Found For Judge
       {% endif% #}
       <br />
-      <a href="{{ url_for('judge.profile',id=judge.id) }}">{{judge.name}}</a><br />
+      {#<a href="{{ url_for('judge.profile',id=judge.id) }}">{{judge.name}}</a><br />#}
+{{judge.name}}<br />
+
+{#State: {{judge.state}}<br />#}
+
+
+{%if judge.retired%}
+  Retired&nbsp;
+  {%if judge.scope == 1 %}
+     Moderator
+  {%else%}
+     Arbitrator
+  {%endif%}
+{%else%}
+  {%if judge.scope == 1 %}
+     Federal Judge
+  {%else%}
+     State Judge
+  {%endif%}
+{%endif%}
+
+{{judge.court}}<br />
+
+
+
+
 
       {%if judge.total_reviews > 0 %}
         <div class="rating">
@@ -24,6 +49,17 @@
   </div>
 
     <div class="blog-header ">
+
+    {#{% if reviews|length > 0 %}
+      Reviews<br/>
+    {% endif %}
+    {% if reviews|count > 0 %}
+      Reviews<br/>
+    {% endif %}#}
+
+    {% if judge.total_reviews > 0 %}
+      <h4>Reviews</h4>
+    {% endif %}
     {% if current_user.user_role != "admin" %}
       {% for review in reviews %}
       {{review.created_at.strftime('%Y-%m-%d') }}
@@ -39,7 +75,7 @@
       {% endfor %}
     {% else %}
       {% for review in reviews %}
-{{review.created_at.strftime('%Y-%m-%d') }}
+        {{review.created_at.strftime('%Y-%m-%d') }}
         <div class="rating">
           <img alt="gavel" class="{{review.average_rating_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
@@ -48,9 +84,9 @@
         by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
         {{review.reviewer_name}}</a><br />
         <br />
-        {{review.excerpt}}<br />
-        <a href="{{ url_for('review.review',id=review.id) }}">details</a>&nbsp;|&nbsp;
-        <a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>
+        {{review.excerpt}}
+        <a href="{{ url_for('review.review',id=review.id) }}">details</a>
+       {#<a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>#}
       {% endfor %}
     {% endif%}
   </div>

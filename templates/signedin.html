@@ -28,7 +28,7 @@
               <ul class="nav navbar-nav">
 
                <li><a href="{{ url_for('user.profile',id=current_user.id) }}">{{current_user.username}}</a></li>
-               <li><a href="{{ url_for('judge.tracked') }}">my judges</a></li>
+               {#<li><a href="{{ url_for('judge.tracked') }}">my judges</a></li>#}
                 <li><a href="{{ url_for('account.signout') }}">sign out</a></li>
               </ul>
             </div><!--/.nav-collapse -->

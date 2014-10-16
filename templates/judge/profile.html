@@ -29,15 +29,15 @@ Type: {%if judge.retired%}
 {%endif%}
 <br />
 
- <a href="{{ url_for('judge.track',id=judge.id) }}">track</a><br />
+ {#<a href="{{ url_for('judge.track',id=judge.id) }}">track</a><br />#}
 
-<a href="{{ url_for('review.index',id=judge.id) }}">reviews</a>&nbsp;|&nbsp;<a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>
+<a href="{{ url_for('review.index',id=judge.id) }}">reviews</a>&nbsp;|&nbsp;
+<a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>
 {%if can_show_edit_judge_link%}
-                {#{% if current_usr.user_role == "admin" %}#}
-&nbsp;|&nbsp;
-                        <a href="{{ url_for('judge.edit',id=judge.id) }}">edit judge</a><br />
 
-                  {% endif%}
+                        {#<a href="{{ url_for('judge.edit',id=judge.id) }}">edit judge</a><br />#}
+
+{% endif%}
         </div>
 
     </div>
