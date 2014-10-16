@@ -54,13 +54,15 @@ def untrack(id):
 @mod.route('/judge/sitting')
 @login_required
 def sitting():
-    judges= Judge.query.filter_by(retired=False).all()
+    judges= Judge.query.filter_by(retired=False).order_by(Judge.id.desc()).all()
+    # for judge in judges:
+    #     print judge.name
     return render_template("judge/sitting.html",judges=judges)
 
 @mod.route('/judge/retired')
 @login_required
 def retired():
-    judges= Judge.query.filter_by(retired=True).all()
+    judges= Judge.query.filter_by(retired=True).order_by(Judge.id.desc()).all()
     return render_template("judge/retired.html",judges=judges)
 
 
@@ -68,10 +70,14 @@ def retired():
 @login_required
 def index():
     name = request.args.get('name')
+    # print name
     form = JudgeSearchForm(name=name)
     if name != 'all':
-        #judges= Judge.query.filter_by(name=name).all()
-        judges= Judge.query.filter(Judge.name.like(name + '%')).filter_by(state='CA').order_by(Judge.name).limit(20).all()
+        #User.query.filter(User.email.in_(('x1@dom1.com', 'x2@dom2.com')))
+        #Judge.name.startswith(name)
+        judges= Judge.query.filter(Judge.name.like('%' + name + '%')).filter_by(state='CA').order_by(Judge.name).limit(20).all()
+        #judges= Judge.query.filter(Judge.name == u'Andre Birotte Jr.').order_by(Judge.name).all()
+        #judges= Judge.query.filter(Judge.name == name).order_by(Judge.name).all()
     else:
         judges= Judge.query.filter_by(state='CA').order_by(Judge.name).limit(20).all()
     message = None
