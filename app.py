@@ -84,7 +84,8 @@ def create_app():
 #
 #manage from command line
 from flask.ext.script import Manager
-manager = Manager(create_app())
+judgeapp = create_app()
+manager = Manager(judgeapp)
 if __name__ == '__main__':
     manager.run()
 

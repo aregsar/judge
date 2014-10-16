@@ -26,6 +26,8 @@ def dictfunc(*args,**kwargs):
     {"keys": ["f5"], "command": "refresh_folder_list" }
 ]
 
+$ gunicorn -b 127.0.0.1:4000 app:judgeapp
+
 cmd-opt / #to comment or uncomment blocks and lines
 (venv)$ pip install -r requirements.txt
 (venv)$ pip freeze > requirements.txt
