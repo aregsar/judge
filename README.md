@@ -26,7 +26,17 @@ def dictfunc(*args,**kwargs):
     {"keys": ["f5"], "command": "refresh_folder_list" }
 ]
 
+git push heroku master
+Permission denied (publickey)
+$ heroku keys:add
+
 $ gunicorn -b 127.0.0.1:4000 app:judgeapp
+$ heroku ps:scale web=1
+$ heroku ps
+$ heroku run python createdb.py
+
+HEROKU_POSTGRESQL_ONYX_URL
+http://judgejungle.herokuapp.com/
 
 cmd-opt / #to comment or uncomment blocks and lines
 (venv)$ pip install -r requirements.txt
