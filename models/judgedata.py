@@ -232,7 +232,7 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
     #changes backing data store, does not change or effect internal state
     @staticmethod
     def add_judge_to_database(judgedata):
-        judge = CreateActiveJudge(name=judgedata.full_name(),state="CA",court=judgedata.Court_Name, district="")
+        judge = CreateActiveJudge(name=judgedata.full_name().strip(),state="CA",court=judgedata.Court_Name, district="")
         print judge
         db.session.add(judge)
 
