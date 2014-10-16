@@ -1,6 +1,6 @@
 from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField, SubmitField, TextField,SelectField
-from wtforms.validators import Required, Email
+from wtforms.validators import Required, Email,Length,Regexp,NumberRange
 from wtforms.fields.html5 import EmailField
 from models.state import STATE_CHOICES
 
@@ -26,13 +26,18 @@ from models.state import STATE_CHOICES
 
 
 class SignupForm(Form):
-    firstname = TextField('Firstname', validators=[Required()])
-    lastname = TextField('Lastname', validators=[Required()])
-    barnumber = TextField('Barnumber', validators=[Required()])
-    #state = TextField('State', validators=[Required()])
+    firstname = TextField('Firstname', validators=[Required(),Length(max=50)])
+    lastname = TextField('Lastname', validators=[Required(),Length(max=50)])
+    barnumber = TextField('Barnumber', validators=[Required(),Length(max=50)])
+    #barnumber = TextField('Barnumber', validators=[Required(),Length(max=50),NumberRange(min=1, max=1000000)])
+    #^[0-9]*$
+    #^[0-9]+$
+    #"^[a-zA-Z0-9_-]+$"
+    #/^\w+$/
+    #barnumber = TextField('Barnumber', validators=[Required(),Length(max=50),Regexp(regex='^([1-9][0-9]*)$')])
     state = SelectField(label='State', choices=STATE_CHOICES)
-    username = TextField('Username', validators=[Required()])
-    email = TextField('Email', validators=[Required()])
-    #email = TextField('Email', validators=[Required(), Email()])
-    password = PasswordField('Password', validators=[Required()])
+    #state = TextField('State', validators=[Required()])
+    username = TextField('Username', validators=[Required(),Length(max=50)])
+    email = TextField('Email', validators=[Required(), Email(),Length(max=100)])
+    password = PasswordField('Password', validators=[Required(),Length(max=100)])
 
