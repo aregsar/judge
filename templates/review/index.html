@@ -51,14 +51,14 @@
     <div class="blog-header ">
 
     {#{% if reviews|length > 0 %}
-      Reviews<br/>
+       <p class="lead blog-description">Reviews</p>
     {% endif %}
     {% if reviews|count > 0 %}
-      Reviews<br/>
+       <p class="lead blog-description">Reviews</p>
     {% endif %}#}
 
     {% if judge.total_reviews > 0 %}
-      <h4>Reviews</h4>
+       <p class="lead blog-description">Reviews</p>
     {% endif %}
     {% if current_user.user_role != "admin" %}
       {% for review in reviews %}

@@ -13,9 +13,9 @@
     {{message}}
       <a href="{{ url_for('judge.submit',name=name) }}">review {{name}}</a>
   {% else %}
-    <div class="blog-header ">
+
       <p class="lead blog-description">Results</p>
-    </div>
+
   {% endif %}
 
 
@@ -43,12 +43,14 @@
           src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
       </div>
       {% endif%}
-      <a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>&nbsp;|&nbsp;
-      <a href="{{ url_for('judge.edit',id=judge.id) }}">edit judge</a>
+      <a href="{{ url_for('review.add',id=judge.id) }}">add a review</a>
+      {#<a href="{{ url_for('judge.edit',id=judge.id) }}">edit judge</a>#}
       <br />
       <br />
     {% endfor %}
   {% endif%}
+
+
   </div>
 
 </div>
