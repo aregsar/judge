@@ -155,6 +155,8 @@ Termination specific reason <values: (Empty)=>add judge and court name as sittin
             index += 1
             if record.add_to_database_if_allowed():
                 judges += 1
+            if judges > 200:
+                break
         print str(index) + " total records"
         print str(judges) + " active judges"
         db.session.commit()
