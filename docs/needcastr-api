@@ -14,18 +14,27 @@ http://stackoverflow.com/questions/4461350/spring-mvc-and-url-generation-to-a-sp
 https://github.com/resthub/springmvc-router
 http://resthub.org/
 http://stackoverflow.com/questions/8761551/how-to-generate-uri-inside-a-controller-in-spring-3
+
 -java spring mvc 4 url generation jsp tag plus async rest controller links:
 http://docs.spring.io/spring/docs/current/spring-framework-reference/html/new-in-4.1.html
 http://docs.spring.io/spring/docs/current/spring-framework-reference/html/new-in-4.0.html
 http://docs.spring.io/spring/docs/current/spring-framework-reference/html/remoting.html#rest-async-resttemplate
 http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-links-to-controllers-from-views
+
 -spring mvc 4 boot async url generator
+http://zeroturnaround.com/rebellabs/beyond-rest-how-to-build-a-hateoas-api-in-java-with-spring-mvc-jersey-jax-rs-and-vraptor/
+ControllerLinkBuilder.linkTo method
+linkTo(methodOn(ControllerClass.class).someMethod(parameter)).withSelfRel();
+https://github.com/spring-projects/spring-hateoas/blob/master/src/main/java/org/springframework/hateoas/mvc/ControllerLinkBuilder.java
+https://github.com/spring-projects/spring-hateoas/blob/master/src/main/java/org/springframework/hateoas/LinkBuilder.java
+
 http://www.infoq.com/news/2013/12/spring4
 http://www.infoq.com/articles/microframeworks1-spring-boot
 http://www.infoq.com/news/2013/06/Spring_Framework_4.0_Announced
 http://www.infoq.com/presentations/spring-boot-hello-world
+http://www.infoq.com/presentations/spring-rest-nosql-big-data-mobile
+
 http://www.codingpedia.org/ama/restful-web-services-example-in-java-with-jersey-spring-and-mybatis/
-http://zeroturnaround.com/rebellabs/beyond-rest-how-to-build-a-hateoas-api-in-java-with-spring-mvc-jersey-jax-rs-and-vraptor/
 http://www.leveluplunch.com/java/tutorials/010-building-restful-webservice-spring-mvc-boot/
 http://www.concretepage.com/spring-4/spring-4-rest-web-service-json-example-tomcat
 http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
