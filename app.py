@@ -77,7 +77,7 @@ def create_app():
 
     #
     #list all application mapped routes
-    app.url_map
+    print app.url_map
 
     return app
 

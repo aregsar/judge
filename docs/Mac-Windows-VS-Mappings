@@ -1,0 +1,42 @@
+Mac-Windows-VS-Mappings
+
+eclipse\spring shortcuts
+
+-----------------------------------
+
+mac to windows key mapings
+
+f1-f12 keys --> settings turn on use of function keys
+backspace -->delete
+delete --> fn+delete
+alt -->option
+control-->command
+ctrl+alt+delete -->
+
+----------------------------------------------
+visual studio shortcut keys
+
+ctrl+k -multiline comment
+ctrl+shift+k -multiline  uncomment
+
+or
+
+ctrl+shift+k -multiline  comment
+ctrl+shift+u -multiline uncomment
+
+ctrl+. -import namespace
+ctrl+, -goto dialog
+
+
+ctrl+??? create a new class file from new instance
+ctrl+??? add a new class method base on a method call
+
+F5 -build
+F6 -debug
+
+right click on\in action to do add view
+right click in controller to do add action ???
+
+type class tab tab -class macro expansion
+type ctor tab tab - constructor macro expansion
+type prop tab tab -get set property macro expansion

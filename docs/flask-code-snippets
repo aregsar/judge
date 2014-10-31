@@ -1,0 +1,84 @@
+flask-code-snippets
+
+
+
+
+Tech links:
+https://charlesleifer.com/blog/saturday-morning-hacks-command-line-client-for-the-flask-note-taking-app/
+http://blog.miguelgrinberg.com/post/video-streaming-with-flask
+https://www.twilio.com/blog/2014/10/branded-mms-coupon-generation-with-python-and-twilio.html
+https://stormpath.com/blog/part-two-solving-flask-authentication-problem/
+http://amix.dk/blog/post/19367
+http://stackoverflow.com/questions/6463035/wtforms-getting-the-errors
+http://stackoverflow.com/questions/12701671/wtforms-form-not-submitting-but-outputs-no-validation-errors
+https://medium.com/@5hreyans/the-one-weird-trick-that-cut-our-flask-page-load-time-by-70-87145335f679
+
+
+
+Project Resources:
+https://github.com/sloria/cookiecutter-flask
+https://github.com/sh4nks/flaskbb
+https://github.com/hasankhan/pyMVC
+http://www.fullstackpython.com/flask.html
+flaskbb.org
+https://socratic.org/  - flask
+zapier.com  - django
+drhonch  - django
+
+
+
+Snippets:
+
+
+http://stackoverflow.com/questions/19963647/flask-request-json-to-dict
+https://freepythontips.wordpress.com/2013/08/04/args-and-kwargs-in-python-explained/
+http://stackoverflow.com/questions/7257481/html-form-put-method
+
+CSRF_ENABLED = True
+
+
+@user.route('/<user_id>', defaults={'username': None})
+@user.route('/<user_id>/<username>')
+def show(user_id, username):
+    pass
+
+@app.route('/users/', defaults={'page': 1})
+@app.route('/users/page/<int:page>')
+def show_users(page):
+    pass
+
+----------------
+Flaskonrails template script:
+
+#!/bin/bash
+#chmod u+x ~/scripts/flask_new.sh
+#create a new github repo named mynewproject prior to running this script
+
+
+#This script creates a new flask project named <project>
+#from ~/projects/boilerplates/flasktemplate boilerplate
+#installs required packages and checks in the initial commit of the project
+
+cp -r ~/projects/boilerplates/flasktemplate ~/projects/flask/testproject
+cd ~/projects/flask/testproject
+#flask_home=~/projects/boilerplates
+#cd $flask_home
+#git clone git@github.com:aregsar/flasktemplate.git
+#cp -r flasktemplate mynewproject
+#cd mynewproject
+chmod -R 755 .git
+rm -rf .git
+virtualenv -p $(which python) venv
+. venv/bin/activate
+pip install -r requirements.txt
+deactivate
+git init
+git remote add origin git@github.com:aregsar/testproject.git
+git add -A
+git commit -m "initial commit"
+git push -u origin --all
+
+
+
+
+

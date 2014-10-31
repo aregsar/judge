@@ -1,0 +1,134 @@
+needcastr api
+
+
+React asp.net:
+http://reactjs.net/
+http://facebook.github.io/react/blog/2014/04/04/reactnet.html
+http://facebook.github.io/react/blog/
+-----------------------
+Spring:
+http://raibledesigns.com/rd/entry/a_webapp_makeover_with_spring
+https://devcenter.heroku.com/articles/migrating-spring-boot-apps-to-heroku-from-cloudbees
+https://spring.io/guides/gs/spring-boot/
+http://stackoverflow.com/questions/4461350/spring-mvc-and-url-generation-to-a-specific-controller
+https://github.com/resthub/springmvc-router
+http://resthub.org/
+http://stackoverflow.com/questions/8761551/how-to-generate-uri-inside-a-controller-in-spring-3
+-java spring mvc 4 url generation jsp tag plus async rest controller links:
+http://docs.spring.io/spring/docs/current/spring-framework-reference/html/new-in-4.1.html
+http://docs.spring.io/spring/docs/current/spring-framework-reference/html/new-in-4.0.html
+http://docs.spring.io/spring/docs/current/spring-framework-reference/html/remoting.html#rest-async-resttemplate
+http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-links-to-controllers-from-views
+-spring mvc 4 boot async url generator
+http://www.infoq.com/news/2013/12/spring4
+http://www.infoq.com/articles/microframeworks1-spring-boot
+http://www.infoq.com/news/2013/06/Spring_Framework_4.0_Announced
+http://www.infoq.com/presentations/spring-boot-hello-world
+http://www.codingpedia.org/ama/restful-web-services-example-in-java-with-jersey-spring-and-mybatis/
+http://zeroturnaround.com/rebellabs/beyond-rest-how-to-build-a-hateoas-api-in-java-with-spring-mvc-jersey-jax-rs-and-vraptor/
+http://www.leveluplunch.com/java/tutorials/010-building-restful-webservice-spring-mvc-boot/
+http://www.concretepage.com/spring-4/spring-4-rest-web-service-json-example-tomcat
+http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+http://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/
+http://spring.io/guides/gs/rest-service/
+http://www.programming-free.com/2014/01/spring-mvc-40-restful-web-services.html
+
+
+
+
+API:
+
+(all objects are added/edited/deleted by current_user)
+Get /needs/new
+Post /needs
+Get /needs/edit<id>
+Put /needs<id>
+Get /needs/delete<id>
+Delete /needs<id>
+Get /needs/<id>  (displays tags and tips as well)
+Get /needs
+Get /needs?page=<page> (limit10, sorted by need id desc)
+Get /user/<id>/needs
+Get /user/<id>/needs?page=<page> (limit10, sorted by need id desc)
+Get /needs/search/<keyword>/
+Get /needs/search/<keyword>/?page=<page> (limit10, sorted by need id desc)
+Get /needs/tagged/<tag>/
+Get /needs/tagged/<tag>/?page=<page> (limit10, sorted by need id desc)
+Get /needs/tag/search/< keyword >/
+Get /needs/tag/search/< keyword >/?page=<page> (limit10, sorted by need id desc)
+
+
+Get /needs/<need_id>/tips/new
+Post /needs/<need_id>/tips
+Get /tips/edit/<id> (displays need and tags as well)
+Put /tips/<id>
+Get /tips/delete/<id>
+Delete /tips/<id>
+Get /tips/<tip_id>/vote/new
+Post /tips/<tip_id>/vote
+
+
+Get /needs/<need_id>/tags/new
+Post /needs/<need_id>/tags
+Get /tags/delete/<id>
+Delete /tags/<id>
+Get /tags/search/<keyword>
+Get /tags/search/<keyword>?page=<page> (limit10, sorted by need tag text)
+
+
+object model:
+
+need:id, user_id,text,tag_count,tip_count,last_updated_at
+tip:id,need_id,text,last_updated_at
+tag:id,need_id,text
+user:id,name,email,password,need_count,tip_count,signin_token,last_signedin_at
+userlog:id, event_date,event(created,confirmed,signedin,signedout,banned,unbanned,deleted,needed,tiped,unneeded,untipped)
+
+
+-----------------------
+
+{
+"total":1000,
+"next":"http://xxx/needs/?page=3",
+"prev":"http://xxx/needs/?page=1",
+"results":[
+{id:1,text:"abcd",tagcount=10,tipcount=2,last_updated_at='10/12/13Z23:44:12'},
+{id:2,text:"xza",tagcount=10,tipcount=2,last_updated_at='10/12/13Z23:44:12'},
+{id:3,text:"cdd",tagcount=10,tipcount=2,last_updated_at='10/12/13Z23:44:12'},
+]
+}
+
+OR
+
+{
+"total":1000,
+"page":1,
+"results":[
+{id:1,text:"abcd",tagcount=10,tipcount=2,last_updated_at='10/12/13Z23:44:12'},
+{id:2,text:"xza",tagcount=10,tipcount=2,last_updated_at='10/12/13Z23:44:12'},
+{id:3,text:"cdd",tagcount=10,tipcount=2,last_updated_at='10/12/13Z23:44:12'},
+]
+}
+
+----------
+
+needcastr sharing:
+
+method 1:
+add a user as a friend
+you will show up in that users pending friends list
+if approved you will be added to their friends list
+so they will see your needs but you will not see their needs
+unless they add you as a friend which will make them
+show up in your pending friend list.
+
+if you show up in someones friend list they can ban you which will remove you
+from pending list and not allow you to show up again unless they un ban you
+but if they flag you
+you will be blocked but if hundred users flag you, you will be banned from the site to eliminate spamming.
+
+method 2:
+-add a need
+-in need detail click on a mailto: link that will pop up your device email client and add
+the link to the need to it.
+

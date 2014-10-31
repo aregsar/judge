@@ -1,0 +1,220 @@
+Restful-API
+
+------------------------
+Examples:
+
+?sort=newest
+http://stackoverflow.com/questions/tagged/javascript?page=2&sort=newest&pagesize=15
+http://stackoverflow.com/users?tab=NewUsers&sort=creationdate
+
+Get /judges
+Get /judges/search/var
+
+Get /judges?search=var
+Get/judges/method/var1/var2?sortfield1^: sortfield2&page=1&limit=10&fileld=a:b:c
+
+Get /Reviews/judge/1/reviewer/2/latest&sort= creationdate&page=1&limit=10
+Get /Reviews/judge/1/reviewer/2/latest&sort= creationdate_desc_and_votes&page=1&limit=10
+(in the responder will map creationdate_desc_and_votes to proper column expression string for sorting)
+--------------
+
+Streamlined API:
+in the reviews responder file:
+=====>Get /reviews/byuser/2/forjudge/1 ==> for_judge_by_user(judge_id,user_id)
+
+In the judges responder file:
+Get /judges ==> index()
+Get /judges/<int:page?> ==> index(int page) ?????????
+Get /judges/retired ==> retired()
+Get /judges/reviewed_by_user/1 ==> reviewed_by_user(user_id)
+Get /judges/search/abc ==> search(keyword)
+
+inside these methods we check for sort,page,limit,pagetype
+sort=sort_keyword that maps to hard coded columns
+limit=number
+page = value if page exists we check for the pagetype
+pagetype=page or beforefirst or afterlast
+the page value is filtered by the hard coded sort columns
+by default a method returns hardcoded fields
+
+
+#map to these methods
+Get /judges/1 ==> details(id)
+Post /judges ==> create(id)
+Put /judges/1 ==> edit(id)
+Delete /judges/1 ==> delete(id)
+
+Get /reviews/1
+Post /reviews
+Put /reviews/1
+Delete /reviews/1
+
+
+
+-----------------------
+API to responder mapping:
+
+Get /judges
+
+optional parammeters:
+filter=:filter
+&sort=:sort
+&afterlast=:last
+&beforefirst=:first
+&page=:page
+&limit=:limit
+&fields=field1:field2:field3
+
+Get,Put,Post /judges only optional parameter filter=:filter
+
+Get /judges/1
+Post /judges
+Post /judges/list
+Put /judges/1
+Put /judges/<filter>
+Delete /judges/1 ===> delete(id)
+Delete /judges/<filter>
+Delete /judges/retired ===> delete_retired()  or delete(filter)
+Delete /judges?retired=1 ===> delete() {if request.get("retired") }
+Delete /judges?reviewed_by_user_id=1 ===> delete_reviewed_by_user(id)
+Delete /judges/reviewed_by_user/1 ===> delete_reviewed_by_user(id)
+
+
+Get /Reviews/1
+-these three map to same endpoint
+Get /Reviews?judge_id=1
+Get /Reviews?user_id=1
+Get /Reviews?user_id=1&judge_id=1
+
+-these three map to separate endpoints
+Get /Judges/1/Reviews/ =>
+Get /Users/1/Reviews/
+Get /Users/1/Judges/1/Reviews/
+
+
+================================
+^ logical AND in filter format
+| logical OR in filter format
+() groups filter parames
+[val1,val2,val3] in clause
+[] null
+"" empty
+filter format: field=[],field=val, field<val,field1<=val^field2=val,field1<=val|field2=val
+--------------
+^ descending marker for sort field
+sort format: field:filed:filed^:field
+--------------
+
+
+
+Resource Judge (parent resource)
+Operations:
+
+-Get all fields
+Get /judges
+Get /judges?filter=:filter
+Get /judges?filter=:filter&sort=:sort
+Get /judges?filter=:filter&sort=:sort&afterlast=:last&limit=:limit
+Get /judges?filter=:filter&sort=:sort&beforefirst=:first&limit=:limit
+Get /judges?filter=:filter&sort=:sort&page=:page&limit=:limit
+
+-Get specified fields
+Get /judges?fields=field1:field2:field3
+Get /judges?filter=:filter&fields=field1:field2:field3
+Get /judges?filter=:filter&sort=:sort&fields=field1:field2:field3
+Get /judges?filter=:filter&sort=:sort&afterlast=:last&limit=:limit&fields=field1:field2:field3
+Get /judges?filter=:filter&sort=:sort&beforefirst=:first&limit=:limit&fields=field1:field2:field3
+Get /judges?filter=:filter&sort=:sort&page=:page&limit=:limit&fields=field1:field2:field3
+
+-Get all fields
+Get /judges/1
+
+-Get specifoed fields
+Get /judges/1?fields=field1:field2:field3
+
+Post /judges  (posts a single object)
+Post /judges?count=2 (posts a list)
+
+Put /judges/1
+
+Put /judges
+
+Put /judges? filter =: filter
+
+
+Delete /judges/1
+
+Delete /judges
+
+Delete /judges? filter =: filter
+
+-----------------------
+Resource Reviews (child resource)
+Operations:
+Get /reviews
+
+Get /reviews?filter=:filter
+
+Get /reviews?filter=:filter&sort=:sort
+Get /reviews?filter=:filter&sort=:sort&last=:last&limit=:limit
+Get /reviews?filter=:filter&sort=:sort&first=:first&limit=:limit
+Get /reviews?filter=:filter&sort=:sort&page=:page&limit=:limit
+
+Get /reviews&fields=:filelds
+
+Get /reviews?filter=:filter&fields=:filelds
+
+Get /reviews?filter=:filter&sort=:sort&fields=:filelds
+Get /reviews?filter=:filter&sort=:sort&last=:last&limit=:limit&fields=:filelds
+Get /reviews?filter=:filter&sort=:sort&first=:first&limit=:limit&fields=:filelds
+Get /reviews?filter=:filter&sort=:sort&page=:page&limit=:limit&fields=:filelds
+
+
+Post /reviews  (we always post a list even if count is one - post params must include the parent id)
+
+Get /reviews/1
+
+Get /reviews/1?fields=:filelds
+
+Put /reviews/1
+
+Put /reviews
+
+Put /reviews? filter =: filter
+
+Delete /reviews/1
+
+Delete /reviews
+
+Delete /reviews? filter =: filter
+
+---------------------------
+Resouce Review child of Resource Judge parent
+(Not strictly needed - special case of the filter judge_id=1 for Review resource
+operation i.e. Get /reviews?judge_id=1 )
+
+Operations:
+
+Get /judges/1/reviews
+Get /judges/1/reviews?filter=:filter
+Get /judges/1/reviews?filter=:filter&sort=:sort
+Get /judges/1/reviews?filter=:filter&sort=:sort&last=:last&limit=:limit
+Get /judges/1/reviews?filter=:filter&sort=:sort&first=:first&limit=:limit
+Get /judges/1/reviews?filter=:filter&sort=:sort&page=:page&limit=:limit
+
+
+Get /judges/1/reviews&fields=:filelds
+Get /judges/1/reviews?filter=:filter&fields=:filelds
+Get /judges/1/reviews?filter=:filter&sort=:sort&fields=:filelds
+Get /judges/1/reviews?filter=:filter&sort=:sort&last=:last&limit=:limit&fields=:filelds
+Get /judges/1/reviews?filter=:filter&sort=:sort&first=:first&limit=:limit&fields=:filelds
+Get /judges/1/reviews?filter=:filter&sort=:sort&page=:page&limit=:limit&fields=:filelds
+
+
+Put /judges/1/reviews
+
+Put /judges/1/reviews? filter =: filter
+
+Delete /judges/1/reviews
+
+Delete /judges/1/reviews? filter =: filter
