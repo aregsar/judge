@@ -76,14 +76,19 @@ def more(id):
 @login_required
 def review(id):
     review = JudgeReview.query.get(id)
-    reviewer = User.query.get(review.reviewer_id)
     if review == None:
+        return render_template("review/notfound.html")
+    reviewer = User.query.get(review.reviewer_id)
+    if reviewer == None:
+        return render_template("review/notfound.html")
+    judge = Jude.query.get(review.judge_id)
+    if judge == None:
         return render_template("review/notfound.html")
     can_show_edit_review_link = True
     if review.active:
         can_show_edit_review_link= False
     if can_view_review(review):
-        return render_template("review/review.html",reviewer = reviewer, review=review,can_show_edit_review_link=can_show_edit_review_link)
+        return render_template("review/review.html",judge=judge, reviewer = reviewer, review=review,can_show_edit_review_link=can_show_edit_review_link)
     return "forbidden" #abort(403)
 
 
