@@ -50,6 +50,14 @@ class Judge(db.Model):
         self.total_review_averages = 0
         #total_reviews_average = total_review_averages/total_reviews
         self.total_reviews_average = 0
+        self.total_knowledges = 0
+        self.total_knowledges_average = 0
+        self.total_decorum = 0
+        self.total_decorum_average = 0
+        self.total_tentatives = 0
+        self.total_tentatives_average  = 0
+        self.total_curiosity = 0
+        self.total_curiosity_average  = 0
 
     #return a string containing two css classes example: "clip-2 pos-2"
     def total_reviews_average_class(self):

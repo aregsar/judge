@@ -31,9 +31,25 @@ class User(db.Model):
     lastvisit_at = db.Column(db.DateTime,nullable=True)
     created_at = db.Column(db.DateTime,nullable=False, index=True)
     updated_at = db.Column(db.DateTime,nullable=True)
+
+    #this the total number of reviews
     total_reviews = db.Column(db.Integer,nullable=False)
+    #this is the total of the average rating for each review by this user
     total_review_averages = db.Column(db.Integer,nullable=False)
+    #this is the average of the average rating for each review by this user i.e.(total_review_averages\total_reviews)
     total_reviews_average = db.Column(db.Integer,nullable=False)
+
+
+    #this is the total of the knowledge rating for each review by this user
+    total_knowledges = db.Column(db.Integer,nullable=False)
+    #this is the average of the knowledge rating for each review by this user i.e (total_knowledges\total_reviews)
+    total_knowledges_average = db.Column(db.Integer,nullable=False)
+    total_decorum = db.Column(db.Integer,nullable=False)
+    total_decorum_average = db.Column(db.Integer,nullable=False)
+    total_tentatives = db.Column(db.Integer,nullable=False)
+    total_tentatives_average  = db.Column(db.Integer,nullable=False)
+    total_curiosity = db.Column(db.Integer,nullable=False)
+    total_curiosity_average  = db.Column(db.Integer,nullable=False)
 
     #SecureRandom.urlsafe_base64
 
@@ -66,6 +82,14 @@ class User(db.Model):
         self.total_review_averages = 0
         #total_reviews_average = total_review_averages/total_reviews
         self.total_reviews_average = 0
+        self.total_knowledges = 0
+        self.total_knowledges_average = 0
+        self.total_decorum = 0
+        self.total_decorum_average = 0
+        self.total_tentatives = 0
+        self.total_tentatives_average  = 0
+        self.total_curiosity = 0
+        self.total_curiosity_average  = 0
 
 
     def set_password(self,password):

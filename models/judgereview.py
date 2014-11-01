@@ -130,32 +130,47 @@ class JudgeReview(db.Model):
     def edit_rating(self, body, judge, reviewer,rating,knowledge,decorum,tentatives,curiosity):
         self.excerpt = (body[:10] + '...') if len(body) > 10 else body
         self.body = body
-        #remove current rating average from total
-        reviewer.total_review_averages = reviewer.total_review_averages - self.average_rating
-        judge.total_review_averages = judge.total_review_averages - self.average_rating
-        #calculate new total rating average
+        #before updating the ratings and calculating the new average_rating
+        reset_rating_averages(self, judge, reviewer)
+        #next update the review ratings and rating average
+        self.knowledge = knowledge
+        self.decorum = decorum
+        self.tentatives = tentatives
+        self.curiosity = curiosity
+        #calculate new total rating average average_rating
         ratings_total = knowledge + decorum + tentatives + curiosity
         self.average_rating = int(round(ratings_total / 4.0))
-
-
+        #finally update the rating averages
         edit_rating_averages(self, judge, reviewer)
-        #update the total averages
-        # reviewer.total_review_averages = reviewer.total_review_averages + self.average_rating
-        # reviewer.total_reviews_average =  reviewer.total_review_averages / reviewer.total_reviews
-        # judge.total_review_averages = judge.total_review_averages + self.average_rating
-        # judge.total_reviews_average =  judge.total_review_averages / judge.total_reviews
 
 
+    def reset_rating_averages(self, judge, reviewer):
+        self.reset_reviewer_rating_averages(reviewer)
+        self.reset_judge_rating_averages(judge)
+
+    def reset_reviewer_rating_averages(self,reviewer):
+        #remove current rating average from rating average total
+        reviewer.total_review_averages = reviewer.total_review_averages - self.average_rating
+        #remove current knowledge rating from knowledge rating total
+        reviewer.total_knowledges = reviewer.total_knowledges - self.knowledge
+        reviewer.total_decorum = reviewer.total_decorum - self.decorum
+        reviewer.total_tentatives = reviewer.total_tentatives - self.tentatives
+        reviewer.total_curiosity = reviewer.total_curiosity - self.curiosity
+
+    def reset_judge_rating_averages(self, judge):
+        #remove current rating average from rating average total
+        judge.total_review_averages = judge.total_review_averages - self.average_rating
+        #remove current knowledge rating from knowledge rating total
+        judge.total_knowledges = judge.total_knowledges - self.knowledge
+        judge.total_decorum = judge.total_decorum - self.decorum
+        judge.total_tentatives = judge.total_tentatives - self.tentatives
+        judge.total_curiosity = judge.total_curiosity - self.curiosity
 
     def edit_rating_averages(self, judge, reviewer):
         self.add_reviewer_rating_averages(reviewer)
         self.add_judge_rating_averages(judge)
 
     def edit_reviewer_rating_averages(self,reviewer):
-        # reviewer.total_review_averages = reviewer.total_review_averages + self.average_rating
-        # reviewer.total_reviews_average =  reviewer.total_review_averages / reviewer.total_reviews
-        #keep the total reviews count by the reviewer
-        reviewer.total_reviews = reviewer.total_reviews + 1
         #keep a total of the average rating for each review by the reviewer
         reviewer.total_review_averages = reviewer.total_review_averages + self.average_rating
         #calculate the average of all the average ratings of the reviews by the reviewer
@@ -180,11 +195,6 @@ class JudgeReview(db.Model):
 
 
     def edit_judge_rating_averages(self, judge):
-        # judge.total_review_averages = judge.total_review_averages + self.average_rating
-        # judge.total_reviews_average =  judge.total_review_averages / judge.total_reviews
-
-        #keep the total reviews count for the judge
-        judge.total_reviews = judge.total_reviews + 1
         #keep a total of the average rating for each review for the judge
         judge.total_review_averages = judge.total_review_averages + self.average_rating
         #calculate the average of all the average ratings of the reviews for the judge
