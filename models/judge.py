@@ -1,4 +1,4 @@
-from plugins import db, bcrypt,login_manager,flaskuuid
+from plugins import db, bcrypt,login_manager,flaskuuid, current_app
 from flask.ext.login import make_secure_token
 from datetime import datetime
 import uuid
@@ -70,6 +70,22 @@ class Judge(db.Model):
         #clip-n class will clip the nth row and
         #pos-n class will shift the n-th row to position 0 in the browser viewport
         return 'clip-' + judgerating + ' pos-' + judgerating
+
+    def knowledge_class(self):
+        reviewrating = str(self.total_knowledges_average * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def decorum_class(self):
+        reviewrating = str(self.total_decorum_average * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def tentatives_class(self):
+        reviewrating = str(self.total_tentatives_average * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def curiosity_class(self):
+        reviewrating = str(self.total_curiosity_average * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
 
     # def total_reviews_average_clip(self):
     #     return 'clip-' + str(self.total_reviews_average)

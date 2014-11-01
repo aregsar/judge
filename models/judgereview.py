@@ -1,4 +1,4 @@
-from plugins import db, bcrypt,login_manager,flaskuuid
+from plugins import db, bcrypt,login_manager,flaskuuid, current_app
 from flask.ext.login import make_secure_token
 from datetime import datetime
 import uuid
@@ -34,7 +34,8 @@ class JudgeReview(db.Model):
 
         self.judge_id = judge_id #judge.id
         self.judge_name = judge_name #judge.name
-        self.excerpt = (body[:10] + '...') if len(body) > 10 else body
+        excerpt_length = current_app.config['REVIEW_SUMMARY_LENGTH']
+        self.excerpt = (body[:excerpt_length] + '...') if len(body) > excerpt_length else body
         self.body = body
         self.knowledge = knowledge
         self.decorum = decorum
@@ -53,13 +54,10 @@ class JudgeReview(db.Model):
         reviewrating = str(self.average_rating * 2)
         return 'clip-' + reviewrating + ' pos-' + reviewrating
 
-    def rating_class(self):
-        reviewrating = str(self.rating * 2)
-        return 'clip-' + reviewrating + ' pos-' + reviewrating
-
     def knowledge_class(self):
         reviewrating = str(self.knowledge * 2)
         return 'clip-' + reviewrating + ' pos-' + reviewrating
+
     def decorum_class(self):
         reviewrating = str(self.decorum * 2)
         return 'clip-' + reviewrating + ' pos-' + reviewrating
@@ -128,7 +126,8 @@ class JudgeReview(db.Model):
 
 
     def edit_rating(self, body, judge, reviewer,rating,knowledge,decorum,tentatives,curiosity):
-        self.excerpt = (body[:10] + '...') if len(body) > 10 else body
+        excerpt_length = current_app.config['REVIEW_SUMMARY_LENGTH']
+        self.excerpt = (body[:summary_length] + '...') if len(body) > summary_length else body
         self.body = body
         #before updating the ratings and calculating the new average_rating
         reset_rating_averages(self, judge, reviewer)

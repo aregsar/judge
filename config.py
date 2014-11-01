@@ -15,8 +15,14 @@ class Config:
 
     #ENV can be set to "DEV" or "TEST" or "STAGE" or "PROD"
     ENV = os.environ.get('FLASK_ENVIRONMENT')
+    SECRET_KEY = os.environ['SECRET_KEY']
+    #SECRET_KEY = os.environ.get('JUDGE_SECRET_KEY')
     DEBUG = bool(os.environ.get('FLASK_DEBUG'))
     DEBUG_TB_INTERCEPT_REDIRECTS = False
+    #secret key generation from python shell
+    #import os
+    #os.urandom(24)
+    #export SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
     #SSL_DISABLE = False
 
     #SqlAlchemy looks for this specific app.config['SQLALCHEMY_DATABASE_URL']
@@ -26,13 +32,8 @@ class Config:
     SQLALCHEMY_RECORD_QUERIES = True #records queries
     #SQLALCHEMY_ECHO = True #logs queries
 
-    #secret key generation from python shell
-    #import os
-    #os.urandom(24)
-    #export SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
-    SECRET_KEY = os.environ['SECRET_KEY']
-    #SECRET_KEY = os.environ.get('JUDGE_SECRET_KEY')
 
+    REVIEW_SUMMARY_LENGTH = 30 #bool(os.environ.get('JUDGE_REVIEW_SUMMARY_LENGTH'))
     JUDGE_JUDGES_PER_PAGE = 20
     JUDGE_JUDGE_REVIEWS_PAGE = 50
     JUDGE_USERS_PER_PAGE = 30

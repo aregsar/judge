@@ -1,4 +1,4 @@
-from plugins import db, bcrypt,login_manager,flaskuuid
+from plugins import db, bcrypt,login_manager,flaskuuid, current_app
 from flask.ext.login import make_secure_token
 from flask.ext.login import current_user
 from datetime import datetime
@@ -91,6 +91,33 @@ class User(db.Model):
         self.total_curiosity = 0
         self.total_curiosity_average  = 0
 
+    #return a string containing two css classes example: "clip-2 pos-2"
+    def total_reviews_average_class(self):
+        #there are 10 rows of 5 gavel rating bitmaps.(first row 0 gavels is not used)
+        #0 gvls, 1 gvl,1.5 gvls, 2 gvls,2.5 gvls, 3 gvls, 3.5 gvls, 4 gvls, 4.5 gvls, 5gvls
+        #ratings selections are 1 to 5 so since we dont use the 0 gavels first bitmap row
+        #we multipy the rating by two to get the rating bitmap row number starting with row 2:
+        #1 * 2 = row 2, 1.5 * 2 = row 3, 2 * 2 = row 4, ..., 4.5 * 2 = row 9, 5 * 2 = row 10
+        judgerating = str(self.total_reviews_average * 2)
+        #clip-n class will clip the nth row and
+        #pos-n class will shift the n-th row to position 0 in the browser viewport
+        return 'clip-' + judgerating + ' pos-' + judgerating
+
+    def knowledge_class(self):
+        reviewrating = str(self.total_knowledges_average * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def decorum_class(self):
+        reviewrating = str(self.total_decorum_average * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def tentatives_class(self):
+        reviewrating = str(self.total_tentatives_average * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
+
+    def curiosity_class(self):
+        reviewrating = str(self.total_curiosity_average * 2)
+        return 'clip-' + reviewrating + ' pos-' + reviewrating
 
     def set_password(self,password):
         self.password = bcrypt.generate_password_hash(password)
