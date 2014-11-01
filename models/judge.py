@@ -7,6 +7,7 @@ class Judge(db.Model):
     __tablename__ = "judges"
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(255),nullable=False,  index=True)
+    name_lower = db.Column(db.String(255),nullable=False,  index=True)
 
     #for ative judges scope options are 1-federal or 2-state
     #for retired judges scope options are 1-mediator, 2-arbitrator, 3-both
@@ -40,6 +41,7 @@ class Judge(db.Model):
 
     def __init__(self,name,state,scope,retired=False,court=None,district=None):
         self.name = name
+        self.name_lower = name.lower()
         self.scope = scope
         self.state = state
         self.retired = retired

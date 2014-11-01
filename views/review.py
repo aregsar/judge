@@ -58,7 +58,7 @@ def index(id):
     judge = Judge.query.get(id)
     if judge == None:
         return render_template("judge/notfound.html")
-    reviews = JudgeReview.query.filter_by(judge_id=id,active=True).order_by(JudgeReview.id.desc()).limit(20).all()
+    reviews = JudgeReview.query.filter_by(judge_id=id,active=True).order_by(JudgeReview.id.desc()).all()
     return render_template("review/index.html",reviews=reviews,judge=judge)
 
 #TODO:ajax load more
@@ -70,7 +70,7 @@ def more(id):
         return render_template("judge/notfound.html")
     #reviews = JudgeReview.query.filter_by(judge_id=id,active=True).filter(JudgeReview.id > last_review_id).order_by(JudgeReview.id.desc()).limit(20).all()
     reviews = []
-    return render_template("review/index.html",reviews=reviews)
+    return render_template("review/index.html",reviews=reviews,judge=judge)
 
 @mod.route('/review/<id>')
 @login_required
@@ -103,6 +103,18 @@ def add(id):
     if review == None:
         form = AddReviewForm()
         if form.validate_on_submit():
+            # review = JudgeReview(
+            #                     body=form.body.data,
+            #                     rating= int(form.rating.data),
+            #                     knowledge= int(form.knowledge.data),
+            #                     decorum= int(form.decorum.data),
+            #                     tentatives= int(form.tentatives.data),
+            #                     curiosity= int(form.curiosity.data),
+            #                     judge_id = judge.id,
+            #                     judge_name = judge.name,
+            #                     reviewer_id = current_user.id,
+            #                     reviewer_name = current_user.username)
+            # review.add_rating_averages(judge, current_user)
             review = JudgeReview(
                                 body=form.body.data,
                                 rating= int(form.rating.data),
@@ -110,13 +122,9 @@ def add(id):
                                 decorum= int(form.decorum.data),
                                 tentatives= int(form.tentatives.data),
                                 curiosity= int(form.curiosity.data),
-                                judge_id = judge.id,
-                                judge_name = judge.name,
-                                #judge= judge,
-                                #current_user=current_user
-                                reviewer_id = current_user.id,
-                                reviewer_name = current_user.username)
-            review.add_rating_averages(judge, current_user)
+                                judge= judge,
+                                reviewer=current_user
+                              )
             db.session.add(review)
             db.session.commit()
             #return redirect(url_for('review.index',id=judge.id))

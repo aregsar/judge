@@ -59,27 +59,31 @@ def sitting():
     #     print judge.name
     return render_template("judge/sitting.html",judges=judges)
 
+
+##NOT USED
 @mod.route('/judge/retired')
 @login_required
 def retired():
     judges= Judge.query.filter_by(retired=True).order_by(Judge.id.desc()).all()
     return render_template("judge/retired.html",judges=judges)
 
-
+##NOT USED
 @mod.route('/judge')
 @login_required
 def index():
     name = request.args.get('name')
     # print name
     form = JudgeSearchForm(name=name)
+    name = name.lower()
+    limit = current_app.config['JUDGE_LIST_LIMIT']
     if name != 'all':
         #User.query.filter(User.email.in_(('x1@dom1.com', 'x2@dom2.com')))
         #Judge.name.startswith(name)
-        judges= Judge.query.filter(Judge.name.like('%' + name + '%')).filter_by(state='CA').order_by(Judge.name).limit(20).all()
+        judges= Judge.query.filter(Judge.name_lower.like('%' + name + '%')).filter_by(state='CA').order_by(Judge.name).limit(limit).all()
         #judges= Judge.query.filter(Judge.name == u'Andre Birotte Jr.').order_by(Judge.name).all()
         #judges= Judge.query.filter(Judge.name == name).order_by(Judge.name).all()
     else:
-        judges= Judge.query.filter_by(state='CA').order_by(Judge.name).limit(20).all()
+        judges= Judge.query.filter_by(state='CA').order_by(Judge.name).limit(limit).all()
     message = None
     if len(judges) == 0:
         message = "Didn't find your judge? Submit them for review by clicking here."

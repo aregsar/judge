@@ -29,11 +29,29 @@ class JudgeReview(db.Model):
 
 
 
-    def __init__(self,body,rating,knowledge,decorum,tentatives,curiosity,
-                 judge_id, judge_name,reviewer_name,reviewer_id,title=None):
+    # def __init__(self,body,rating,knowledge,decorum,tentatives,curiosity,
+    #              judge_id, judge_name,reviewer_name,reviewer_id,title=None):
+    #     self.judge_id = judge_id #judge.id
+    #     self.judge_name = judge_name #judge.name
+    #     excerpt_length = current_app.config['REVIEW_SUMMARY_LENGTH']
+    #     self.excerpt = (body[:excerpt_length] + '...') if len(body) > excerpt_length else body
+    #     self.body = body
+    #     self.knowledge = knowledge
+    #     self.decorum = decorum
+    #     self.tentatives = tentatives
+    #     self.curiosity = curiosity
+    #     self.reviewer_name = reviewer_name #current_user.username
+    #     self.reviewer_id = reviewer_id #current_user.id
+    #     self.created_at = datetime.utcnow()
+    #     self.active =  True
+    #     self.removed = False
+    #     ratings_total = knowledge + decorum + tentatives + curiosity
+    #     self.average_rating = int(round(ratings_total / 4.0))
 
-        self.judge_id = judge_id #judge.id
-        self.judge_name = judge_name #judge.name
+    def __init__(self,body,rating,knowledge,decorum,tentatives,curiosity,
+                 judge,reviewer,title=None):
+        self.judge_id = judge.id
+        self.judge_name = judge.name
         excerpt_length = current_app.config['REVIEW_SUMMARY_LENGTH']
         self.excerpt = (body[:excerpt_length] + '...') if len(body) > excerpt_length else body
         self.body = body
@@ -41,14 +59,14 @@ class JudgeReview(db.Model):
         self.decorum = decorum
         self.tentatives = tentatives
         self.curiosity = curiosity
-        self.reviewer_name = reviewer_name #current_user.username
-        self.reviewer_id = reviewer_id #current_user.id
+        self.reviewer_name = reviewer.username
+        self.reviewer_id = reviewer.id
         self.created_at = datetime.utcnow()
         self.active =  True
         self.removed = False
-
         ratings_total = knowledge + decorum + tentatives + curiosity
         self.average_rating = int(round(ratings_total / 4.0))
+        self.add_rating_averages(judge, reviewer)
 
     def average_rating_class(self):
         reviewrating = str(self.average_rating * 2)
