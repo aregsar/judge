@@ -29,12 +29,11 @@ class User(db.Model):
     signedin_at = db.Column(db.DateTime,nullable=True)
     banned = db.Column(db.Boolean,nullable=False)
     lastvisit_at = db.Column(db.DateTime,nullable=True)
+    created_at = db.Column(db.DateTime,nullable=False, index=True)
+    updated_at = db.Column(db.DateTime,nullable=True)
     total_reviews = db.Column(db.Integer,nullable=False)
     total_review_averages = db.Column(db.Integer,nullable=False)
     total_reviews_average = db.Column(db.Integer,nullable=False)
-    created_at = db.Column(db.DateTime,nullable=False, index=True)
-    updated_at = db.Column(db.DateTime,nullable=True)
-
 
     #SecureRandom.urlsafe_base64
 
