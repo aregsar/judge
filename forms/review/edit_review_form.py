@@ -11,7 +11,6 @@ RATING_SELECT_CHOICES = [('1', '1'),('2', '2'),
 ('3', '3'),('4', '4'),('5', '5')]
 
 class EditReviewForm(Form):
-    rating = RadioField('rating', choices=RATING_CHOICES,default='5', validators=[Required()])
     knowledge = RadioField('knowledge', choices=RATING_CHOICES, validators=[Required()])
     decorum = RadioField('decorum', choices=RATING_CHOICES, validators=[Required()])
     tentatives = RadioField('tentatives', choices=RATING_CHOICES, validators=[Required()])

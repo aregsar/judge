@@ -10,9 +10,7 @@
 
         <div class="blog-header ">
 <form method="POST" action="{{ url_for('review.edit', id=review.id) }}" class="form-signin" role="form">
-             <label for="rating">Overall Rating</label>
-  {{form.rating(class='form-control',required=True)}}
-<label for="knowledge">Knowledge of the law</label>
+  <label for="knowledge">Knowledge of the law</label>
   {{form.knowledge(class='form-control',required=True)}}
   <label for="decorum">Courtroom decorum</label>
   {{form.decorum(class='form-control',required=True)}}

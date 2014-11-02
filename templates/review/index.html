@@ -42,6 +42,22 @@
           <img alt="gavel" class="{{judge.total_reviews_average_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.knowledge_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.decorum_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.tentatives_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.tentatives_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div>
       {% endif%}
       {{judge.total_reviews}}&nbsp;review{%if judge.total_reviews != 1 %}s{% endif%}
       <a href="{{url_for('review.add',id=judge.id)}}">add a review</a>
