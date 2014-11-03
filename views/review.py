@@ -81,7 +81,7 @@ def review(id):
     reviewer = User.query.get(review.reviewer_id)
     if reviewer == None:
         return render_template("review/notfound.html")
-    judge = Jude.query.get(review.judge_id)
+    judge = Judge.query.get(review.judge_id)
     if judge == None:
         return render_template("review/notfound.html")
     can_show_edit_review_link = True
@@ -117,7 +117,6 @@ def add(id):
             # review.add_rating_averages(judge, current_user)
             review = JudgeReview(
                                 body=form.body.data,
-                                rating= int(form.rating.data),
                                 knowledge= int(form.knowledge.data),
                                 decorum= int(form.decorum.data),
                                 tentatives= int(form.tentatives.data),
@@ -166,7 +165,6 @@ def edit(id):
         if current_user.user_role == "admin":
             form = EditReviewAdminForm(
                                         body=review.body,
-                                        rating= str(review.rating),
                                         knowledge= str(review.knowledge),
                                         decorum= str(review.decorum),
                                         tentatives= str(review.tentatives),

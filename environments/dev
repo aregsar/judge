@@ -1,9 +1,9 @@
 #!/bin/bash
-JUDGE_DEBUG=True
+export JUDGE_DEBUG=True
 echo $JUDGE_DEBUG
-JUDGE_SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
+export JUDGE_SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
 echo $JUDGE_SECRET_KEY
-JUDGE_ENV=DEV
+export JUDGE_ENV=DEV
 echo $JUDGE_ENV
-DATABASE_URL=postgres://localhost/judgedb
+export DATABASE_URL=postgres://localhost/judgedb
 echo $DATABASE_URL

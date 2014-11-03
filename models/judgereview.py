@@ -49,7 +49,7 @@ class JudgeReview(db.Model):
     #     ratings_total = knowledge + decorum + tentatives + curiosity
     #     self.average_rating = int(round(ratings_total / 4.0))
 
-    def __init__(self,body,rating,knowledge,decorum,tentatives,curiosity,
+    def __init__(self,body,knowledge,decorum,tentatives,curiosity,
                  judge,reviewer,title=None):
         self.judge_id = judge.id
         self.judge_name = judge.name
