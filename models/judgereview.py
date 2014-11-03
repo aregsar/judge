@@ -174,6 +174,12 @@ class JudgeReview(db.Model):
         reviewer.total_decorum = reviewer.total_decorum - self.decorum
         reviewer.total_tentatives = reviewer.total_tentatives - self.tentatives
         reviewer.total_curiosity = reviewer.total_curiosity - self.curiosity
+        # print "reviewer"
+        # print "total_review_averages = " + str(reviewer.total_review_averages)
+        # print "total_knowledges = " + str(reviewer.total_knowledges)
+        # print "total_decorum = " + str(reviewer.total_decorum)
+        # print "total_tentatives = " + str(reviewer.total_tentatives)
+        # print "total_curiosity = " + str(reviewer.total_curiosity)
 
     def reset_judge_rating_averages(self, judge):
         #remove current rating average from rating average total
@@ -183,10 +189,16 @@ class JudgeReview(db.Model):
         judge.total_decorum = judge.total_decorum - self.decorum
         judge.total_tentatives = judge.total_tentatives - self.tentatives
         judge.total_curiosity = judge.total_curiosity - self.curiosity
+        # print "judge"
+        # print "total_review_averages = " + str(judge.total_review_averages)
+        # print "total_knowledges = " + str(judge.total_knowledges)
+        # print "total_decorum = " + str(judge.total_decorum)
+        # print "total_tentatives = " + str(judge.total_tentatives)
+        # print "total_curiosity = " + str(judge.total_curiosity)
 
     def edit_rating_averages(self, judge, reviewer):
-        self.add_reviewer_rating_averages(reviewer)
-        self.add_judge_rating_averages(judge)
+        self.edit_reviewer_rating_averages(reviewer)
+        self.edit_judge_rating_averages(judge)
 
     def edit_reviewer_rating_averages(self,reviewer):
         #keep a total of the average rating for each review by the reviewer
@@ -209,7 +221,14 @@ class JudgeReview(db.Model):
         reviewer.total_curiosity = reviewer.total_curiosity + self.curiosity
         #calculate the average of all the average ratings of the reviews by the reviewer
         reviewer.total_curiosity_average =  reviewer.total_curiosity / reviewer.total_reviews
-
+        # print "reviewer updated"
+        # print "total_review_averages = " + str(reviewer.total_review_averages)
+        # print "total_knowledges = " + str(reviewer.total_knowledges)
+        # print "total_decorum = " + str(reviewer.total_decorum)
+        # print "total_tentatives = " + str(reviewer.total_tentatives)
+        # print "total_curiosity = " + str(reviewer.total_curiosity)
+        # print "total_reviews_average = " + str(reviewer.total_reviews_average)
+        # print "total_knowledges_average = " + str(reviewer.total_knowledges_average)
 
 
     def edit_judge_rating_averages(self, judge):
@@ -233,4 +252,12 @@ class JudgeReview(db.Model):
         judge.total_curiosity = judge.total_curiosity + self.curiosity
         #calculate the average of all the average ratings of the reviews for the judge
         judge.total_curiosity_average =  judge.total_curiosity / judge.total_reviews
+        # print "judge updated"
+        # print "total_review_averages = " + str(judge.total_review_averages)
+        # print "total_knowledges = " + str(judge.total_knowledges)
+        # print "total_decorum = " + str(judge.total_decorum)
+        # print "total_tentatives = " + str(judge.total_tentatives)
+        # print "total_curiosity = " + str(judge.total_curiosity)
+        # print "total_reviews_average = " + str(judge.total_reviews_average)
+        # print "total_knowledges_average = " + str(judge.total_knowledges_average)
 

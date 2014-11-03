@@ -160,9 +160,9 @@ def edit(id):
     review = JudgeReview.query.get(id)
     if review == None:
         return render_template("review/notfound.html")
-    reviewer = User.query.get(review.reviewer_id)
-    if reviewer == None:
-        return render_template("review/notfound.html")
+    # reviewer = User.query.get(review.reviewer_id)
+    # if reviewer == None:
+    #     return render_template("review/notfound.html")
     judge = Judge.query.get(review.judge_id)
     if judge == None:
         return render_template("review/notfound.html")
@@ -180,7 +180,7 @@ def edit(id):
             if form.validate_on_submit():
                 review.edit_rating( form.body.data,
                                    judge,
-                                   reviewer,
+                                   current_user,
                                    int(form.knowledge.data),
                                    int(form.decorum.data),
                                    int(form.tentatives.data),
@@ -209,7 +209,7 @@ def edit(id):
             if form.validate_on_submit():
                 review.edit_rating( form.body.data,
                                    judge,
-                                   reviewer,
+                                   current_user,
                                    int(form.knowledge.data),
                                    int(form.decorum.data),
                                    int(form.tentatives.data),
