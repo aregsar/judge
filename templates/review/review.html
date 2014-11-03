@@ -9,80 +9,92 @@
          Judge <a href="{{ url_for('review.index',id=review.judge_id) }}">{{review.judge_name}}</a>
          <br />
         {{judge.court}}<br />
-
+      {{judge.total_reviews}}&nbsp;review{%if judge.total_reviews != 1 %}s{% endif%}
       {%if judge.total_reviews > 0 %}
+        <h5>Average rating</h5>
         <div class="rating">
           <img alt="gavel" class="{{judge.total_reviews_average_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+        </div><br />
+        <h5>Average rating for Knowledge of the law</h5>
         <div class="rating">
           <img alt="gavel" class="{{judge.knowledge_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+        </div><br />
+        <h5>Average rating for Courtroom decorum</h5>
         <div class="rating">
           <img alt="gavel" class="{{judge.decorum_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+        </div><br />
+        <h5>Average rating for Issues tentatives</h5>
         <div class="rating">
           <img alt="gavel" class="{{judge.tentatives_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+        </div><br />
+        <h5>Average rating for Curiosity towards attorneys</h5>
         <div class="rating">
           <img alt="gavel" class="{{judge.curiosity_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div>
       {% endif%}
-      {{judge.total_reviews}}&nbsp;review{%if judge.total_reviews != 1 %}s{% endif%}
     </p>
   <!-- </div> -->
+<br /><br />
+ <p class="lead blog-description">
 
 
-
-      Reviewed by <a href="{{url_for('user.profile',id=reviewer.id)}}">{{reviewer.username}}</a>
-    {%if reviewer.total_reviews > 0 %}
+      Reviewer <a href="{{url_for('user.profile',id=reviewer.id)}}">{{reviewer.username}}</a><br />
+      {{reviewer.total_reviews}}&nbsp;review{%if reviewer.total_reviews != 1 %}s{% endif%}<br />
+      {%if reviewer.total_reviews > 0 %}
+        <h5>Average of ratings given by reviewer</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.total_reviews_average_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+        </div><br />
+        <h5>Average of all Knowledge of the law ratings given by reviewer</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.knowledge_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+        </div><br />
+        <h5>Average of all Courtroom decorum given by reviewer</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.decorum_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+        </div><br />
+        <h5>Average of all Issues tentatives given by reviewer</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.tentatives_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+        </div><br />
+        <h5>Average  of all uriosity towards attorneys given by reviewer</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.curiosity_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div>
       {% endif%}
 
+ </p>
+<br /><br />
+ <p class="lead blog-description">
 
-         ({{reviewer.total_reviews}}&nbsp;review
 
-        {%if reviewer.total_reviews != 1 %}s{% endif%})<br />
-        {{review.created_at.strftime('%Y-%m-%d') }}<br />
+        Review on {{review.created_at.strftime('%Y-%m-%d') }}<br />
         {% if current_user.user_role == "admin" %}
                 <a href="{{url_for('review.edit',id=review.id)}}">edit</a>
         {% endif %}
 
-
+ </p>
 
 
 
  <div class="blog-header ">
 
 
-          <h4>Average review rating</h4>
+          <h5>Average rating for this review</h5>
           <div class="rating">
           <img alt="gavel" class="{{review.average_rating_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-          </div><br /><br />
+          </div><br />
 
           <h5>Knowledge of the law</h5>
           <div class="rating">
@@ -106,9 +118,10 @@
           <div class="rating">
           <img alt="gavel" class="{{review.curiosity_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-          </div><br /><br />
+          </div><br />
 
-          <h3>Review</h3>
+<br />
+
 
         {{review.body}}<br />
 
