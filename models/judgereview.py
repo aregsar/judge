@@ -144,12 +144,12 @@ class JudgeReview(db.Model):
         judge.total_curiosity_average =  judge.total_curiosity / judge.total_reviews
 
 
-    def edit_rating(self, body, judge, reviewer,rating,knowledge,decorum,tentatives,curiosity):
+    def edit_rating(self, body, judge, reviewer,knowledge,decorum,tentatives,curiosity):
         excerpt_length = current_app.config['REVIEW_SUMMARY_LENGTH']
-        self.excerpt = (body[:summary_length] + '...') if len(body) > summary_length else body
+        self.excerpt = (body[:excerpt_length] + '...') if len(body) > excerpt_length else body
         self.body = body
         #before updating the ratings and calculating the new average_rating
-        reset_rating_averages(self, judge, reviewer)
+        self.reset_rating_averages(judge, reviewer)
         #next update the review ratings and rating average
         self.knowledge = knowledge
         self.decorum = decorum
@@ -159,7 +159,7 @@ class JudgeReview(db.Model):
         ratings_total = knowledge + decorum + tentatives + curiosity
         self.average_rating = int(round(ratings_total / 4.0))
         #finally update the rating averages
-        edit_rating_averages(self, judge, reviewer)
+        self.edit_rating_averages(judge, reviewer)
 
 
     def reset_rating_averages(self, judge, reviewer):

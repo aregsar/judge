@@ -1,8 +1,7 @@
 {% extends "signedin.html" %}
 {% block body %}
 <div class="container">
-
-  <div class="blog-header ">
+  <!-- <div class="blog-header "> -->
     <p class="lead blog-description">
       {# % if reviews|length > 0 %}
         Reviews For Judge
@@ -11,30 +10,27 @@
       {% endif% #}
       <br />
       {#<a href="{{ url_for('judge.profile',id=judge.id) }}">{{judge.name}}</a><br />#}
-{{judge.name}}<br />
+      {{judge.name}}<br />
 
-{#State: {{judge.state}}<br />#}
-
-
-{%if judge.retired%}
-  Retired&nbsp;
-  {%if judge.scope == 1 %}
-     Moderator
-  {%else%}
-     Arbitrator
-  {%endif%}
-{%else%}
-  {%if judge.scope == 1 %}
-     Federal Judge
-  {%else%}
-     State Judge
-  {%endif%}
-{%endif%}
-
-{{judge.court}}<br />
+      {#State: {{judge.state}}<br />#}
 
 
+      {%if judge.retired%}
+        Retired&nbsp;
+        {%if judge.scope == 1 %}
+           Moderator
+        {%else%}
+           Arbitrator
+        {%endif%}
+      {%else%}
+        {%if judge.scope == 1 %}
+           Federal Judge
+        {%else%}
+           State Judge
+        {%endif%}
+      {%endif%}
 
+      {{judge.court}}<br />
 
 
       {%if judge.total_reviews > 0 %}
@@ -62,9 +58,9 @@
       {{judge.total_reviews}}&nbsp;review{%if judge.total_reviews != 1 %}s{% endif%}
       <a href="{{url_for('review.add',id=judge.id)}}">add a review</a>
     </p>
-  </div>
+ <!--  </div>  -->
 
-    <div class="blog-header ">
+  <div class="blog-header ">
 
     {#{% if reviews|length > 0 %}
        <p class="lead blog-description">Reviews</p>
@@ -105,6 +101,8 @@
        {#<a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>#}
       {% endfor %}
     {% endif%}
-  </div>
+  </div><!--  <div class="blog-header "> -->
+
+
 </div>
 {% endblock %}}

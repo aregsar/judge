@@ -160,6 +160,12 @@ def edit(id):
     review = JudgeReview.query.get(id)
     if review == None:
         return render_template("review/notfound.html")
+    reviewer = User.query.get(review.reviewer_id)
+    if reviewer == None:
+        return render_template("review/notfound.html")
+    judge = Judge.query.get(review.judge_id)
+    if judge == None:
+        return render_template("review/notfound.html")
     #if current_user.id == review.reviewer_id or current_user.user_role == "admin":
     if can_edit_review(review):
         if current_user.user_role == "admin":
@@ -172,12 +178,18 @@ def edit(id):
                                         active = review.active,
                                         removed = review.removed)
             if form.validate_on_submit():
-                review.body = form.body.data
-                review.rating= int(form.rating.data)
-                review.knowledge= int(form.knowledge.data)
-                review.decorum= int(form.decorum.data)
-                review.tentatives= int(form.tentatives.data)
-                review.curiosity= int(form.curiosity.data)
+                review.edit_rating( form.body.data,
+                                   judge,
+                                   reviewer,
+                                   int(form.knowledge.data),
+                                   int(form.decorum.data),
+                                   int(form.tentatives.data),
+                                   int(form.curiosity.data))
+                # review.body = form.body.data
+                # review.knowledge= int(form.knowledge.data)
+                # review.decorum= int(form.decorum.data)
+                # review.tentatives= int(form.tentatives.data)
+                # review.curiosity= int(form.curiosity.data)
                 if current_user.user_role == "admin":
                     review.active = form.active.data
                     review.removed = form.removed.data
@@ -195,12 +207,18 @@ def edit(id):
                                     curiosity= str(review.curiosity),
                                     rating=str(review.rating))
             if form.validate_on_submit():
-                review.body = form.body.data
-                review.rating= int(form.rating.data)
-                review.knowledge= int(form.knowledge.data)
-                review.decorum= int(form.decorum.data)
-                review.tentatives= int(form.tentatives.data)
-                review.curiosity= int(form.curiosity.data)
+                review.edit_rating( form.body.data,
+                                   judge,
+                                   reviewer,
+                                   int(form.knowledge.data),
+                                   int(form.decorum.data),
+                                   int(form.tentatives.data),
+                                   int(form.curiosity.data))
+                # review.body = form.body.data
+                # review.knowledge= int(form.knowledge.data)
+                # review.decorum= int(form.decorum.data)
+                # review.tentatives= int(form.tentatives.data)
+                # review.curiosity= int(form.curiosity.data)
                 db.session.commit()
                 return redirect(url_for('review.review',id=review.id))
             return render_template("review/edit.html",form=form,review=review)
