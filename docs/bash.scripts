@@ -6,6 +6,7 @@
 #
 cd ~/flaskprojects/judge
 . venv/bin/activate
+. ~/flaskprojects/judge/environments/dev
 subl .
 open -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome http://localhost:5000
 python app.py runserver --host 0.0.0.0

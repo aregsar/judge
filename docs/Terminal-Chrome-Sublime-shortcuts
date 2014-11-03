@@ -1,66 +1,61 @@
 OSX Keybindings:
 
-
-
 All apps:
-cmd:/    -fullscreen active app
 cmd+Q  -quit active app
 
-
-Terminal:
-cmd+N  -open new window
-cmd+T  -add new tab
-cmd+]   -next tab
-cmd+[   -previous tab
-opt+cmd+/    -close tab or ignore command on last tab
-cmd+shift+W    -close window
-
-Chrome:
+Terminal,Chrome,Sublime Text
+cmd+]   -cycle through next tabs
+cmd+[   -cycle through previous tabs
+cmd+T   -add new tab to current window
 cmd+N   -open new window
-cmd+T   -add new tab
-cmd+]   -next tab
-cmd+[   -previous tab
-opt+cmd+/    -close tab or close window on last tab
-cmd+shift+W    -close window
-cmd+L       -focus address bar and highlight text if any
-cmd+R -refresh page
+opt+cmd+.    -close current tab
+cmd+shift+W    -close current window
+
+Additionally in Chrome:
 opt+cmd+]  -navigate forward in history
 opt+cmd+[  -navigate backward in history
+cmd+R   -refresh page
+cmd+L   -focus address bar and highlight text if any
 
-
-Sublime:
-cmd+N    -add new tab(cmd+T)
-cmd+]   -next tab
-cmd+[   -previous tab
-opt+cmd+/    -close tab or close window on last tab
-cmd+shift+W   -close window
-cmd+shift+N   -close all tabs but not the window(cmd+shift+/)
-opt+cmd+S   -save all
-cmd+F -find
-cmd+P -goto
-cmd+e -find selected text
+Additionally in  Sublime Text:
 fn+F5 -refresh folders
-
-
-Sublime\Python:
 opt+cmd+/  -toggle comments for cursor line or multiline selection
+opt+cmd+S   -save all
+cmd+s -save
+cmd+P -toggle search box
+cmd+F -open find bar
+cmd+shift+F -open find in files bar
 
 
-sublime key map to OSX conversions:
-super == cmd
-ctrl == ctrl
-alt == opt
+To get these mappings :
 
+For Terminal: map keys via OSX settings app
+Select Net Tab ==> cmd+]
+Select Previous Tab ==> cmd+[
+Close Tab ==> opt+cmd+.
 
-Preferences > Key Bindings > User:
+For Chrome: map keys via OSX settings app
+Select Net Tab ==> cmd+]
+Select Previous Tab ==> cmd+[
+Close Tab ==> opt+cmd+.
+Back ==> opt+cmd+[
+Forward ===> opt+cmd+]
 
+For Sublime: map keys via Sublime keymap overrides.
+In Preferences > Key Bindings > User:
 Change in sublime prefs from:
 [
     { "keys": ["f5"], "command": "refresh_folder_list" },
     { "keys": ["super+]"], "command": "next_view" },
     { "keys": ["super+["], "command": "prev_view" },
-    { "keys": ["alt+super+/"], "command": "close" }
+    { "keys": ["alt+super+."], "command": "close" },
+    { "keys": ["super+n"], "command": "new_window" },
+    { "keys": ["super+t"], "command": "new_file" }
 ]
 
-setting for close all tabs without closing the window
-{ "keys": ["super+shift+w"], "command": "close_all" }
+Note: Sublime keymap key name to OSX keyboard keyname conversions:
+super == OSX
+ctrl == ctrl
+alt == opt
+
+
