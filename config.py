@@ -14,10 +14,10 @@ class Config:
     #use $ env or $ printenv to show current env var settings
 
     #ENV can be set to "DEV" or "TEST" or "STAGE" or "PROD"
-    ENV = os.environ.get('FLASK_ENVIRONMENT')
+    ENV = os.environ.get('JUDGE_ENV')
     SECRET_KEY = os.environ['SECRET_KEY']
     #SECRET_KEY = os.environ.get('JUDGE_SECRET_KEY')
-    DEBUG = bool(os.environ.get('FLASK_DEBUG'))
+    DEBUG = bool(os.environ.get('JUDGE_DEBUG'))
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     #secret key generation from python shell
     #import os

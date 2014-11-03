@@ -5,11 +5,6 @@
        <form method="GET" action="{{ url_for('judge.index') }}" class="form-signin" role="form">
            {{form.name(class='form-control',required=True,placeholder='Enter judge name',autofocus=True,onfocus='this.value = this.value;')}}
             <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
-
-              <a href="{{ url_for('judge.sitting') }}">judges</a>
-        <br />
-
-          <a href="{{ url_for('user.index') }}">users</a>
              {% if current_user.user_role == "admin" %}
              <br /><br />
 
@@ -28,3 +23,5 @@
 
 </div>
  {% endblock %}
+
+

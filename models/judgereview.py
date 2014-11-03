@@ -1,4 +1,5 @@
-from plugins import db, bcrypt,login_manager,flaskuuid, current_app
+from flask import current_app
+from plugins import db, bcrypt,login_manager,flaskuuid
 from flask.ext.login import make_secure_token
 from datetime import datetime
 import uuid
