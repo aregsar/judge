@@ -1,28 +1,36 @@
 {% macro render(reviewer) %}
-Reviewer <a href="{{url_for('user.profile',id=reviewer.id)}}">{{reviewer.username}}</a><br />
-      {{reviewer.total_reviews}}&nbsp;review{%if reviewer.total_reviews != 1 %}s{% endif%}<br />
+<a href="{{url_for('user.profile',id=reviewer.id)}}">{{reviewer.username}}</a><br />
+
+
+  since: {{reviewer.created_at.strftime('%Y-%m-%d') }}<br />
+
+
+
+      {{reviewer.total_reviews}}&nbsp;
+      <a href="{{ url_for('review.reviewer',id=reviewer.id) }}">review{%if reviewer.total_reviews != 1 %}s{% endif%}</a>
+      <br /><br />
       {%if reviewer.total_reviews > 0 %}
-        <h5>Average of ratings given by reviewer</h5>
+        <h5>Average of ratings</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.total_reviews_average_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div><br />
-        <h5>Average of all Knowledge of the law ratings given by reviewer</h5>
+        <h5>Average of all Knowledge of the law ratings</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.knowledge_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div><br />
-        <h5>Average of all Courtroom decorum given by reviewer</h5>
+        <h5>Average of all Courtroom decorum ratings</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.decorum_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div><br />
-        <h5>Average of all Issues tentatives given by reviewer</h5>
+        <h5>Average of all Issues tentatives ratings</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.tentatives_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div><br />
-        <h5>Average  of all uriosity towards attorneys given by reviewer</h5>
+        <h5>Average  of all curiosity towards attorneys ratings</h5>
         <div class="rating">
           <img alt="gavel" class="{{reviewer.curiosity_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />

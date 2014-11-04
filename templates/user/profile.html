@@ -1,32 +1,42 @@
 {% extends "signedin.html" %}
 {% block body %}
+{% import 'user/_reviewer.html' as _reviewer %}
 <div class="container">
     <div class="blog-header ">
 
-{{user.username}}<br />
-        since: {{user.created_at.strftime('%Y-%m-%d') }}
-<a href="{{ url_for('review.reviewer',id=user.id) }}">reviews</a>
 
+
+
+
+
+
+
+{{ _reviewer.render(user) }}
+
+
+
+
+
+
+
+  {% if current_user.user_role == "admin" %}
+  <br />
         {% if current_user.user_role == "admin" %}
+             email: {{user.email}}<br />
+        {% endif%}
 
-
-<br />
-{% if current_user.user_role == "admin" %}
-                         email: {{user.email}}
-                         <br />
-{% endif%}
-                         role: {{user.user_role}} <br />
-                         status:
-                          {% if user.banned == True %}Banned
-                          {% elif user.activated == True %}Active
-                          {% else %}Pending Activation
-                          {% endif%}
-                          <a href="{{ url_for('user.edit', id=user.id) }}">manage</a>
-<br />
+       role: {{user.user_role}}<br />
+       status:
+        {% if user.banned == True %}Banned
+        {% elif user.activated == True %}Active
+        {% else %}Pending Activation
+        {% endif%}
+        <a href="{{ url_for('user.edit', id=user.id) }}">manage</a>
+            <br />
 
 
 
-        {% endif %}
+  {% endif %}
 
     </div>
 
