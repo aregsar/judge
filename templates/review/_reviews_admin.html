@@ -1,14 +1,51 @@
 {% macro render(reviews) %}
 {% for review in reviews %}
         {{review.created_at.strftime('%Y-%m-%d') }}
-        <div class="rating">
-          <img alt="gavel" class="{{review.average_rating_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
+
 
         by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
         {{review.reviewer_name}}</a><br />
         <br />
+
+
+<h5>Average rating</h5>
+          <div class="rating">
+          <img alt="gavel" class="{{review.average_rating_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+          </div><br />
+
+          <h5>Knowledge of the law</h5>
+          <div class="rating">
+          <img alt="gavel" class="{{review.knowledge_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+          </div><br />
+
+          <h5>Courtroom decorum</h5>
+          <div class="rating">
+          <img alt="gavel" class="{{review.decorum_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+          </div><br />
+
+          <h5>Issues tentatives</h5>
+          <div class="rating">
+          <img alt="gavel" class="{{review.tentatives_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+          </div><br />
+
+          <h5>Curiosity towards attorneys</h5>
+          <div class="rating">
+          <img alt="gavel" class="{{review.curiosity_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+          </div><br />
+
+
+
+
+
+
+
+
+
         {{review.excerpt}}
         <a href="{{ url_for('review.review',id=review.id) }}">details</a>
        <a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>

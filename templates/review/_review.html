@@ -1,13 +1,5 @@
-{% macro render(reviews) %}
-{% for review in reviews %}
-      {{review.created_at.strftime('%Y-%m-%d') }}
-
-        by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
-        {{review.reviewer_name}}</a><br />
-        <br />
-
-
- <h5>Average rating</h5>
+{% macro render(review) %}
+<h5>Average rating</h5>
           <div class="rating">
           <img alt="gavel" class="{{review.average_rating_class()}}"
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
@@ -37,23 +29,8 @@
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
           </div><br />
 
+<br />
 
 
-
-
-
-
-        {{review.excerpt}}<br />
-        <a href="{{ url_for('review.review',id=review.id) }}">details</a><br/><br/>
-{% endfor %}
-
-
-
-
-    {#{% if reviews|length > 0 %}
-       <p class="lead blog-description">Reviews</p>
-    {% endif %}
-    {% if reviews|count > 0 %}
-       <p class="lead blog-description">Reviews</p>
-    {% endif %}#}
+        {{review.body}}<br />
 {% endmacro %}

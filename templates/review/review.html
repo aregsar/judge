@@ -2,6 +2,7 @@
 {% block body %}
 {% import 'judge/_judge.html' as _judge %}
 {% import 'user/_reviewer.html' as _reviewer %}
+{% import 'review/_review.html' as _review %}
 <div class="container">
 
    <!-- <div class="blog-header "> -->
@@ -34,41 +35,8 @@
 
  <div class="blog-header ">
 
+{{ _review.render(review) }}
 
-          <h5>Average rating for this review</h5>
-          <div class="rating">
-          <img alt="gavel" class="{{review.average_rating_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-          </div><br />
-
-          <h5>Knowledge of the law</h5>
-          <div class="rating">
-          <img alt="gavel" class="{{review.knowledge_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-          </div><br />
-
-          <h5>Courtroom decorum</h5>
-          <div class="rating">
-          <img alt="gavel" class="{{review.decorum_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-          </div><br />
-
-          <h5>Issues tentatives</h5>
-          <div class="rating">
-          <img alt="gavel" class="{{review.tentatives_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-          </div><br />
-
-          <h5>Curiosity towards attorneys</h5>
-          <div class="rating">
-          <img alt="gavel" class="{{review.curiosity_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-          </div><br />
-
-<br />
-
-
-        {{review.body}}<br />
 
     </div>
   </div>
