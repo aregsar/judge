@@ -62,6 +62,21 @@ class Judge(db.Model):
         self.total_curiosity = 0
         self.total_curiosity_average  = 0
 
+
+    def scope_formatted(self):
+        if self.retired:
+            if self.scope == 1:
+                return "Retired Moderator"
+            else:
+                return "Retired Arbitrator"
+        else:
+            if self.scope == 1:
+                return "Federal Judge"
+            else:
+                return "State Judge"
+
+
+
     #return a string containing two css classes example: "clip-2 pos-2"
     def total_reviews_average_class(self):
         #there are 10 rows of 5 gavel rating bitmaps.(first row 0 gavels is not used)

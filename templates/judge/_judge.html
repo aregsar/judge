@@ -1,5 +1,5 @@
 {% macro render(judge) %}
- Judge
+ {{judge.scope_formatted()}}
          <a href="{{ url_for('review.index',id=judge.id) }}">{{judge.name}}</a>
          <br />
         {{judge.court}}<br />
@@ -31,4 +31,9 @@
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div>
       {% endif%}
+      {# % if reviews|length > 0 %}
+        Reviews For Judge
+      {% else%}
+        No Reviews Found For Judge
+      {% endif% #}
 {% endmacro %}
