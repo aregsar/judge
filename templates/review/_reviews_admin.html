@@ -1,11 +1,6 @@
 {% macro render(reviews) %}
 {% for review in reviews %}
-        {{review.created_at.strftime('%Y-%m-%d') }}
 
-
-        by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
-        {{review.reviewer_name}}</a><br />
-        <br />
 
 
 <h5>Average rating</h5>
@@ -40,7 +35,12 @@
 
 
 
+{{review.created_at.strftime('%Y-%m-%d') }}
 
+
+        by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
+        {{review.reviewer_name}}</a><br />
+        <br />
 
 
 

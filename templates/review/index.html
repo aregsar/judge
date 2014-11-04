@@ -1,22 +1,36 @@
 {% extends "signedin.html" %}
 {% block body %}
 {% import 'judge/_judge.html' as _judge %}
+{% import 'judge/_judge_ratings.html' as _judge_ratings %}
 {% import 'review/_reviews.html' as _reviews %}
 {% import 'review/_reviews_admin.html' as _reviews_admin %}
 <div class="container">
-  <p class="lead blog-description">
-  {{ _judge.render(judge) }}
-  </p>
-  <a href="{{url_for('review.add',id=judge.id)}}">add a review</a>
-  <div class="blog-header ">
-    {% if judge.total_reviews > 0 %}
-       <p class="lead blog-description">Reviews</p>
-    {% endif %}
-    {% if current_user.user_role != "admin" %}
-      {{ _reviews.render(reviews) }}
-    {% else %}
-      {{ _reviews_admin.render(reviews) }}
-    {% endif%}
+       <p class="lead blog-description">
+        {{judge.scope_formatted()}}
+         <a href="{{ url_for('review.index',id=judge.id) }}">{{judge.name}}</a>
+         <br />
+        {{judge.court}}<br />
+         {{judge.total_reviews}}&nbsp;review{%if judge.total_reviews != 1 %}s{% endif%}
+         <a href="{{url_for('review.add',id=judge.id)}}">add a review</a>
+      </p>
+  <div class="row">
+    <div class="col-md-3">
+        {% if judge.total_reviews > 0 %}
+           <p class="lead blog-description">Summary</p>
+        {% endif %}
+        {{ _judge_ratings.render(judge) }}
+        <br/><br/>
+    </div>
+    <div class="col-md-9">
+        {% if judge.total_reviews > 0 %}
+           <p class="lead blog-description">Reviews</p>
+        {% endif %}
+        {% if current_user.user_role != "admin" %}
+          {{ _reviews.render(reviews) }}
+        {% else %}
+          {{ _reviews_admin.render(reviews) }}
+        {% endif%}
+    </div>
   </div>
 </div>
 {% endblock %}}
