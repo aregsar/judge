@@ -1,48 +1,24 @@
 {% extends "signedin.html" %}
 {% block body %}
+{% import 'judge/_judge.html' as _judge %}
+{% import 'user/_reviewer.html' as _reviewer %}
 <div class="container">
 
    <!-- <div class="blog-header "> -->
 
        <p class="lead blog-description">
 
-         Judge <a href="{{ url_for('review.index',id=review.judge_id) }}">{{review.judge_name}}</a>
-         <br />
-        {{judge.court}}<br />
-      {{judge.total_reviews}}&nbsp;review{%if judge.total_reviews != 1 %}s{% endif%}
-      {%if judge.total_reviews > 0 %}
-        <h5>Average rating</h5>
-        <div class="rating">
-          <img alt="gavel" class="{{judge.total_reviews_average_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div><br />
-        <h5>Average rating for Knowledge of the law</h5>
-        <div class="rating">
-          <img alt="gavel" class="{{judge.knowledge_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div><br />
-        <h5>Average rating for Courtroom decorum</h5>
-        <div class="rating">
-          <img alt="gavel" class="{{judge.decorum_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div><br />
-        <h5>Average rating for Issues tentatives</h5>
-        <div class="rating">
-          <img alt="gavel" class="{{judge.tentatives_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div><br />
-        <h5>Average rating for Curiosity towards attorneys</h5>
-        <div class="rating">
-          <img alt="gavel" class="{{judge.curiosity_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
-      {% endif%}
+
+{{ _judge.render(judge) }}
+
+
+
     </p>
   <!-- </div> -->
 <br /><br />
  <p class="lead blog-description">
-
-
+{{ _reviewer.render(reviewer) }}
+{#
       Reviewer <a href="{{url_for('user.profile',id=reviewer.id)}}">{{reviewer.username}}</a><br />
       {{reviewer.total_reviews}}&nbsp;review{%if reviewer.total_reviews != 1 %}s{% endif%}<br />
       {%if reviewer.total_reviews > 0 %}
@@ -72,7 +48,7 @@
             src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
         </div>
       {% endif%}
-
+#}
  </p>
 <br /><br />
  <p class="lead blog-description">

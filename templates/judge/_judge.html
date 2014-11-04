@@ -1,0 +1,34 @@
+{% macro render(judge) %}
+ Judge
+         <a href="{{ url_for('review.index',id=judge.id) }}">{{judge.name}}</a>
+         <br />
+        {{judge.court}}<br />
+      {{judge.total_reviews}}&nbsp;review{%if judge.total_reviews != 1 %}s{% endif%}
+      {%if judge.total_reviews > 0 %}
+        <h5>Average rating</h5>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.total_reviews_average_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br />
+        <h5>Average rating for Knowledge of the law</h5>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.knowledge_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br />
+        <h5>Average rating for Courtroom decorum</h5>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.decorum_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br />
+        <h5>Average rating for Issues tentatives</h5>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.tentatives_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div><br />
+        <h5>Average rating for Curiosity towards attorneys</h5>
+        <div class="rating">
+          <img alt="gavel" class="{{judge.curiosity_class()}}"
+            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
+        </div>
+      {% endif%}
+{% endmacro %}
