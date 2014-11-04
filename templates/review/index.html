@@ -1,60 +1,22 @@
 {% extends "signedin.html" %}
 {% block body %}
 {% import 'judge/_judge.html' as _judge %}
+{% import 'review/_reviews.html' as _reviews %}
+{% import 'review/_reviews_admin.html' as _reviews_admin %}
 <div class="container">
-  <!-- <div class="blog-header "> -->
-    <p class="lead blog-description">
-
-    {{ _judge.render(judge) }}
-
-
-    </p>
-       <a href="{{url_for('review.add',id=judge.id)}}">add a review</a>
- <!--  </div>  -->
-
+  <p class="lead blog-description">
+  {{ _judge.render(judge) }}
+  </p>
+  <a href="{{url_for('review.add',id=judge.id)}}">add a review</a>
   <div class="blog-header ">
-
-    {#{% if reviews|length > 0 %}
-       <p class="lead blog-description">Reviews</p>
-    {% endif %}
-    {% if reviews|count > 0 %}
-       <p class="lead blog-description">Reviews</p>
-    {% endif %}#}
-
     {% if judge.total_reviews > 0 %}
        <p class="lead blog-description">Reviews</p>
     {% endif %}
     {% if current_user.user_role != "admin" %}
-      {% for review in reviews %}
-      {{review.created_at.strftime('%Y-%m-%d') }}
-        <div class="rating">
-          <img alt="gavel" class="{{review.average_rating_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
-        by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
-        {{review.reviewer_name}}</a><br />
-        <br />
-        {{review.excerpt}}<br />
-        <a href="{{ url_for('review.review',id=review.id) }}">details</a><br/><br/>
-      {% endfor %}
+      {{ _reviews.render(reviews) }}
     {% else %}
-      {% for review in reviews %}
-        {{review.created_at.strftime('%Y-%m-%d') }}
-        <div class="rating">
-          <img alt="gavel" class="{{review.average_rating_class()}}"
-            src="{{url_for('static',filename='png/gavels_v1.png')}}"  />
-        </div>
-
-        by <a href="{{ url_for('user.profile',id=review.reviewer_id,judge=review.judge_id) }}">
-        {{review.reviewer_name}}</a><br />
-        <br />
-        {{review.excerpt}}
-        <a href="{{ url_for('review.review',id=review.id) }}">details</a>
-       {#<a href="{{ url_for('review.edit',id=review.id) }}">edit</a><br/><br/>#}
-      {% endfor %}
+      {{ _reviews_admin.render(reviews) }}
     {% endif%}
-  </div><!--  <div class="blog-header "> -->
-
-
+  </div>
 </div>
 {% endblock %}}
