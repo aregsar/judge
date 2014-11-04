@@ -160,9 +160,9 @@ def edit(id):
     review = JudgeReview.query.get(id)
     if review == None:
         return render_template("review/notfound.html")
-    # reviewer = User.query.get(review.reviewer_id)
-    # if reviewer == None:
-    #     return render_template("review/notfound.html")
+    reviewer = User.query.get(review.reviewer_id)
+    if reviewer == None:
+        return render_template("review/notfound.html")
     judge = Judge.query.get(review.judge_id)
     if judge == None:
         return render_template("review/notfound.html")
@@ -180,7 +180,7 @@ def edit(id):
             if form.validate_on_submit():
                 review.edit_rating( form.body.data,
                                    judge,
-                                   current_user,
+                                   reviewer,
                                    int(form.knowledge.data),
                                    int(form.decorum.data),
                                    int(form.tentatives.data),
@@ -191,8 +191,19 @@ def edit(id):
                 # review.tentatives= int(form.tentatives.data)
                 # review.curiosity= int(form.curiosity.data)
                 if current_user.user_role == "admin":
+                    was_active=False
+                    if review.active and not review.removed:
+                        was_active=True
                     review.active = form.active.data
                     review.removed = form.removed.data
+                    if was_active:
+                        #if deactivated
+                        if review.removed or not review.active:
+                            review.reset_rating_averages(judge,reviewer)
+                    else:
+                        #if activated
+                        if not review.removed and review.active:
+                            review.edit_rating_averages(judge,reviewer)
                 db.session.commit()
                 return redirect(url_for('review.review',id=review.id))
             return render_template("review/editadmin.html",form=form,review=review)

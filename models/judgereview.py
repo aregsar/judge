@@ -167,6 +167,7 @@ class JudgeReview(db.Model):
         self.reset_judge_rating_averages(judge)
 
     def reset_reviewer_rating_averages(self,reviewer):
+        reviewer.total_reviews = reviewer.total_reviews - 1
         #remove current rating average from rating average total
         reviewer.total_review_averages = reviewer.total_review_averages - self.average_rating
         #remove current knowledge rating from knowledge rating total
@@ -182,6 +183,7 @@ class JudgeReview(db.Model):
         # print "total_curiosity = " + str(reviewer.total_curiosity)
 
     def reset_judge_rating_averages(self, judge):
+        judge.total_reviews = judge.total_reviews - 1
         #remove current rating average from rating average total
         judge.total_review_averages = judge.total_review_averages - self.average_rating
         #remove current knowledge rating from knowledge rating total
@@ -201,6 +203,7 @@ class JudgeReview(db.Model):
         self.edit_judge_rating_averages(judge)
 
     def edit_reviewer_rating_averages(self,reviewer):
+        reviewer.total_reviews = reviewer.total_reviews + 1
         #keep a total of the average rating for each review by the reviewer
         reviewer.total_review_averages = reviewer.total_review_averages + self.average_rating
         #calculate the average of all the average ratings of the reviews by the reviewer
@@ -232,6 +235,7 @@ class JudgeReview(db.Model):
 
 
     def edit_judge_rating_averages(self, judge):
+        judge.total_reviews = judge.total_reviews + 1
         #keep a total of the average rating for each review for the judge
         judge.total_review_averages = judge.total_review_averages + self.average_rating
         #calculate the average of all the average ratings of the reviews for the judge
