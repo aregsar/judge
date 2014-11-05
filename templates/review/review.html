@@ -1,50 +1,31 @@
 {% extends "signedin.html" %}
 {% block body %}
 {% import 'judge/_judge.html' as _judge %}
+{% import 'judge/_judge_ratings.html' as _judge_ratings %}
 {% import 'user/_reviewer.html' as _reviewer %}
 {% import 'review/_review.html' as _review %}
 <div class="container">
-
-   <!-- <div class="blog-header "> -->
-
-       <p class="lead blog-description">
-
-
-{{ _judge.render(judge) }}
-
-
-
-    </p>
-  <!-- </div> -->
-<br /><br />
- <p class="lead blog-description">
-{#{ _reviewer.render(reviewer) }#}
-
-Reviewer <a href="{{url_for('user.profile',id=reviewer.id)}}">{{reviewer.username}}</a><br />
-      {{reviewer.total_reviews}}&nbsp;review{%if reviewer.total_reviews != 1 %}s{% endif%}<br />
-
-
-
-
- </p>
-<br /><br />
- <p class="lead blog-description">
-
-
-        Review on {{review.created_at.strftime('%Y-%m-%d') }}<br />
-        {% if current_user.user_role == "admin" %}
-                <a href="{{url_for('review.edit',id=review.id)}}">edit</a>
+      <p class="lead blog-description">
+        {{judge.scope_formatted()}}
+         <a href="{{ url_for('review.index',id=judge.id) }}">{{judge.name}}</a>
+         <br />
+        {{judge.court}}<br />
+         {{judge.total_reviews}}&nbsp;review{%if judge.total_reviews != 1 %}s{% endif%}
+         <a href="{{url_for('review.add',id=judge.id)}}">add a review</a>
+      </p>
+  <div class="row">
+    <div class="col-md-3">
+        {% if judge.total_reviews > 0 %}
+           <p class="lead blog-description">Summary</p>
         {% endif %}
-
- </p>
-
-
-
- <div class="blog-header ">
-
-{{ _review.render(review) }}
-
-
+        {{ _judge_ratings.render(judge) }}
+        <br/><br/>
+    </div>
+    <div class="col-md-9">
+        {% if judge.total_reviews > 0 %}
+           <p class="lead blog-description">Review</p>
+        {% endif %}
+        {{ _review.render(review,reviewer,current_user) }}
     </div>
   </div>
 </div>
