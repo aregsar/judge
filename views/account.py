@@ -16,6 +16,46 @@ from models.state import STATE_CHOICES_DICT
 #this bluprint is registered in blueprints.py
 mod = Blueprint('account',__name__)
 
+
+@mod.route('/account/password',methods=['GET','POST'])
+def forgot_password():
+    if current_user.is_authenticated():
+        return redirect(url_for('home.index'))
+    form = SignupForm()
+    if form.validate_on_submit():
+        state = form.state.data.strip().upper()
+        if state not in STATE_CHOICES_DICT:
+            flash("wrong state abbreviation.")
+            return render_template("account/forgot_password.html",form=form)
+
+        user = User.query.filter_by(email=form.email.data.strip()).first()
+        if user:
+            if (user.barnumber = form.barnumber.data.strip() and
+                    user.username = form.username.data.strip() and
+                    user.firstname = form.firstname.data.strip() and
+                    user.lastname = form.lastname.data.strip() and
+                    user.state = form.state.data.strip())
+
+                user.set_password(form.password.data.strip())
+                user.refresh_signin_token_and_date()
+                try:
+                    db.session.commit()
+                except: #sqlalchemy.exc.IntegrityError
+                    #need to also catch unique constraint violations and display validation errors
+                    #e = sys.exc_info()[0]
+                    #flash("Error: %s" % e)
+                    flash("There was an error while updating your account.Please try again")
+                    return render_template("account/forgot_password.html",form=form)
+
+                #store the authentcation state for login_user
+                #to access via user.is_authenticated()
+                user.authenticated=True
+                #login_user uses user.is_authenticated() and user.is_active()
+                login_user(user, remember=True)
+                return redirect(url_for("home.index"))
+    return render_template("account/forgot_password.html",form=form)
+
+
 @mod.route('/account/signup',methods=['GET','POST'])
 def signup():
     if current_user.is_authenticated():
@@ -62,22 +102,18 @@ def signup():
             #need to also catch unique constraint violations and display validation errors
             #e = sys.exc_info()[0]
             #flash("Error: %s" % e)
-            flash("There was an error while creating your account.")
+            flash("There was an error while creating your account.Please try again.")
             return render_template("account/signup.html",form=form)
-        try:
-            #store the authentcation state for login_user
-            #to access via user.is_authenticated()
-            user.authenticated=True
-            #login_user uses user.is_authenticated() and user.is_active()
-            login_user(user, remember=True)
-            return redirect(url_for("home.index"))
-            #return render_template('account/created.html',confirmation_email_url='#')
-        except:
-            #e = sys.exc_info()[0]
-            #flash("Error: %s" % e)
-            flash("Signup was success but there was an error sending the confirmation email.")
-            #redirect(url_for("account.error_signup_email_delivery"))
+        #store the authentcation state for login_user
+        #to access via user.is_authenticated()
+        user.authenticated=True
+        #login_user uses user.is_authenticated() and user.is_active()
+        login_user(user, remember=True)
+        return redirect(url_for("home.index"))
+        #return render_template('account/created.html',confirmation_email_url='#')
     return render_template("account/signup.html",form=form)
+
+
 
 @mod.route('/account/signin')
 def signinform():
@@ -246,9 +282,9 @@ def set_password():
 
 
 
-@mod.route('/account/password/activate',methods=['GET','POST'])
-def forgot_password():
-    pass
+# @mod.route('/account/password/activate',methods=['GET','POST'])
+# def forgot_password():
+#     pass
 #     secret = current_app.config["SECRET_KEY"]
 #     ts = URLSafeTimedSerializer(secret)
 #     form = ForgotPasswordForm()
