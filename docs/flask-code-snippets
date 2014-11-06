@@ -15,7 +15,24 @@ http://amix.dk/blog/post/19367
 http://stackoverflow.com/questions/6463035/wtforms-getting-the-errors
 http://stackoverflow.com/questions/12701671/wtforms-form-not-submitting-but-outputs-no-validation-errors
 https://medium.com/@5hreyans/the-one-weird-trick-that-cut-our-flask-page-load-time-by-70-87145335f679
+https://developer.gocardless.com/pro/#overview-cursor-pagination
+https://gocardless.com/blog/lessons-learned-building-apis/
+http://leanstack.io/stackups/travis-ci-vs-circleci-vs-codeship
+https://alexgaynor.net/2014/jan/06/why-travis-is-great-for-the-python-community/
+https://alexgaynor.net/2014/oct/27/ideal-development-environment/
+https://alexgaynor.net/2014/jul/04/your-python-has-evolved/
 
+Flask Twillio
+
+http://www.benheymink.com/blog/?p=91
+https://www.twilio.com/docs/quickstart/python/sms/hello-monkey
+https://www.twilio.com/docs/quickstart/python/twiml/say-response
+https://github.com/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask
+https://www.plivo.com/twilio-alternative-compare/?utm_medium=cpc&utm_term=twillio&utm_matchtype=p&utm_source=google&utm_campaign=twillio&gclid=CjwKEAjwrNeiBRD3goG_1s-0_XMSJADuGQQcDByzINDGQdkGLozx0cvJzYcPMj5TqFWbkuUCLoWSsBoCUAjw_wcB
+https://www.twilio.com/blog/2012/01/making-an-sms-birthday-card-with-python-and-flask.html
+https://www.twilio.com/blog/2014/03/unit-testing-your-twilio-app-using-pythons-flask-and-nose.html
+https://ngrok.com/
+https://www.twilio.com/blog/2014/09/getting-started-with-twilio-mms.html
 
 
 Project Resources:
@@ -40,9 +57,24 @@ https://freepythontips.wordpress.com/2013/08/04/args-and-kwargs-in-python-explai
 http://stackoverflow.com/questions/7257481/html-form-put-method
 http://stackoverflow.com/questions/8054165/using-put-method-in-html-form
 http://flask-wtf.readthedocs.org/en/latest/api.html
+http://stackoverflow.com/questions/5710391/converting-python-dict-to-kwargs
+http://markmiyashita.com/blog/python-args-and-kwargs/
+https://github.com/fredj/flask-jsonify
+http://stackoverflow.com/questions/7257481/html-form-put-method
+http://stackoverflow.com/questions/8054165/using-put-method-in-html-form
 
-CSRF_ENABLED = True
+https://flask-wtf.readthedocs.org/en/v0.8.3/
+Flask-WTF sets CSRF_ENABLED = True
+For ajax for post pass the form.csrf_token value as the json parameter 'csrf'
+in your javascript in the inline script tag in the html template page like so:
+var params = {'csrf' : '{{ form.csrf_token }}'};
+OR pass to external script using data dash to set to the json parameter 'csrf' like so:
+<div id="crsf" data-crsf={{ form.csrf_token }}></div>
+var csrf_token = $('#crsf').data('crsf')
+var params = {'csrf' : csrf_token };
 
+------------------
+Optional parameter routing
 
 @user.route('/<user_id>', defaults={'username': None})
 @user.route('/<user_id>/<username>')

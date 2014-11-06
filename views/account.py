@@ -35,6 +35,14 @@ def signup():
         if user:
             flash("account with bar number exists.")
             return render_template("account/signup.html",form=form)
+
+        state = form.state.data.strip()
+
+        #if state not in STATE_CHOICES_DICT.values():
+        if state not in STATE_CHOICES_DICT:
+            flash("wrong state abbreviation.")
+            return render_template("account/signup.html",form=form)
+
         user = User(
             email = form.email.data.strip(),
             password = form.password.data.strip(),
