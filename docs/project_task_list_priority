@@ -1,0 +1,113 @@
+project_task_list_priority
+
+Phase 1:
+web apps
+
+judge
+needcastr-flask
+needcastr-spring-boot
+
+https://github.com/spring-projects/spring-boot
+http://projects.spring.io/spring-boot/
+https://spring.io/guides/gs/spring-boot/
+http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/
+https://gocardless.com/blog/building-apis/
+
+
+Restful urls
+
+Get /judge
+Get /judge/id (include reviews)
+Get /judge?name=name
+Post /judge/id/delete
+Post /review?judgeid=id
+Post /review/id (ban review and adjust totals)
+Post /review/id/delete
+Get /review/id (include reviewer user and judge)
+Get /user/id (include reviews)
+Post /account
+Post /signin
+Post /account/edit
+-------------------
+
+Get /need
+Get /need/id (include tips)
+Get /need?search=keyword
+Post /need (add)
+Post /need/id (edit)
+Post /need/id/delete
+Post /tip?needid=id
+Post /tip/id
+Post /tip/id/delete
+Post /Tag?needid=id
+Post /Tag/id/Delete
+Post /Vote?tipid=id
+Post /Share?needid=id
+
+
+
+
+Phase 2:
+apis
+needcastr-flask
+needcastr-spring-boot
+spring-security
+
+Restful api
+
+Get /need
+Get /need/id (include tips)
+Get /need?search=keyword
+Post /need
+Put /need/id
+Delete /need/id
+Post /tip?needid=id
+Put /tip/id
+Delete /tip/id
+Post /Tag?needid=id
+Delete /Tag/id
+Post /Vote?tipid=id
+Post /Share?needid=id
+
+
+
+Phase 3:
+boilerplate\security
+flask-on-rails
+oauth2\two factor
+
+
+Phase 4:
+Ajax:
+form post
+loadmore
+paging
+
+--------------------------------------------------------
+Phase 5:
+async
+needcastr-flask-twillio
+needcastr-aspnet-vnext
+needcaster-play
+
+Phase 6:
+clients
+Reactjs
+ios
+android
+
+Phase 7
+push
+signalr
+aws mobile sdk sns
+azure notification hubs
+
+Phase 8
+aws mobile sdk sync
+dropbox sync
+kineticjs
+
+Phase 9
+docker
+go
+node
