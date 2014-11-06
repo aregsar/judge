@@ -30,11 +30,11 @@ def forgot_password():
 
         user = User.query.filter_by(email=form.email.data.strip()).first()
         if user:
-            if (user.barnumber = form.barnumber.data.strip() and
-                    user.username = form.username.data.strip() and
-                    user.firstname = form.firstname.data.strip() and
-                    user.lastname = form.lastname.data.strip() and
-                    user.state = form.state.data.strip())
+            if (user.barnumber == form.barnumber.data.strip() and
+                    user.username == form.username.data.strip() and
+                    user.firstname == form.firstname.data.strip() and
+                    user.lastname == form.lastname.data.strip() and
+                    user.state == form.state.data.strip()):
 
                 user.set_password(form.password.data.strip())
                 user.refresh_signin_token_and_date()
