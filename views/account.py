@@ -11,6 +11,7 @@ from forms.account.signup_form import SignupForm
 from forms.account.forgotpassword_form import ForgotPasswordForm
 #from models import user
 from models.user import User
+from models.state import STATE_CHOICES_DICT
 
 #this bluprint is registered in blueprints.py
 mod = Blueprint('account',__name__)
@@ -36,7 +37,7 @@ def signup():
             flash("account with bar number exists.")
             return render_template("account/signup.html",form=form)
 
-        state = form.state.data.strip()
+        state = form.state.data.strip().upper()
 
         #if state not in STATE_CHOICES_DICT.values():
         if state not in STATE_CHOICES_DICT:
@@ -52,7 +53,7 @@ def signup():
             lastname = form.lastname.data.strip(),
             state = form.state.data.strip())
 
-        user.refresh_signin_token_and_date()
+        user.make_active()
 
         try:
             db.session.add(user)
@@ -106,6 +107,7 @@ def signin():
                 return redirect(url_for("home.index"))
     flash("invalid email or password")
     return render_template("account/signin.html",form=form)
+
 
 
 #@login_required

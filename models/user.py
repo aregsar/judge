@@ -6,6 +6,7 @@ from datetime import datetime
 import uuid
 
 
+
 #User.__table__
 #User.__mapper__
 
@@ -91,6 +92,11 @@ class User(db.Model):
         self.total_tentatives_average  = 0
         self.total_curiosity = 0
         self.total_curiosity_average  = 0
+
+    def make_active(self):
+        self.approve()
+        self.activate()
+        self.refresh_signin_token_and_date()
 
     #return a string containing two css classes example: "clip-2 pos-2"
     def total_reviews_average_class(self):
@@ -186,6 +192,18 @@ class User(db.Model):
         if viewer.user_role == "admin":
             return self.email
         return ''
+
+    @staticmethod
+    def Signin(form):
+        #Note form parameter is a forms.account.signup_form.SignupForm
+        user = User.query.filter_by(email=form.email.data.strip()).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data.strip()):
+                user.refresh_signin_token_and_date()
+                db.session.commit()
+                #store the authentcation state for login_user
+                #to access via user.is_authenticated()
+                user.authenticated=True
 
 
 #flask login api for user if based authentication. works in conjunction with get_id

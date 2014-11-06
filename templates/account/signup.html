@@ -11,10 +11,11 @@
           {{ message }}<br />
           {% endfor %}
           <form method="POST" action="{{ url_for('account.signup') }}" class="form-signin" role="form">
-             {{form.state(class='form-control',required=True)}}
+          {#{ form.username(size=30, maxlength=50) }#}
+             {{form.state(class='form-control',placeholder='State',maxlength=2, required=True ,autofocus=True,onfocus='this.value = this.value;')}}
           {{form.firstname(class='form-control',placeholder='First name',required=True,autofocus=True,onfocus='this.value = this.value;')}}
           {{form.lastname(class='form-control',placeholder='Last name',required=True,autofocus=True,onfocus='this.value = this.value;')}}
- {{form.barnumber(class='form-control',placeholder='Bar number',required=True)}}
+          {{form.barnumber(class='form-control',placeholder='Bar number',required=True)}}
              {{form.username(class='form-control',placeholder='User name',required=True,autofocus=True,onfocus='this.value = this.value;')}}
 
             {{form.email(class='form-control',placeholder='Email address',required=True)}}
