@@ -193,10 +193,33 @@ class User(db.Model):
             return self.email
         return ''
 
+
+
+    def update_password(password):
+        self.set_password(password)
+        self.refresh_signin_token_and_date()
+        try:
+            db.session.commit()
+            return True
+        except:
+            return False
+
+
+
     @staticmethod
-    def Signin(form):
-        #Note form parameter is a forms.account.signup_form.SignupForm
-        user = User.query.filter_by(email=form.email.data.strip()).first()
+    def valid_password_reset_credentials(password_reset_form):
+        if (user.barnumber == form.barnumber.data.strip() and
+                    user.username.lower() == form.username.data.strip().lower() and
+                    user.firstname.lower() == form.firstname.data.strip().lower() and
+                    user.lastname.lower() == form.lastname.data.strip().lower() and
+                    user.state.lower() == form.state.data.strip().lower()):
+            return True
+        return False
+
+
+    @staticmethod
+    def Signin(signinform):
+        user = User.query.filter_by(email=signinform.email.data.strip()).first()
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data.strip()):
                 user.refresh_signin_token_and_date()

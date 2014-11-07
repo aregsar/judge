@@ -27,30 +27,13 @@ def forgot_password():
         if state not in STATE_CHOICES_DICT:
             flash("wrong state abbreviation.")
             return render_template("account/forgot_password.html",form=form)
-
         user = User.query.filter_by(email=form.email.data.strip()).first()
         if user:
-            if (user.barnumber == form.barnumber.data.strip() and
-                    user.username == form.username.data.strip() and
-                    user.firstname == form.firstname.data.strip() and
-                    user.lastname == form.lastname.data.strip() and
-                    user.state == form.state.data.strip()):
-
-                user.set_password(form.password.data.strip())
-                user.refresh_signin_token_and_date()
-                try:
-                    db.session.commit()
-                except: #sqlalchemy.exc.IntegrityError
-                    #need to also catch unique constraint violations and display validation errors
-                    #e = sys.exc_info()[0]
-                    #flash("Error: %s" % e)
+            if User.valid_password_reset_credentials(form):
+                if not user.update_password(form.password.data.strip()):
                     flash("There was an error while updating your account.Please try again")
                     return render_template("account/forgot_password.html",form=form)
-
-                #store the authentcation state for login_user
-                #to access via user.is_authenticated()
                 user.authenticated=True
-                #login_user uses user.is_authenticated() and user.is_active()
                 login_user(user, remember=True)
                 return redirect(url_for("home.index"))
     return render_template("account/forgot_password.html",form=form)
