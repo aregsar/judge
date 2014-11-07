@@ -34,6 +34,30 @@ https://www.twilio.com/blog/2014/03/unit-testing-your-twilio-app-using-pythons-f
 https://ngrok.com/
 https://www.twilio.com/blog/2014/09/getting-started-with-twilio-mms.html
 
+flask-aws-eb-docker
+https://github.com/awslabs/eb-py-flask-signup
+http://jtushman.github.io/blog/2013/06/12/first-impressions-with-flask-and-elastic-beanstalk/
+http://codetrips.com/2014/06/23/deploying-a-flask-app-to-aws-beanstalk/
+http://blogs.aws.amazon.com/application-management/post/Tx1ZLAHMVBEDCOC/Dockerizing-a-Python-Web-App
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_Python_flask.html
+
+Real Python
+https://realpython.com/blog/
+https://www.youtube.com/playlist?list=PLLjmbh6XPGK5e0IbpMccp7NmJHnN8O1ng
+
+Peewee blog
+http://charlesleifer.com/
+http://www.blog.pythonlibrary.org/2014/07/17/an-intro-to-peewee-another-python-orm/
+http://charlesleifer.com/blog/saturday-morning-hacks-command-line-client-for-the-flask-note-taking-app/
+http://charlesleifer.com/blog/integrating-flask-microframework-peewee-orm/
+http://charlesleifer.com/blog/saturday-morning-hacks-revisiting-the-notes-app/
+http://charlesleifer.com/blog/web-based-encrypted-file-storage-using-flask-and-aws/
+http://charlesleifer.com/blog/using-redis-pub-sub-and-irc-for-error-logging-with-python/
+http://charlesleifer.com/blog/nautilus-script-push-files-s3-python/
+http://peewee.readthedocs.org/en/latest/peewee/playhouse.html#schema-migrations
+http://charlesleifer.com/blog/self-referencing-many-many-through/
+
+
 
 Project Resources:
 https://github.com/sloria/cookiecutter-flask
