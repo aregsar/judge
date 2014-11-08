@@ -5,6 +5,7 @@ from blueprints import register_blueprints
 from functools import wraps
 from plugins import init_plugins
 #from flask_failsafe import failsafe
+#from models.user import User
 
 #@failsafe
 def create_app():
@@ -32,16 +33,14 @@ def create_app():
     #install application wide error handlers
     @app.errorhandler(404)
     def not_found(e):
-        return "Judge not found"
-        #return render_template("static/404.html"), 404
-        #return render_template("static/html/404.html"), 404
-        #return render_template("templates/404.html"), 404
-        #return render_template("templates/errors/404.html"), 404
+        return "not found"
+        #return app.send_static_file("html/errors/404.html")
+
 
     @app.errorhandler(500)
     def internal_server_error(e):
-        return "Judge internal server error"
-        #return render_template("static/html/404.html"), 404
+        return "internal server error"
+        #return app.send_static_file("html/errors/500.html")
 
     #
     #install application wide request filters
