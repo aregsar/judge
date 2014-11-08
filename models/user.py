@@ -4,7 +4,7 @@ from flask.ext.login import make_secure_token
 from flask.ext.login import current_user
 from datetime import datetime
 import uuid
-
+from models.state import STATE_CHOICES_DICT
 
 
 #User.__table__
@@ -205,23 +205,39 @@ class User(db.Model):
             return False
 
 
-
     @staticmethod
-    def valid_password_reset_credentials(password_reset_form):
-        if (user.barnumber == form.barnumber.data.strip() and
-                    user.username.lower() == form.username.data.strip().lower() and
-                    user.firstname.lower() == form.firstname.data.strip().lower() and
-                    user.lastname.lower() == form.lastname.data.strip().lower() and
-                    user.state.lower() == form.state.data.strip().lower()):
+    def reset_password(password_reset_form):
+        state = password_reset_form.state.data.strip().upper()
+        if state not in STATE_CHOICES_DICT:
+            return None, "invalid state abbreviation"
+        user = User.query.filter_by(email=password_reset_form.email.data.strip()).first()
+        if user:
+            if user.valid_password_reset_credentials(password_reset_form):
+                user.set_password(password_reset_form.password.data.strip())
+                user.refresh_signin_token_and_date()
+                try:
+                    db.session.commit()
+                    return user, ""
+                except:
+                    return None, "there was an error updating your password. please try again"
+            return None, "credentials provided do not match those on file"
+        return None, "could not find user account with email"
+
+    def valid_password_reset_credentials(self,password_reset_form):
+        if (self.barnumber == password_reset_form.barnumber.data.strip() and
+                    self.username.lower() == password_reset_form.username.data.strip().lower() and
+                    self.firstname.lower() == password_reset_form.firstname.data.strip().lower() and
+                    self.lastname.lower() == password_reset_form.lastname.data.strip().lower() and
+                    self.state.lower() == password_reset_form.state.data.strip().lower()):
             return True
         return False
 
 
     @staticmethod
-    def Signin(signinform):
+    def signin(signinform):
         user = User.query.filter_by(email=signinform.email.data.strip()).first()
         if user:
-            if bcrypt.check_password_hash(user.password, form.password.data.strip()):
+            if bcrypt.check_password_hash(user.password, signinform.password.data.strip()):
                 user.refresh_signin_token_and_date()
                 db.session.commit()
                 #store the authentcation state for login_user

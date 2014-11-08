@@ -23,19 +23,13 @@ def forgot_password():
         return redirect(url_for('home.index'))
     form = SignupForm()
     if form.validate_on_submit():
-        state = form.state.data.strip().upper()
-        if state not in STATE_CHOICES_DICT:
-            flash("wrong state abbreviation.")
+        user, result = User.reset_password(form)
+        if len(result) > 0:
+            flash(result)
             return render_template("account/forgot_password.html",form=form)
-        user = User.query.filter_by(email=form.email.data.strip()).first()
-        if user:
-            if User.valid_password_reset_credentials(form):
-                if not user.update_password(form.password.data.strip()):
-                    flash("There was an error while updating your account.Please try again")
-                    return render_template("account/forgot_password.html",form=form)
-                user.authenticated=True
-                login_user(user, remember=True)
-                return redirect(url_for("home.index"))
+        user.authenticated=True #inspected by login_user()
+        login_user(user, remember=True)
+        return redirect(url_for("home.index"))
     return render_template("account/forgot_password.html",form=form)
 
 
