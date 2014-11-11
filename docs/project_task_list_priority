@@ -20,8 +20,8 @@ Get /judge
 Get /judge/id (include reviews)
 Get /judge?name=name
 Post /judge/id/delete
-Post /review?judgeid=id
-Post /review/id (ban review and adjust totals)
+Post /review?judgeid=id (add)
+Post /review/id  (edit - ban review and adjust totals)
 Post /review/id/delete
 Get /review/id (include reviewer user and judge)
 Get /user/id (include reviews)
@@ -44,16 +44,28 @@ Post /Tag/id/Delete
 Post /Vote?tipid=id
 Post /Share?needid=id
 
-
-
-
 Phase 2:
-apis
+apis for:
 needcastr-flask
 needcastr-spring-boot
-spring-security
+with spring-security
 
 Restful api
+
+Get /judge
+Get /judge/id (include reviews)
+Get /judge?name=name
+Delete /judge/id
+Post /review?judgeid=id
+Put /review/id (ban review and adjust totals)
+Delete /review/id
+Get /review/id (include reviewer user and judge)
+Get /user/id (include reviews)
+Post /account
+Post /signin
+Put /account
+
+-------------------
 
 Get /need
 Get /need/id (include tips)

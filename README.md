@@ -26,6 +26,13 @@ def dictfunc(*args,**kwargs):
     {"keys": ["f5"], "command": "refresh_folder_list" }
 ]
 =============
+GUNICORN
+
+#running the project using gunicorn at localhost:4000
+$ gunicorn -b 127.0.0.1:4000 app:judgeapp
+
+
+
 HEROKU
 
 http://judgejungle.herokuapp.com/
@@ -38,9 +45,24 @@ $ heroku keys:add
 
 
 
-$ gunicorn -b 127.0.0.1:4000 app:judgeapp
-$ heroku ps:scale web=1
+#project proc file contains
+web: gunicorn app:judgeapp
+#where judgeapp is set in app.py:
+judgeapp = create_app()
+
+#run localhost:5000 flask server using heroku config settings in .env file
+$ foreman start
+
+$ heroku config:set JUDGE_DEBUG=False
+$ heroku config:set JUDGE_ENV=PROD
+$ heroku config:set JUDGE_SECRET_KEY='\xbd3\xb3\xbcD\xe9)"H\xa1\x80\x05\xc6\xe8\xc0\xc4\xfd\x13%c\xe4\xc8oD'
+
+
+
+
+#show heroku app status
 $ heroku ps
+$ heroku ps:scale web=1
 $ heroku run python createdb.py
 
 Preparing static assets
@@ -50,6 +72,8 @@ $ heroku run python ./manage.py collectstatic --noinput
 
 
 #the .env file in project is only used locally by foreman
+
+#show heroku app configuaration
 $ heroku config
 $ heroku config:get
 $ heroku config:set

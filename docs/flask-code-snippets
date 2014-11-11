@@ -21,6 +21,8 @@ http://leanstack.io/stackups/travis-ci-vs-circleci-vs-codeship
 https://alexgaynor.net/2014/jan/06/why-travis-is-great-for-the-python-community/
 https://alexgaynor.net/2014/oct/27/ideal-development-environment/
 https://alexgaynor.net/2014/jul/04/your-python-has-evolved/
+ansible and docker vid
+https://www.youtube.com/watch?v=BaLR6Wk_ETs
 
 Flask Twillio
 
@@ -86,6 +88,7 @@ http://markmiyashita.com/blog/python-args-and-kwargs/
 https://github.com/fredj/flask-jsonify
 http://stackoverflow.com/questions/7257481/html-form-put-method
 http://stackoverflow.com/questions/8054165/using-put-method-in-html-form
+https://vilimpoc.org/blog/2012/11/21/serving-static-files-from-root-and-not-static-using-flask/
 
 https://flask-wtf.readthedocs.org/en/v0.8.3/
 Flask-WTF sets CSRF_ENABLED = True
@@ -140,6 +143,89 @@ git remote add origin git@github.com:aregsar/testproject.git
 git add -A
 git commit -m "initial commit"
 git push -u origin --all
+
+
+===================================
+
+
+#rendering json or html based on accept header
+http://flask.pocoo.org/snippets/45/
+
+https://realpython.com/blog/python/kickstarting-flask-on-ubuntu-setup-and-deployment/
+
+https://zapier.com/engineering/continuous-integration-jenkins-docker-github/
+
+http://engineering.zenpayroll.com/this-is-how-we-zenpayroll-our-development-workflow/
+
+http://scottchacon.com/2011/08/31/github-flow.html
+
+
+
+
+http://www.giantflyingsaucer.com/blog/?p=4310
+
+http://stackoverflow.com/questions/14112336/flask-request-and-application-json-content-type
+
+http://stackoverflow.com/questions/14028775/flask-getting-request-parameters-based-on-content-type-header
+
+http://flask-restful.readthedocs.org/en/latest/extending.html
+
+https://pythonhosted.org/Flask-Negotiate/
+
+
+
+
+
+http://nose2.readthedocs.org/en/latest/getting_started.html
+
+http://docs.travis-ci.com/user/getting-started/
+
+http://docs.travis-ci.com/user/languages/ruby/
+
+http://docs.travis-ci.com/user/languages/python/
+
+http://docs.travis-ci.com/user/ci-environment/
+
+http://docs.travis-ci.com/user/database-setup/
+
+https://www.heroku.com/pricing
+
+https://travis-ci.com/plans
+
+$ tar xvzf download.tar.gz
+
+http://code.tutsplus.com/articles/10-terminal-commands-that-will-boost-your-productivity--net-14105
+
+http://rpbouman.blogspot.com/2014/06/mysql-extracting-timstamp-and-mac.html
+
+http://ferris-framework.appspot.com/
+
+http://click.pocoo.org/3/
+
+http://flask.readthedocs.org/en/latest/cli/
+
+https://www.youtube.com/watch?v=kNke39OZ2k0
+
+
+
+http://buildbot.net/
+
+https://packer.io/
+
+https://www.shippable.com/
+
+
+http://pex.readthedocs.org/en/latest/buildingpex.html
+
+http://www.mattmakai.com/presentations/2014-cos-ansible.html#/
+
+http://bsdploy.readthedocs.org/en/latest/usage/ansible-with-fabric.html
+
+https://media.readthedocs.org/pdf/underwear/latest/underwear.pdf
+
+http://pantsbuild.github.io/index.html
+
+http://underwear.readthedocs.org/en/latest/index.html
 
 
 
