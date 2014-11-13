@@ -1,7 +1,8 @@
 #ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 #chmod u+x ~/scripts/judge
 #ls -l ~/scripts/judge.sh
-JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+#export JAVA_HOME so maven can see the path
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 POSTGRES_HOME=/Applications/Postgres.app/Contents/Versions/9.3
 GRADLE_HOME=/Users/aregsarkissian/Development/gradle-2.0
 PYTHON_HOME=/usr/local/bin/python
