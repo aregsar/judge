@@ -1,11 +1,81 @@
 needcastr api
 
+API design
+https://gocardless.com/blog/building-apis/
 
+-------------------------------------
 React asp.net:
 http://reactjs.net/
 http://facebook.github.io/react/blog/2014/04/04/reactnet.html
 http://facebook.github.io/react/blog/
+
+---------------------
+http://www.infoq.com/presentations/spring-boot-rest-microservices
+
+http://www.infoq.com/presentations/spring-data-commons
+
+http://www.infoq.com/presentations/spring-trader-cloud
+
+http://www.infoq.com/presentations/SpringOne2GX-2014-keynote-1
+
+http://www.infoq.com/presentations/SpringOne2GX-2014-keynote
+
+http://www.infoq.com/presentations/spring-tour
+
+http://www.infoq.com/presentations/spring-4-tools-update
+
+http://www.infoq.com/presentations/spring-boot-hello-world
+
+http://www.infoq.com/presentations/rest-web-services-spring-mvc
+
+http://www.infoq.com/presentations/spring-data-rdbms-nosql
+
+http://www.infoq.com/presentations/spring-data-commons
+
+http://www.pluralsight.com/courses/spring-mvc4-introduction
+
 -----------------------
+----------------------
+Spring boot with JSP
+//jsp with InternalResourceViewResolver viewResolver() code
+
+http://www.technicalkeeda.com/spring/spring-boot-mvc-example
+
+http://kdubblabs.com/2014/02/spring-boot-simple-configuration/
+
+http://resthub.org/springmvc-router/
+
+http://callistaenterprise.se/blogg/teknik/2014/04/22/c10k-developing-non-blocking-rest-services-with-spring-mvc/
+
+--------------------
+http://blog.netgloo.com/2014/05/18/very-basic-web-application-with-spring-mvc-spring-boot-and-eclipse-sts/
+
+http://blog.goyello.com/2011/12/16/enhancements-spring-mvc31/
+
+http://java.dzone.com/articles/spring-boot-fast-mvc-start
+
+
+http://kielczewski.eu/2014/04/developing-restful-web-service-with-spring-boot/
+
+http://kielczewski.eu/2014/04/spring-boot-mvc-application/
+
+
+http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-links-to-controllers-from-views
+
+
+http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-customize-view-resolvers
+
+
+http://kielczewski.eu/resume/
+-----------
+
+https://github.com/spring-projects/spring-boot
+http://projects.spring.io/spring-boot/
+https://spring.io/guides/gs/spring-boot/
+http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/
+
+
+
 Spring:
 http://raibledesigns.com/rd/entry/a_webapp_makeover_with_spring
 https://devcenter.heroku.com/articles/migrating-spring-boot-apps-to-heroku-from-cloudbees
@@ -51,6 +121,8 @@ http://docs.spring.io/spring-boot/docs/1.1.8.RELEASE/reference/htmlsingle/
 http://www.infoq.com/news/2014/06/spring-cloud-platform-abstract
 http://www.infoq.com/presentations/spring-tour
 http://www.infoq.com/articles/springmvc_jsx-rs
+
+
 
 
 
