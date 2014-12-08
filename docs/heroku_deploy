@@ -1,1 +1,197 @@
 heroku_deploy
+
+http://git-scm.com/book/en/v2/Git-Branching-Rebasing#The-Basic-Rebase
+
+http://stackoverflow.com/questions/18930527/difference-between-git-pull-and-git-pull-rebase
+git checkout master
+git pull --rebase origin
+https://app.brewster.com/landing
+
+http://evhead.com/2005/11/ten-rules-for-web-startups.asp?hn=true
+https://medium.com/spook-studio/beyond-mvp-10-steps-to-make-your-product-minimum-loveable-51800164ae0c
+
+http://qz.com/301496/take-it-from-a-software-engineer-learning-code-can-be-a-nightmare/
+
+https://medium.com/@adamjh/why-i-left-my-254-895-pm-role-at-microsoft-a91c75db37ad
+
+http://hearstartup.com/
+
+https://www.drupal.org/node/1066342
+http://nvie.com/posts/a-successful-git-branching-model/
+http://mrchlblng.me/2014/09/practical-git-introduction/
+https://help.github.com/articles/checking-out-pull-requests-locally/
+
+https://bourgeois.me/rest/
+https://github.com/interagent/http-api-design
+http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api
+http://blog.plataformatec.com.br/2014/11/how-to-serialize-date-and-datetime-without-losing-information/
+
+https://tech.coursera.org/app-platform/oauth2/
+
+http://lindsaar.net/2010/2/6/bundle_me_some_rails
+
+http://brandonhilkert.com/blog/creating-rails-active-record-validation-contexts-with-inheritance/?utm_source=hn&utm_medium=social&utm_campaign=ar-contexts
+
+http://sourcey.com/rails-4-omniauth-using-devise-with-twitter-facebook-and-linkedin/
+
+https://coderwall.com/p/mso-4g/create-an-oauth2-api-with-doorkeeper-and-devise-in-rails
+
+http://alexbilbie.com/2013/02/a-guide-to-oauth-2-grants/
+
+https://github.com/socialcast/devise_oauth2_providable
+
+https://sameer.siruguri.net/blog/2013/06/23/railscast-gotcha-using-devise-doorkeeper-and-oauth2-defaults/
+
+https://sameer.siruguri.net/blog/2014/02/18/oauth-a-quick-breakdown/
+
+It looks like this is the most popular gem for providing OAuth2 support for APIs.
+
+https://github.com/doorkeeper-gem/doorkeeper
+
+The Doorkeeper is an OAuth2 provider gem used for providing API authentication, while Devise is a gem used for cookie based web application authentication.
+
+Devise integrated with the OmniAuth OAuth2 client, can be used as a server side client, to an API that is secured by Doorkeeper.
+
+So my suggestion would be to start our project by using Devise to build a starter web app with cookie based user authentication.
+Once we complete that part we can then add an API to the starter app using Doorkeeper to secure the API with OAuth2 authentication.
+
+The routes for the API will be nested under an api version and will use an api subdomain as shown below:
+
+Devise authenticated Web app route
+http://www.groundwork.com/user
+
+Doorkeeper authenticated Web API route
+http://api.groundwork.com/v1/user
+
+Also check this out for the emerging JWT standard in API authentication.
+http://angular-tips.com/blog/2014/05/json-web-tokens-introduction/
+
+
+
+
+
+
+http://www.daedtech.com/how-developers-stop-learning-rise-of-the-expert-beginner
+
+http://www.slideshare.net/mobile/perlcareers/how-to-write-a-developer-cvrsum-that-will-get-you-hired
+
+ You've been added to the owners team for the webapp-builders organization. Owners have full access to all repositories and admin rights to the organization.
+
+View Owners: https://github.com/orgs/webapp-builders/teams/owners
+
+Read more about team permissions here: https://help.github.com/articles/what-are-the-different-access-permissions
+
+virtual env activate changes os.path for locating python import dependencies?
+
+running gunicorn we can execute it from installed version in virtualenv directories
+
+using --no-sitepackages flag when creating a virtual env
+
+position lead c#, .net, asp.net, sql server developer
+
+
+-mentored the autobytel web team on web application architecture and best pactices helping them convert autobytels
+legacy web site from cold fusion to C# and asp.net mvc.
+these included:
+--encapsulating business logic in the poco model layer for reuse to support multiple current and future UI and API layer frameworks
+--encapsulateing data validation in the poco model layer for robustness to avoid different or bypassed validation paths for data flowing through the system.
+--using command and query separation in the poco model layer to control the mutation of the system state
+--using permission annotations on command models to decouple permissions from back end web stack
+--decoupling the back end web stack from the client side code to support multiple client technologies accessing the web app and web api
+--using view models and action models for transfering data between the controller, model and view layers for testing and separation of concerns
+--using async capabilites of the .NET platform with async controllers to asynchronously access data from multiple back end web services in parallel.
+--proper ajax form submission design with jQuery to handle application and network errors and provide form processing feedback for users that have slow networks
+--proper json response envelope design, global ajax exception handling returning json error responses.
+-designed the used car search service for the web site
+-designed the data access layer component for the web site developers.
+-solved multithreaded production issus that the web team lacked the experience to solve
+-designed the top 10 cars internal editor tool withe jQuery templates and jQuery UI
+-architected the autobytel automotive lead processing web service using a functional pipes and filters architecture with
+multiple stages that validated leads, collected available dealer, selected dealers based on a configurable business rule engine and stored
+leads to be delivered to the selected auto dealers.
+-developed the dynamic plugin based business rules engine for the automotive lead web service.
+-designed web app dashboards for managing processed automotive leads
+-designed windows services  for back end automotive and dealer data feeds
+-developed client adaptors for integrating with 3rd party automotive finance lead web apis
+
+
+
+
+
+
+
+
+-worked with asp.net mvc on personal hobby projects outside of work and when
+autobytel decided to swithc their legacy web site from cold fusion to asp.net I trained the entire web team on the underlying architecture of asp.net mvc and best practices for designing .net web applications such as separation of concerns, the single responsability principle and skinny controllers and fat models for embedding application logic and validation a decoupled business layer that was reused behind a web api layer.
+-designed the used car search service which supported the web site. My design all focused components that
+accumulated and applied search filters and tallied counts to dynamically update the displayed content and the make and model counts  based on users selection of car options.
+-designed the top 10 cars editor tool utilizing jquery templates and jquery UI.
+-helped the web team resolve a seemingly intermittets bug that was causing some car images to not apear of the website. The web team spent over a month but could not solve the problem.
+within one hour of analysing the code of another developer on the team I was able to track the problem and ecomment a solution.
+ a one line linq sorting api code change fix to solve the multithreading issue with missing images displayed on the web site. The solution required postulating the internal working of the specific class library sorting method that was used and how it interacted with multithreaded web request processing. I described the problem and solution in detailed  email (which I can make available if requested) to management to put in the fix that solved the issue.
+-co-architected lead engine, steered the team away from statfull obeject oriented design by building a prototype that used  a stateless functional design
+using the  pipes and filters design patterns passing data transfer objects between different lead processing stages. This prototype was chosen to build the foundation of the production system. In addition In addition my prototype design used the  abstract factory design pattern to allow the lead service to easily support multiple lead types by creating factories for processing each lead type that would then create and inject all the correct dependancies for that particular lead type.
+-developed the business rule stage of the engine which use a configuration based plugin architecture dynamically loaded .net assemplies that conatined the business rules.
+-helped find deployment issues during initial launch of our lead web service , notably prevented a production rollbck by identifing that the soap client of the led web service was not versioned properly causing soap header mismatch faults allowing for a hot fix to allow deployment to go through.
+-designed multiple admin web appications which used command and query separation to design maintainable systems by isolating commands that mutate the state of the database for easy bug identification and resulting queries that did not introduce side effects in the system.
+-designed background  services that interfaced with third party services including phone provisioning web apis to sync data between internal systems for displaying phone numbers attached to our phone leads system on our website
+-developed integration components for finance lead systmem to integrate with varous non standard 3party web apis of partner finance lead providers and lenders
+
+http://www.whitesmith.co/blog/a-rails-development-environment-using-docker-through-fig/
+
+http://macyves.wordpress.com/2014/05/31/docker-in-osx-via-boot2docker-or-vagrant-getting-over-the-hump/
+
+config.vm.synced_folder “./“,”/vagrant”,disabled: true
+config.vm.synced_folder “project“,”/vagrant/project”
+$vagrant reload
+
+which vagrant
+/usr/bin/vagrant
+which virtualbox
+/usr/bin/virtualbox
+which vboxmanage
+/usr/bin/vboxmanage
+
+vagrant -v
+Vagrant 1.6.5
+vboxmanage -v
+4.3.18r96516
+
+virtualbox #lauches gui
+
+
+mkdir myproject
+cd myproject
+$ vagrant init
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment
+
+$subl vagrantfile
+#in vagrant file replace:
+config.vm.box = “base”
+#with:
+config.vm.box = "hashicorp/precise32"
+——————————————————
+
+mkdir myproject
+cd myproject
+$vagrant init hashicorp/precise32
+
+$vagrant ssh
+or
+$ssh vagrant@precise32
+
+
+http://stackoverflow.com/questions/7186676/whats-in-an-eclipse-classpath-project-file
+
+
+java eclipse .classpath .project files and .settings directory can be displayed in thhe
+project explorer panel of a java application along with .gitignore file and .git directory
+
+spring java yml syntax for injecting env vars
+in projects
+application.yml
+bootstrap.yml
+files
+
+DB_CONN: ${ENV_VAR_DB_CONN_VAL:}
