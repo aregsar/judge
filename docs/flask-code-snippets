@@ -1,7 +1,11 @@
 flask-code-snippets
 
+before app.run()
+remove cached template limit by setting:
 
+app.jinja_env.cache = {}
 
+https://medium.com/@5hreyans/the-one-weird-trick-that-cut-our-flask-page-load-time-by-70-87145335f679
 
 Tech links:
 https://alexgaynor.net/2014/jan/06/why-travis-is-great-for-the-python-community/

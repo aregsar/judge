@@ -1,0 +1,420 @@
+flask_resources
+
+app/
+test/
+task/
+
+package.json
+.jshintrc
+gulpfile.js  (read sources from ./app/static/)
+Procfile
+.env
+.gitignore
+.travis.yml
+.bowerrc (install packages in ./app/static/vendor/)
+bower.json
+vagrantfile
+requirements.txt
+readme.md
+manage.py
+
+------------------------------------------------------------------
+before app.run()
+remove cached template limit by setting:
+
+app.jinja_env.cache = {}
+
+https://medium.com/@5hreyans/the-one-weird-trick-that-cut-our-flask-page-load-time-by-70-87145335f679
+
+--------------------------------------------------------------------
+ajax json error handling
+
+@app.error_handler(Exception):
+    if reuest.is_xhr:
+        return {error : "json error"}
+    else
+        return render_tempate("static/error.html")
+
+--------------------------------------------------------------------
+ajax json error handling alternative:
+
+http://stackoverflow.com/questions/22854749/flask-and-ajax-post-requests-400
+
+http://flask.pocoo.org/snippets/83/
+
+http://stackoverflow.com/questions/26618063/how-to-determine-if-it-is-an-ajax-request-in-flask
+
+#check if request is an ajax request (jQuery sets the xhr header)
+if request.is_xhr
+
+
+{% if not request.is_xhr %}
+    {% extends "base.html" %}
+{% endif %}
+or
+
+{% extends "base.html" if not request.is_xhr else "ajax.html" %}
+
+
+-------------------------------------------------------------------
+flask api
+http://blog.luisrei.com/articles/flaskrest.html
+http://mkelsey.com/2013/05/15/test-driven-development-of-a-flask-api/
+http://flask-restful.readthedocs.org/en/latest/
+https://flask-restless.readthedocs.org/en/latest/
+http://blog.miguelgrinberg.com/post/designing-a-restful-api-using-flask-restful
+
+#flask restful api
+https://www.youtube.com/watch?v=2v56TUT_580
+------------------------------------------------------------------
+
+flask oauth2:
+http://tech.shift.com/post/39516330935/implementing-a-python-oauth-2-0-provider-part-1
+http://tech.shift.com/post/40299429203/implementing-a-python-oauth-2-0-provider-part-2
+https://flask-oauthlib.readthedocs.org/en/latest/index.html
+http://blog.miguelgrinberg.com/post/restful-authentication-with-flask
+
+
+-------------------------------------------------------------------
+heroku multi buildpacks:
+http://tartarus.org/james/diary/2013/04/18/running-statsd-on-heroku
+
+http://github.com/heroku/heroku-buildpack-nodejs.git
+http://github.com/heroku/heroku-buildpack-python.git
+http://github.com/heroku/heroku-buildpack-ruby.git
+
+.env file put
+BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+in .buildpacks file put
+http://github.com/heroku/heroku-buildpack-nodejs.git
+http://github.com/heroku/heroku-buildpack-python.git
+http://github.com/heroku/heroku-buildpack-ruby.git
+
+$ heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+
+$ cat .buildpacks
+https://github.com/heroku/heroku-buildpack-nodejs.git#0198c71daa8
+https://github.com/heroku/heroku-buildpack-ruby.git#v86
+
+
+
+-------------------------------------------------------------------
+flask-testing (rendertemplate) nose:
+
+http://blog.paulopoiati.com/2013/02/22/flask-flash-messages-testing/
+
+http://stackoverflow.com/questions/23987564/test-flask-render-template-context
+
+http://stackoverflow.com/questions/10693808/how-to-test-template-context-variables-with-flask
+
+
+Use
+self.get_context_variable(...)
+from within flask.ext.testing modules
+TestCase derived class MyViewTestCase
+see below:
+
+@pgt.route('/myview')
+def myview():
+    context = {
+        'var1': 'value 1',
+        'var2': 'value 2',
+        'var3': 'value 3',
+    }
+    return render_template('mytemplate.html', **context)
+cant do with
+class MyViewTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app()
+        self.client = self.app.test_client()
+
+    def test_get_success(self):
+        response = self.client.get('/pgt/myview')
+
+        # I don't want to do this
+        self.assertIn('value 1', response.data)
+
+        # I want to do something like this
+        self.assertEqual(response.template_context['var1'], 'value 1')
+can do with flask.ext.testing
+from flask.ext.testing import TestCase
+
+class MyViewTestCase(TestCase):
+    def create_app(self):
+        # This method is required by flask.ext.testing.TestCase. It is called
+        # before setUp().
+        return create_app()
+
+    def test_get_success(self):
+        response = self.client.get('/pgt/myview')
+        self.assertEqual(self.get_context_variable('var1'), 'value 1')
+
+
+
+http://pythonhosted.org/Flask-Testing/
+
+http://www.acnenomor.com/2281740p1/templates-when-unit-testing-a-flask-application
+
+http://twill.idyll.org/
+
+http://www.axcella.com/~nicka/blog/?p=148
+
+http://ains.co/blog/things-which-arent-magic-flask-part-1.html
+
+http://ains.co/blog/things-which-arent-magic-flask-part-2.html
+
+http://flask.pocoo.org/snippets/18/
+
+https://docs.djangoproject.com/en/1.7/ref/template-response/
+
+http://stackoverflow.com/questions/7627978/return-django-models-for-template-rendering-after-an-ajax-request
+
+http://runnable.com/UiVZU8cP5RlsAADt/how-to-create-unit-tests-in-flask-for-python
+
+from app import app
+
+import os
+import json
+import unittest
+import tempfile
+
+class FlaskTestCase(unittest.TestCase):
+    # Our first unit test - We are using the unittest
+    # library, calling the _add_numbers route from the app
+    # passing a pair of numbers, and checking that the
+    # returned value, contained on the JSON response, match
+    # the sum of those parameters
+    def test_sum(self):
+        tester = app.test_client(self)
+        response = tester.get('/_add_numbers?a=2&b=6', content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        # Check that the result sent is 8: 2+6
+        self.assertEqual(json.loads(response.data), {"result": 8})
+
+    # This test will purposely fail
+    # We are checking that 2+6 is 10
+    def test_sum_fail(self):
+        tester = app.test_client(self)
+        response = tester.get('/_add_numbers?a=2&b=6', content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.data), {"result": 10})
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+
+
+-------------------------------------------------------------------
+redis queue
+
+http://jibreel.me/blog/4/
+
+http://flapjack.io/docs/1.0/usage/quickstart/
+
+https://devcenter.heroku.com/articles/python-rq
+
+http://python-rq.org/
+
+https://github.com/nvie/rq-dashboard
+
+https://realpython.com/blog/python/flask-by-example-implementing-a-redis-task-queue/
+
+https://pythonhosted.org/Flask-RQ/
+
+http://brunorocha.org/python/flask/using-flask-cache.html
+
+-------------------------------------------------------------------
+stripe:
+#stripe code at zapier
+http://bryanhelmig.com/20-minutes-with-stripe-and-django/
+https://github.com/bryanhelmig/django-stripe-example
+http://blog.epanastasi.com/post/53374577584/debugging-the-stripe-api-using-runscope
+http://gc-taylor.com/blog/2011/12/08/why-we-ditched-paypal-stripe/
+https://github.com/stripe/stripe-python
+https://stripe.com/docs/checkout/guides/flask
+https://gist.github.com/maccman/3299715
+http://www.jeffknupp.com/blog/2014/01/18/python-and-flask-are-ridiculously-powerful/
+-------------------------------------------------------------------
+requests:
+
+http://stackoverflow.com/questions/6853050/how-do-i-make-a-patch-request-in-python/7112444#7112444
+
+#do this in OS shell
+pip install autoenv
+
+#do this inside virtual env and requirements.txt
+pip install requests
+
+http://stackoverflow.com/questions/7164679/how-to-send-cookies-in-a-post-request-with-the-python-requests-library/7164897#7164897
+
+
+
+
+-------------------------------------------------------------------
+ponyorm:
+
+http://ponyorm.com/
+-------------------------------------------------------------------
+peewee:
+-------------------------------------------------------------------
+sqlalchemy:
+-------------------------------------------------------------------
+migrations:
+-------------------------------------------------------------------
+wtforms
+-------------------------------------------------------------------
+featureflags
+
+https://github.com/trustrachel/Flask-FeatureFlags
+http://groovematic.com/2014/10/feature-flags-in-flask/
+http://www.sitepoint.com/introduction-gulp-js/
+http://www.slideshare.net/rachelcordraysanders/developing-flask-extensions-31522115
+https://flask-featureflags.readthedocs.org/en/latest/
+install feature flags with  pip first to get latest version
+added to requirements.txt
+pip install flask_featureflags
+
+
+-------------------------------------------------------------------
+forman honcho
+
+gem install foreman
+http://blog.daviddollar.org/2011/05/06/introducing-foreman.html
+
+https://geeknme.wordpress.com/2009/10/15/getting-started-with-upstart-in-ubuntu/
+pip install honcho
+Flask==0.9
+gunicorn==0.17.2
+honcho==0.4.0
+python-statsd==1.5.8
+https://honcho.readthedocs.org/en/latest/index.html
+
+https://github.com/nickstenning/honcho
+
+
+-------------------------------------------------------------------
+autoenv .env
+
+http://stackoverflow.com/questions/2139080/how-do-i-source-environment-variables-for-a-command-shell-in-a-ruby-script?lq=1
+
+http://stackoverflow.com/questions/19331497/set-environment-variables-from-file
+
+https://github.com/kennethreitz/autoenv
+
+https://hpc.uni.lu/blog/2014/create-a-sandboxed-python-slash-ruby-environment/
+
+https://discussion.heroku.com/t/how-to-manage-production-staging-dev-django-settings/21/3
+
+https://github.com/kennethreitz/autoenv/pull/68
+
+http://www.gotealeaf.com/blog/managing-environment-configuration-variables-in-rails
+
+https://github.com/kennethreitz/autoenv
+
+https://devcenter.heroku.com/articles/config-vars
+
+https://github.com/bkeepers/dotenv
+
+https://github.com/laserlemon/figaro
+
+http://honcho.readthedocs.org/en/latest/using_procfiles.html
+
+https://github.com/ddollar/foreman
+
+setting ENV[] in ruby code
+
+$ source whatever.sh
+$ set > variables.txt
+And then in Ruby:
+
+File.readlines("variables.txt").each do |line|
+  values = line.split("=")
+  ENV[values[0]] = values[1]
+end
+
+from https://github.com/bkeepers/dotenv  document
+
+
+You may also add export in front of each line so you can source the file in bash:
+
+export S3_BUCKET=YOURS3BUCKET
+export SECRET_KEY=YOURSECRETKEYGOESHERE
+So dotenv doesn not use environment vars. it reads the .env file
+and sets the keys values in ENV[]
+(forman and honcho and autoenv probably work the same way since calling source .env in code or reading the key values in .env and exporting in a loop will not work
+
+rails itself looks at environment variables and sets the key values in ENV[]
+-------------------------------------------------------------------
+assets
+
+https://webassets.readthedocs.org/en/latest/
+
+http://flask-assets.readthedocs.org/en/latest/
+
+-------------------------------------------------------------------
+timezones
+
+pip install pytz
+
+
+http://pytz.sourceforge.net/
+-------------------------------------------------------------------
+statsd:
+http://code.flickr.net/2008/10/27/counting-timing/
+https://codeascraft.com/2011/02/15/measure-anything-measure-everything/
+https://github.com/etsy/statsd/
+http://statsd.readthedocs.org/en/latest/
+http://tartarus.org/james/diary/2013/04/18/running-statsd-on-heroku
+
+
+#requirements.txt
+Flask==0.9
+gunicorn==0.17.2
+honcho==0.4.0
+python-statsd==1.5.8
+https://github.com/cyberdelia/flask-statsd
+pip install Flask-StatsD
+from flask import Flask
+from flask.ext.statsd import StatsD
+
+app = Flask(__name__)
+app.config['STATSD_HOST'] = 'statsd.local'
+statsd = StatsD(app)
+
+
+
+-------------------------------------------------------------------
+blueprints
+-------------------------------------------------------------------
+ssl
+
+-------------------------------------------------------------------
+webhooks
+https://www.dropbox.com/developers/webhooks/tutorial
+-------------------------------------------------------------------
+docker-packer
+
+
+https://www.packer.io/docs/builders/docker.html
+
+http://mmckeen.net/blog/2013/12/27/advanced-docker-provisioning-with-packer/
+
+http://blog.mikebabineau.com/2014/03/26/building-docker-capable-machine-images/
+
+https://servercheck.in/blog/server-vm-images-ansible-and-packer
+
+http://qconlondon.com/presentation/docker-fig-flocker
+
+
+
+-------------------------------------------------------------------
+logstash
+
+http://logstash.net/docs/1.4.0/tutorials/getting-started-with-logstash
+http://nbviewer.ipython.org/gist/erik-stephens/6918b6c25591d2b4d93f/
+
+-------------------------------------------------------------------
+rails env
+-------------------------------------------------------------------
+rails migrations project
